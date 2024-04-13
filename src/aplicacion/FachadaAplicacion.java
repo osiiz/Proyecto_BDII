@@ -20,6 +20,7 @@ public class FachadaAplicacion {
     GestionUsuarios cu;
     GestionCategorias cc;
     GestionPrestamos cp;
+    Usuario usuario;
     
     
  public FachadaAplicacion(){
@@ -29,6 +30,7 @@ public class FachadaAplicacion {
    cu = new GestionUsuarios(fgui, fbd);
    cc = new GestionCategorias(fgui, fbd);
    cp = new GestionPrestamos(fgui, fbd);
+   usuario = null;
  }
 
  public static void main(String args[]) {
@@ -45,6 +47,14 @@ public class FachadaAplicacion {
  public void muestraExcepcion(String e){
      fgui.muestraExcepcion(e);
  }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario us) {
+        this.usuario = us;
+    }
  
 public java.util.List<Libro> obtenerLibros(Integer id, String titulo, String isbn, String autor){
   return cl.obtenerLibros(id, titulo,  isbn,  autor);
@@ -75,8 +85,9 @@ public java.util.List<Ejemplar> actualizarEjemplaresLibro(Integer idLibro, java.
 }
 
 
-public Boolean comprobarAutentificacion(String idUsuario, String clave){
-  return cu.comprobarAutentificacion(idUsuario, clave);
+public Usuario comprobarAutentificacion(String idUsuario, String clave){
+    this.usuario = cu.comprobarAutentificacion(idUsuario, clave);
+    return usuario;
 }
  
 public void ventanaUsuario(){

@@ -23,7 +23,7 @@ public class VLibro extends javax.swing.JDialog {
 
      private Integer idLibro;
      private java.util.List<Integer> ejemplaresBorrados;
-     private VPrincipal padre;
+     private VPrincipalUsuario padre;
      private aplicacion.FachadaAplicacion fa;
 
     /** Creates new form VLibro */
@@ -31,7 +31,7 @@ public class VLibro extends javax.swing.JDialog {
         super(parent, modal);
         this.fa=fa;
         initComponents();
-        padre=(VPrincipal) parent;
+        padre=(VPrincipalUsuario) parent;
         btnActualizarCategoriasLibro.setEnabled(false);
         btnActualizarEjemplaresLibro.setEnabled(false);
         btnBorrarLibro.setEnabled(false);
@@ -56,7 +56,7 @@ public class VLibro extends javax.swing.JDialog {
         super(parent, modal);
         this.fa=fa;
         initComponents();
-        padre=(VPrincipal) parent;
+        padre=(VPrincipalUsuario) parent;
         idLibro=libro.getIdLibro();
         textoAno.setText(libro.getAno());
         textoEditorial.setText(libro.getEditorial());

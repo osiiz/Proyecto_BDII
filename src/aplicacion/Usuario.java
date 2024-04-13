@@ -57,10 +57,5 @@ public class Usuario {
 
        return this.tipo;
    }
-   
-   public int getPrestamosVencidos(){
-       //TODO;
-       return 0;
-   }
 
 }

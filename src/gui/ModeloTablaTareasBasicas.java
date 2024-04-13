@@ -10,17 +10,19 @@ import javax.swing.table.*;
  *
  * @author basesdatos
  */
-public class ModeloTablaLibros extends AbstractTableModel{
+public class ModeloTablaTareasBasicas extends AbstractTableModel{
     private java.util.List<Libro> libros;
 
-    public ModeloTablaLibros(){
-        this.libros=new java.util.ArrayList<Libro>();
+    public ModeloTablaTareasBasicas(){
+        this.libros=new java.util.ArrayList<>();
     }
 
+    @Override
     public int getColumnCount (){
         return 5;
     }
 
+    @Override
     public int getRowCount(){
         return libros.size();
     }
@@ -31,10 +33,10 @@ public class ModeloTablaLibros extends AbstractTableModel{
 
         switch (col){
             case 0: nombre= "Id"; break;
-            case 1: nombre= "Autores"; break;
-            case 2: nombre="Título"; break;
-            case 3: nombre="Editorial"; break;
-            case 4: nombre="Año"; break;
+            case 1: nombre= "Nombre"; break;
+            case 2: nombre="Categoría"; break;
+            case 3: nombre="Fecha fin"; break;
+            case 4: nombre="Completada"; break;
         }
         return nombre;
     }

@@ -4,9 +4,7 @@
  */
 package gui;
 
-import aplicacion.Categoria;
-import aplicacion.Ejemplar;
-import aplicacion.Libro;
+import aplicacion.*;
 
 /**
  *
@@ -14,21 +12,33 @@ import aplicacion.Libro;
  */
 public class FachadaGui {
     aplicacion.FachadaAplicacion fa;
-    VPrincipal vp;
+    VPrincipalUsuario vp;
+    VPrincipalAdmin vpa;
+    Usuario usuario; //true es admin y false no admin
     
    public FachadaGui(aplicacion.FachadaAplicacion fa){
      this.fa=fa;
-     this.vp = new VPrincipal(fa);
+     //this.vp = new VPrincipalUsuario(fa);
+     //this.vpa = new VPrincipalAdmin(fa, usuario);
+     this.vp = null;
+     this.vpa = null;
+     
    } 
-    
-    
     
     public void iniciaVista(){
       VAutentificacion va;
     
-      va = new VAutentificacion(vp, true, fa);
-      vp.setVisible(true);
+      va = new VAutentificacion(fa);
       va.setVisible(true);
+      
+      if(fa.getUsuario().getTipoUsuario() == TipoUsuario.Normal || fa.getUsuario().getTipoUsuario() == TipoUsuario.Gestor){
+          vp = new VPrincipalUsuario(fa);
+          vp.setVisible(true);
+      }else{
+          vpa = new VPrincipalAdmin(fa);
+          vpa.setVisible(true);
+      }
+      
     }
     
    
@@ -79,6 +89,16 @@ public class FachadaGui {
         
         
     }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+    
+   
 
     
    

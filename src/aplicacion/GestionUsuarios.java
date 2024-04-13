@@ -23,13 +23,11 @@ public class GestionUsuarios {
     
     
     
-  public Boolean comprobarAutentificacion(String idUsuario, String clave){
+  public Usuario comprobarAutentificacion(String idUsuario, String clave){
       Usuario u;
 
       u=fbd.validarUsuario(idUsuario, clave);
-      if (u!=null){
-          return u.getTipoUsuario()==TipoUsuario.Administrador;
-      } else return false;
+      return u;
   }
   
   public java.util.List<Usuario> obtenerUsuarios(String id, String nombre){

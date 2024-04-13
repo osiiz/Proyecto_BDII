@@ -20,8 +20,7 @@ public class VAutentificacion extends javax.swing.JDialog {
     aplicacion.FachadaAplicacion fa;
     
     /** Creates new form VAutentificacion */
-    public VAutentificacion(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa) {
-        super(parent, modal);
+    public VAutentificacion(aplicacion.FachadaAplicacion fa) {
         this.fa=fa;
         initComponents();
         etiquetaFallo.setVisible(false);
@@ -146,7 +145,7 @@ public class VAutentificacion extends javax.swing.JDialog {
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         etiquetaFallo.setVisible(false);
-        if (fa.comprobarAutentificacion(textoUsuario.getText(), textoClave.getText()))
+        if (fa.comprobarAutentificacion(textoUsuario.getText(), textoClave.getText()) != null)
            this.dispose();
         else etiquetaFallo.setVisible(true);
     }//GEN-LAST:event_btnAceptarActionPerformed
