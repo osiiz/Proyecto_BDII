@@ -22,36 +22,68 @@ public class DAOUsuarios extends AbstractDAO {
         Usuario resultado=null;
         Connection con;
         PreparedStatement stmUsuario=null;
+        PreparedStatement stmGestor = null;
+        PreparedStatement stmAdmin = null;
         ResultSet rsUsuario;
+        ResultSet rsGestor;
+        ResultSet rsAdmin;
 
         con=this.getConexion();
 
         try {
-        stmUsuario=con.prepareStatement("select id_usuario, clave, nombre, direccion, email, tipo_usuario "+
-                                        "from usuario "+
-                                        "where id_usuario = ? and clave = ?");
-        stmUsuario.setString(1, idUsuario);
-        stmUsuario.setString(2, clave);
-        rsUsuario=stmUsuario.executeQuery();
-        if (rsUsuario.next())
-        {
-            resultado = new Usuario(rsUsuario.getString("id_usuario"), rsUsuario.getString("clave"),
-                                      rsUsuario.getString("nombre"), rsUsuario.getString("direccion"),
-                                      rsUsuario.getString("email"), TipoUsuario.valueOf(rsUsuario.getString("tipo_usuario")));
+            stmUsuario = con.prepareStatement("select id_usuario, contraseña, nombre, direccion, email "+
+                                            "from usuario "+
+                                            "where id_usuario = ? and contraseña = ?;");
+            stmUsuario.setString(1, idUsuario);
+            stmUsuario.setString(2, clave);
 
-        }
+            stmGestor = con.prepareStatement("select id_gestor, contraseña, nombre, direccion, email "+
+                                            "from usuario_gestor "+
+                                            "where id_gestor = ? and contraseña = ?;");
+            stmGestor.setString(1, idUsuario);
+            stmGestor.setString(2, clave);
+
+            stmAdmin = con.prepareStatement("select id_administrador, contraseña, nombre "+
+                                            "from administrador "+
+                                            "where id_administrador = ? and contraseña = ?;");
+            stmAdmin.setString(1, idUsuario);
+            stmAdmin.setString(2, clave);
+
+            rsUsuario = stmUsuario.executeQuery();
+            rsGestor = stmGestor.executeQuery();
+            rsAdmin = stmAdmin.executeQuery();
+            if (rsUsuario.next()) {
+                resultado = new Usuario(rsUsuario.getString("id_usuario"), rsUsuario.getString("contraseña"),
+                                          rsUsuario.getString("nombre"), rsUsuario.getString("direccion"),
+                                          rsUsuario.getString("email"), TipoUsuario.valueOf("Normal"));
+
+            }else if (rsGestor.next()){
+                resultado = new Usuario(rsGestor.getString("id_gestor"), rsGestor.getString("contraseña"),
+                                          rsGestor.getString("nombre"), rsGestor.getString("direccion"),
+                                          rsGestor.getString("email"), TipoUsuario.valueOf("Gestor"));
+            }else if (rsAdmin.next()){
+                resultado = new Usuario(rsAdmin.getString("id_administrador"), rsAdmin.getString("contraseña"),
+                                        rsAdmin.getString("nombre"), null, null, TipoUsuario.valueOf("Administrador"));
+            
+            }
         } catch (SQLException e){
           System.out.println(e.getMessage());
           this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         }finally{
-          try {stmUsuario.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+            try {
+                if (stmUsuario != null) stmUsuario.close();
+                if (stmGestor != null) stmGestor.close();
+                if (stmAdmin != null) stmAdmin.close();
+            } catch (SQLException e){
+                System.out.println("Imposible cerrar cursores");
+            }
         }
         return resultado;
     }
     
     
     public java.util.List<Usuario> consultarUsuarios(String id, String nombre){
-        java.util.List<Usuario> resultado = new java.util.ArrayList<Usuario>();
+        java.util.List<Usuario> resultado = new java.util.ArrayList<>();
         Usuario usuarioActual;
         Connection con;
         PreparedStatement stmUsuarios=null;

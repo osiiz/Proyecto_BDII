@@ -10,6 +10,7 @@
  */
 
 package gui;
+import aplicacion.*;
 
 
 /**
@@ -19,12 +20,12 @@ package gui;
 public class VPrincipalUsuario extends javax.swing.JFrame {
   
     aplicacion.FachadaAplicacion fa;
-    String idUsuario;
+    Usuario usuario;
     
     /** Creates new form VPrincipal */
-    public VPrincipalUsuario(aplicacion.FachadaAplicacion fa) {
+    public VPrincipalUsuario(FachadaAplicacion fa) {
         this.fa=fa;
-        this.idUsuario = fa.getUsuario().getIdUsuario();
+        this.usuario = fa.getUsuario();
         initComponents();
     }
 
@@ -92,7 +93,7 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
             }
         });
 
-        btnNuevaTarea.setText("Nuevo");
+        btnNuevaTarea.setText("Nueva");
         btnNuevaTarea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevaTareaActionPerformed(evt);
@@ -124,7 +125,7 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
             }
         });
 
-        btnBorrarTarea.setText("jButton2");
+        btnBorrarTarea.setText("Borrar");
 
         jMenu2.setText("Proyectos");
         jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
