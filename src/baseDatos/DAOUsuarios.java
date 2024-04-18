@@ -88,33 +88,71 @@ public class DAOUsuarios extends AbstractDAO {
         Connection con;
         PreparedStatement stmUsuarios=null;
         ResultSet rsUsuarios;
+        PreparedStatement stmGestores=null;
+        ResultSet rsGestores;
+        PreparedStatement stmAdmin=null;
+        ResultSet rsAdmin;
 
         con=this.getConexion();
         
-        String consulta = "select id_usuario, nombre, email, tipo_usuario, clave, direccion " +
+        String consultaUs = "select id_usuario, nombre, email, contraseña, direccion " +
                                          "from usuario as u " +
                                          "where id_usuario like ?" +
                                          "and nombre like ?";
+        
+        String consultaGest = "select id_gestor, nombre, email, contraseña, direccion " +
+                                         "from usuario_gestor as ug " +
+                                         "where id_gestor like ?" +
+                                         "and nombre like ?";
+        
+        String consultaAdmin= "select id_administrador, nombre, contraseña " +
+                                         "from administrador as ad " +
+                                         "where id_administrador like ?" +
+                                         "and nombre like ?";
     
         try  {
-         stmUsuarios=con.prepareStatement(consulta);
-         stmUsuarios.setString(1, "%"+id+"%");
-         stmUsuarios.setString(2, "%"+nombre+"%");
-         rsUsuarios=stmUsuarios.executeQuery();
-        while (rsUsuarios.next())
-        {
-            usuarioActual = new Usuario(rsUsuarios.getString("id_usuario"), rsUsuarios.getString("clave"),
-                                      rsUsuarios.getString("nombre"), rsUsuarios.getString("direccion"),
-                                      rsUsuarios.getString("email"), TipoUsuario.valueOf(rsUsuarios.getString("tipo_usuario")));
-            
-            resultado.add(usuarioActual);
-        }
+            stmUsuarios = con.prepareStatement(consultaUs);
+            stmGestores = con.prepareStatement(consultaGest);
+            stmAdmin = con.prepareStatement(consultaAdmin);
+            stmUsuarios.setString(1, "%"+id+"%");
+            stmUsuarios.setString(2, "%"+nombre+"%");
+            stmGestores.setString(1, "%"+id+"%");
+            stmGestores.setString(2, "%"+nombre+"%");
+            stmAdmin.setString(1, "%"+id+"%");
+            stmAdmin.setString(2, "%"+nombre+"%");
+            rsUsuarios = stmUsuarios.executeQuery();
+            rsGestores = stmGestores.executeQuery();
+            rsAdmin = stmAdmin.executeQuery();
+            while (rsUsuarios.next()){
+                usuarioActual = new Usuario(rsUsuarios.getString("id_usuario"), rsUsuarios.getString("contraseña"),
+                                          rsUsuarios.getString("nombre"), rsUsuarios.getString("direccion"),
+                                          rsUsuarios.getString("email"), TipoUsuario.valueOf("Normal"));
+
+                resultado.add(usuarioActual);
+            }
+            while (rsGestores.next()){
+                usuarioActual = new Usuario(rsGestores.getString("id_gestor"), rsGestores.getString("contraseña"),
+                                          rsGestores.getString("nombre"), rsGestores.getString("direccion"),
+                                          rsGestores.getString("email"), TipoUsuario.valueOf("Gestor"));
+
+                resultado.add(usuarioActual);
+            }
+            while (rsAdmin.next()){
+                usuarioActual = new Usuario(rsAdmin.getString("id_administrador"), rsAdmin.getString("contraseña"),
+                                          rsAdmin.getString("nombre"), "-", "-", TipoUsuario.valueOf("Administrador"));
+
+                resultado.add(usuarioActual);
+            }
 
         } catch (SQLException e){
           System.out.println(e.getMessage());
           this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         }finally{
-          try {stmUsuarios.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+            try {
+                if (stmUsuarios != null) stmUsuarios.close();
+                if (stmGestores != null) stmGestores.close();
+                if (stmAdmin != null) stmAdmin.close();
+            } catch (SQLException e){System.out.println("Imposible cerrar cursores");}
         }
         return resultado;
     }
@@ -126,16 +164,36 @@ public class DAOUsuarios extends AbstractDAO {
         con=super.getConexion();
 
         try {
-        stmUsuario=con.prepareStatement("insert into usuario(id_usuario, nombre, email, tipo_usuario, clave, direccion) "+
-                                      "values (?,?,?,?,?,?)");
-        stmUsuario.setString(1, u.getIdUsuario());
-        stmUsuario.setString(2, u.getNombre());
-        stmUsuario.setString(3, u.getEmail());
-        stmUsuario.setString(4, u.getTipoUsuario().toString());
-        stmUsuario.setString(5, u.getClave());
-        stmUsuario.setString(6, u.getDireccion());
-        stmUsuario.executeUpdate();
-
+            switch (u.getTipoUsuario().toString()){
+                case "Normal": 
+                    stmUsuario=con.prepareStatement("insert into usuario(id_usuario, nombre, email, contraseña, direccion) "+
+                                              "values (?,?,?,?,?)");
+                    stmUsuario.setString(1, u.getIdUsuario());
+                    stmUsuario.setString(2, u.getNombre());
+                    stmUsuario.setString(3, u.getEmail());
+                    stmUsuario.setString(4, u.getClave());
+                    stmUsuario.setString(5, u.getDireccion());
+                    stmUsuario.executeUpdate();
+                    break;
+                case "Gestor": 
+                    stmUsuario=con.prepareStatement("insert into usuario_gestor(id_gestor, nombre, email, contraseña, direccion) "+
+                                              "values (?,?,?,?,?)");
+                    stmUsuario.setString(1, u.getIdUsuario());
+                    stmUsuario.setString(2, u.getNombre());
+                    stmUsuario.setString(3, u.getEmail());
+                    stmUsuario.setString(4, u.getClave());
+                    stmUsuario.setString(5, u.getDireccion());
+                    stmUsuario.executeUpdate();
+                    break;
+                case "Administrador": 
+                    stmUsuario=con.prepareStatement("insert into administrador(id_administrador, nombre, contraseña) "+
+                                              "values (?,?,?)");
+                    stmUsuario.setString(1, u.getIdUsuario());
+                    stmUsuario.setString(2, u.getNombre());
+                    stmUsuario.setString(3, u.getClave());
+                    stmUsuario.executeUpdate(); break;
+            }
+            
         } catch (SQLException e){
           System.out.println(e.getMessage());
           this.getFachadaAplicacion().muestraExcepcion(e.getMessage());

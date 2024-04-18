@@ -38,6 +38,11 @@ public class VPrincipalAdmin extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnGestUsuarios.setText("Gestión Usuarios");
+        btnGestUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGestUsuariosActionPerformed(evt);
+            }
+        });
 
         btnGestCategorias.setText("Gestión Categorías");
 
@@ -81,6 +86,10 @@ public class VPrincipalAdmin extends javax.swing.JFrame {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnGestUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestUsuariosActionPerformed
+        fa.ventanaUsuario();
+    }//GEN-LAST:event_btnGestUsuariosActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
