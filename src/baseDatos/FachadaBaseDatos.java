@@ -5,11 +5,7 @@
 
 package baseDatos;
 
-import aplicacion.Ejemplar;
-import aplicacion.Usuario;
-import aplicacion.Categoria;
-import aplicacion.Libro;
-import aplicacion.Prestamo;
+import aplicacion.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -25,10 +21,9 @@ import java.util.Properties;
 public class FachadaBaseDatos {
     private aplicacion.FachadaAplicacion fa;
     private java.sql.Connection conexion;
-    private DAOLibros daoLibros;
     private DAOCategorias daoCategorias;
     private DAOUsuarios daoUsuarios;
-    private DAOPrestamos daoPrestamos;
+    private DAOTareas daoTareas;
 
     public FachadaBaseDatos (aplicacion.FachadaAplicacion fa){
         
@@ -54,23 +49,17 @@ public class FachadaBaseDatos {
                     configuracion.getProperty("baseDatos"),
                     usuario);
 
-            daoLibros = new DAOLibros(conexion, fa);
             daoCategorias = new DAOCategorias(conexion, fa);
-            daoUsuarios = new DAOUsuarios(conexion, fa);
-            daoPrestamos = new DAOPrestamos(conexion, fa);
-          
+            daoUsuarios = new DAOUsuarios(conexion, fa);     
+            daoTareas = new DAOTareas(conexion, fa);
 
 
         } catch (FileNotFoundException f){
             System.out.println(f.getMessage());
             fa.muestraExcepcion(f.getMessage());
-        } catch (IOException i){
+        } catch (IOException | java.sql.SQLException i){
             System.out.println(i.getMessage());
             fa.muestraExcepcion(i.getMessage());
-        } 
-        catch (java.sql.SQLException e){
-            System.out.println(e.getMessage());
-            fa.muestraExcepcion(e.getMessage());
         }
         
         
@@ -78,41 +67,6 @@ public class FachadaBaseDatos {
     }
     
     
-
-    public java.util.List<Libro> consultarCatalogo(Integer id, String titulo, String isbn, String autor){
-        return daoLibros.consultarCatalogo(id, titulo, isbn, autor);
-    }
-
-    public Libro consultarLibro(Integer idLibro){
-        return daoLibros.consultarLibro(idLibro);
-    }
-    public java.util.List<Ejemplar> consultarEjemplaresLibro(Integer idLibro){
-        return daoLibros.consultarEjemplaresLibro(idLibro);
-    }
-    public java.util.List<String> obtenerRestoCategorias(Integer idLibro){
-        return daoLibros.obtenerRestoCategorias(idLibro);
-    }
-    public Integer insertarLibro(Libro libro){
-       return daoLibros.insertarLibro(libro);
-    }
-    public void borrarLibro(Integer idLibro){
-        daoLibros.borrarLibro(idLibro);
-    }
-    public void modificarLibro(Libro libro){
-         daoLibros.modificarLibro(libro);
-    }
-    public void modificarCategoriasLibro(Integer idLibro, java.util.List<String> categorias){
-       daoLibros.modificarCategoriasLibro(idLibro, categorias);
-    }
-    public void insertarEjemplarLibro(Integer idLibro, Ejemplar ejemplar){
-        daoLibros.insertarEjemplarLibro(idLibro, ejemplar);
-    }
-    public void borrarEjemplaresLibro(Integer idLibro, java.util.List<Integer> numsEjemplar){
-        daoLibros.borrarEjemplaresLibro(idLibro, numsEjemplar);
-    }
-    public void modificarEjemplarLibro(Integer idLibro, Ejemplar ejemplar){
-        daoLibros.modificarEjemplarLibro(idLibro, ejemplar);
-    }
 
     public Usuario validarUsuario(String idUsuario, String clave){
         return daoUsuarios.validarUsuario(idUsuario, clave);
@@ -146,15 +100,7 @@ public class FachadaBaseDatos {
         daoCategorias.anhadirCategoria(categoria);
     }
 
-    public List<Prestamo> obtenerPrestamos(String id, String nombre, int numEjemplar) {
-        return daoPrestamos.obtenerPrestamos(id, nombre, numEjemplar);
-    }
-
-    public void devolverEjemplar(Integer idEjemplar, Integer idLibro) {
-        daoPrestamos.devolverEjemplar(idEjemplar, idLibro);
-    }
-
-    public void prestarEjemplar(Integer numEjemplar, Integer idLibro, String idUsuario) {
-        daoPrestamos.prestarEjemplar(numEjemplar, idLibro, idUsuario);
+    public List<Tarea> consultarTareas(String nombre, String categoria, Boolean completada, Usuario usuario) {
+        return daoTareas.obtenerTareasBasicas(nombre, categoria, completada, usuario);
     }
 }

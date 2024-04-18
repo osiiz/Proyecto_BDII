@@ -6,30 +6,30 @@
 package aplicacion;
 import gui.FachadaGui;
 import baseDatos.FachadaBaseDatos;
+import java.util.List;
 /**
  *
  * @author basesdatos
  */
-public class GesionLibros{
+public class GestionTareas{
     FachadaGui fgui;
     FachadaBaseDatos fbd;
     
-    public GesionLibros(FachadaGui fgui, FachadaBaseDatos fbd){
+    public GestionTareas(FachadaGui fgui, FachadaBaseDatos fbd){
      this.fgui=fgui;
      this.fbd=fbd;
     }
 
-    public java.util.List<Libro> obtenerLibros(Integer id, String titulo, String isbn, String autor){
-        return fbd.consultarCatalogo(id, titulo, isbn, autor);
+    public java.util.List<Tarea> obtenerTareas(String nombre, String categoria, Boolean completada, Usuario usuario){
+        return fbd.consultarTareas(nombre, categoria, completada, usuario);
     }
 
-    public void visualizarLibro(Integer idLibro){
-        java.util.List<String> restoCategorias;
-        java.util.List<Ejemplar> ejemplares;
-        Libro l;
-        l=fbd.consultarLibro(idLibro);
-        restoCategorias=fbd.obtenerRestoCategorias(idLibro);
-        fgui.visualizaLibro(l, restoCategorias);
+    public void visualizarTarea(Integer idTarea){
+        List<String> restoCategorias;
+        Tarea tarea;
+        tarea = fbd.consultarTarea(idTarea);
+        restoCategorias = fbd.obtenerRestoCategorias(idTarea);
+        fgui.visualizaTarea(tarea, restoCategorias);
     }
 
     public void nuevoLibro(){
@@ -39,8 +39,8 @@ public class GesionLibros{
             restoCategorias.add(c.getNombre());
         }
 
-        fgui.nuevoLibro(restoCategorias);
-    }
+        fgui.nuevaTarea(restoCategorias);
+    }/*
     
     public Integer actualizarLibro(Libro l){
         
@@ -74,5 +74,5 @@ public class GesionLibros{
            fbd.borrarEjemplaresLibro(idLibro, borrar);
        }
        return fbd.consultarEjemplaresLibro(idLibro);
-    }
+    }*/
 }

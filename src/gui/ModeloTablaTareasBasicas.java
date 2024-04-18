@@ -1,30 +1,32 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
 package gui;
-import aplicacion.Libro;
-import javax.swing.table.*;
+import aplicacion.*;
+import java.util.List;
+import java.util.ArrayList;
+import javax.swing.table.AbstractTableModel;
+
 /**
  *
- * @author basesdatos
+ * @author alumnogreibd
  */
-public class ModeloTablaTareasBasicas extends AbstractTableModel{
-    private java.util.List<Libro> libros;
+public class ModeloTablaTareasBasicas extends AbstractTableModel {
+    private List<Tarea> tareas;
 
-    public ModeloTablaTareasBasicas(){
-        this.libros=new java.util.ArrayList<>();
+    public ModeloTablaTareasBasicas() {
+        this.tareas = new ArrayList<>();
     }
-
+    
     @Override
-    public int getColumnCount (){
+    public int getColumnCount(){
         return 5;
     }
-
+    
     @Override
     public int getRowCount(){
-        return libros.size();
+        return tareas.size();
     }
 
     @Override
@@ -34,13 +36,13 @@ public class ModeloTablaTareasBasicas extends AbstractTableModel{
         switch (col){
             case 0: nombre= "Id"; break;
             case 1: nombre= "Nombre"; break;
-            case 2: nombre="Categoría"; break;
-            case 3: nombre="Fecha fin"; break;
-            case 4: nombre="Completada"; break;
+            case 2: nombre= "Categoría"; break;
+            case 3: nombre= "Fecha_fin"; break;
+            case 4: nombre= "Completada"; break;
         }
         return nombre;
     }
-
+    
     @Override
     public Class getColumnClass(int col){
         Class clase=null;
@@ -49,8 +51,8 @@ public class ModeloTablaTareasBasicas extends AbstractTableModel{
             case 0: clase= java.lang.Integer.class; break;
             case 1: clase= java.lang.String.class; break;
             case 2: clase=java.lang.String.class; break;
-            case 3: clase=java.lang.String.class; break;
-            case 4: clase=java.lang.String.class; break;
+            case 3: clase=java.time.LocalDate.class; break;
+            case 4: clase=java.lang.Boolean.class; break;
         }
         return clase;
     }
@@ -60,26 +62,28 @@ public class ModeloTablaTareasBasicas extends AbstractTableModel{
         return false;
     }
 
+    @Override
     public Object getValueAt(int row, int col){
         Object resultado=null;
 
         switch (col){
-            case 0: resultado= libros.get(row).getIdLibro(); break;
-            case 1: resultado= libros.get(row).getAutoresAsString(); break;
-            case 2: resultado=libros.get(row).getTitulo();break;
-            case 3: resultado=libros.get(row).getEditorial(); break;
-            case 4: resultado=libros.get(row).getAno(); break;
+            case 0: resultado= tareas.get(row).getIdTarea(); break;
+            case 1: resultado= tareas.get(row).getNombre(); break;
+            case 2: resultado= tareas.get(row).getCategoria();break;
+            case 3: resultado= tareas.get(row).getFechaFin(); break;
+            case 4: resultado= tareas.get(row).getCompletada(); break;
         }
         return resultado;
     }
 
-    public void setFilas(java.util.List<Libro> libros){
-        this.libros=libros;
+    public void setFilas(List<Tarea> tareas){
+        this.tareas=tareas;
         fireTableDataChanged();
     }
 
-    public Libro obtenerLibro(int i){
-        return this.libros.get(i);
+    public Tarea obtenerTareas(int i){
+        return this.tareas.get(i);
     }
-
+    
+    
 }

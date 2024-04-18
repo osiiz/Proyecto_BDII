@@ -12,12 +12,12 @@ package aplicacion;
  * @author basesdatos
  */
 public class Usuario {
-    private String idUsuario;
-    private String clave;
-    private String nombre;
-    private String direccion;
-    private String email;
-    private TipoUsuario tipo;
+    private final String idUsuario;
+    private final String clave;
+    private final String nombre;
+    private final String direccion;
+    private final String email;
+    private final TipoUsuario tipo;
 
    public Usuario (String idUsuario, String clave, String nombre, String direccion, String email, TipoUsuario tipo){
     this.idUsuario=idUsuario;

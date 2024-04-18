@@ -232,7 +232,7 @@ public class DAOUsuarios extends AbstractDAO {
                     break;
                 case "Administrador":
                     stmUsuario=con.prepareStatement("update administrador set nombre=?, "+
-                                        "contraseña=?, where id_administrador=?");
+                                        "contraseña=? where id_administrador=?");
                     stmUsuario.setString(1, u.getNombre());
                     stmUsuario.setString(2, u.getClave());
                     stmUsuario.setString(3, u.getIdUsuario());

@@ -22,7 +22,8 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
     aplicacion.FachadaAplicacion fa;
     Usuario usuario;
     
-    /** Creates new form VPrincipal */
+    /** Creates new form VPrincipal
+     * @param fa */
     public VPrincipalUsuario(FachadaAplicacion fa) {
         this.fa=fa;
         this.usuario = fa.getUsuario();
@@ -44,13 +45,13 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         buscaCategoria = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaLibros = new javax.swing.JTable();
+        tablaTareas = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         btnNuevaTarea = new javax.swing.JButton();
         btnEditarTarea = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        btnCompletada = new javax.swing.JCheckBox();
+        buscaCompletada = new javax.swing.JCheckBox();
         jButton1 = new javax.swing.JButton();
         selecAscDesc = new javax.swing.JComboBox<>();
         btnBorrarTarea = new javax.swing.JButton();
@@ -72,12 +73,12 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
             }
         });
 
-        tablaLibros.setModel(new gui.ModeloTablaTareasBasicas());
-        tablaLibros.setColumnSelectionAllowed(true);
-        tablaLibros.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tablaLibros.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(tablaLibros);
-        tablaLibros.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaTareas.setModel(new gui.ModeloTablaTareasBasicas());
+        tablaTareas.setColumnSelectionAllowed(true);
+        tablaTareas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaTareas.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tablaTareas);
+        tablaTareas.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -110,9 +111,9 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
 
         jLabel3.setText("Completada:");
 
-        btnCompletada.addActionListener(new java.awt.event.ActionListener() {
+        buscaCompletada.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCompletadaActionPerformed(evt);
+                buscaCompletadaActionPerformed(evt);
             }
         });
 
@@ -177,7 +178,7 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnCompletada)))
+                                .addComponent(buscaCompletada)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                         .addComponent(jButton1)
                         .addGap(24, 24, 24))))
@@ -195,7 +196,7 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
                                 .addComponent(jLabel1)
                                 .addComponent(buscaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jLabel3))
-                            .addComponent(btnCompletada))
+                            .addComponent(buscaCompletada))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -232,29 +233,29 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         // TODO add your handling code here:
-        buscarLibros();
+        buscarTareas();
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnEditarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarTareaActionPerformed
         // TODO add your handling code here:
-        ModeloTablaTareasBasicas mtl = (ModeloTablaTareasBasicas) tablaLibros.getModel();
-        int idLibro;
-        idLibro = mtl.obtenerLibro(tablaLibros.getSelectedRow()).getIdLibro();
-        fa.visualizarLibro(idLibro);
+        ModeloTablaTareasBasicas mtl = (ModeloTablaTareasBasicas) tablaTareas.getModel();
+        int idTarea;
+        idTarea = mtl.obtenerTareas(tablaTareas.getSelectedRow()).getIdTarea();
+        fa.visualizarTarea(idTarea);
     }//GEN-LAST:event_btnEditarTareaActionPerformed
 
     private void btnNuevaTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaTareaActionPerformed
         // TODO add your handling code here:
-        fa.nuevoLibro();
+        fa.nuevaTarea();
     }//GEN-LAST:event_btnNuevaTareaActionPerformed
 
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu2MouseClicked
 
-    private void btnCompletadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCompletadaActionPerformed
+    private void buscaCompletadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaCompletadaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnCompletadaActionPerformed
+    }//GEN-LAST:event_buscaCompletadaActionPerformed
 
     private void selecAscDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecAscDescActionPerformed
         // TODO add your handling code here:
@@ -267,11 +268,11 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBorrarTarea;
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JCheckBox btnCompletada;
     private javax.swing.JButton btnEditarTarea;
     private javax.swing.JButton btnNuevaTarea;
     private javax.swing.JButton btnSalir;
     private javax.swing.JTextField buscaCategoria;
+    private javax.swing.JCheckBox buscaCompletada;
     private javax.swing.JTextField buscaNombre;
     private javax.swing.JLabel etiquetaTitulo;
     private javax.swing.JButton jButton1;
@@ -282,16 +283,16 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JComboBox<String> selecAscDesc;
-    private javax.swing.JTable tablaLibros;
+    private javax.swing.JTable tablaTareas;
     // End of variables declaration//GEN-END:variables
 
-    public void buscarLibros(){
+    public void buscarTareas(){
         ModeloTablaTareasBasicas m;
 
-        m=(ModeloTablaTareasBasicas) tablaLibros.getModel();
-        //m.setFilas(fa.obtenerLibros(buscaTitulo.getText(), buscaNombre.getText(), buscaCategoria.getText()));
+        m=(ModeloTablaTareasBasicas) tablaTareas.getModel();
+        m.setFilas(fa.obtenerTareas(buscaNombre.getText(), buscaCategoria.getText(), buscaCompletada.isSelected()));
         if (m.getRowCount() > 0) {
-            tablaLibros.setRowSelectionInterval(0, 0);
+            tablaTareas.setRowSelectionInterval(0, 0);
             btnEditarTarea.setEnabled(true);
         }
         else btnEditarTarea.setEnabled(false);

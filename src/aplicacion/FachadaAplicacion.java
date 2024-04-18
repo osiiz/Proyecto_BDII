@@ -5,7 +5,6 @@
 
 package aplicacion;
 
-import gui.VLibro;
 import java.util.List;
 
 
@@ -16,20 +15,18 @@ import java.util.List;
 public class FachadaAplicacion {
     gui.FachadaGui fgui;
     baseDatos.FachadaBaseDatos fbd;
-    GesionLibros cl;
     GestionUsuarios cu;
     GestionCategorias cc;
-    GestionPrestamos cp;
+    GestionTareas ct;
     Usuario usuario;
     
     
  public FachadaAplicacion(){
    fgui =new gui.FachadaGui(this);
    fbd = new baseDatos.FachadaBaseDatos(this);
-   cl = new GesionLibros(fgui, fbd);
    cu = new GestionUsuarios(fgui, fbd);
    cc = new GestionCategorias(fgui, fbd);
-   cp = new GestionPrestamos(fgui, fbd);
+   ct = new GestionTareas(fgui, fbd);
    usuario = null;
  }
 
@@ -56,35 +53,6 @@ public class FachadaAplicacion {
         this.usuario = us;
     }
  
-public java.util.List<Libro> obtenerLibros(Integer id, String titulo, String isbn, String autor){
-  return cl.obtenerLibros(id, titulo,  isbn,  autor);
-};
-
-public void visualizarLibro(Integer idLibro){
- cl.visualizarLibro(idLibro);
-}
-
-public void nuevoLibro(){
- cl.nuevoLibro();
-}
-
-public Integer actualizarLibro(Libro l){
-  return cl.actualizarLibro(l);
-}
-
-public void borrarLibro(Integer idLibro){
-   cl.borrarLibro(idLibro);
-}
-
-public void actualizarCategoriasLibro(Integer idLibro, java.util.List<String> categorias){
- cl.actualizarCategoriasLibro(idLibro, categorias);
-}
-
-public java.util.List<Ejemplar> actualizarEjemplaresLibro(Integer idLibro, java.util.List<Ejemplar> ejemplares, java.util.List<Integer> borrar){
-  return cl.actualizarEjemplaresLibro(idLibro, ejemplares, borrar);
-}
-
-
 public Usuario comprobarAutentificacion(String idUsuario, String clave){
     this.usuario = cu.comprobarAutentificacion(idUsuario, clave);
     return usuario;
@@ -121,23 +89,17 @@ public void anhadirCategoria(Categoria categoria) {
     cc.anhadirCategoria(categoria);
 }
 
-public List<Prestamo> obtenerPrestamos(String id, String nombre, int numEjemplar) {
-    return cp.obtenerPrestamos(id, nombre, numEjemplar);
+public void nuevaTarea(){
+    
 }
 
-    public void ventanaPrestamos(Ejemplar ejemplar, VLibro vlibro) {
-        fgui.ventanaPrestamos(ejemplar, vlibro);
-    }
+public void visualizarTarea(int idTarea){
+    
+}
 
-    public void devolverEjemplar(Integer idEjemplar, Integer idLibro) {
-        cp.devolverEjemplar(idEjemplar, idLibro);
-    }
-
-    public void prestarEjemplar(Integer numEjemplar, Integer idLibro, String idUsuario) {
-        cp.prestarEjemplar(numEjemplar, idLibro, idUsuario);
-    }
-
-
+public List<Tarea> obtenerTareas(String nombre, String categoria, Boolean completada){
+    return ct.obtenerTareas(nombre, categoria, completada, usuario);
+}
 
 
 }

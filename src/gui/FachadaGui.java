@@ -18,8 +18,6 @@ public class FachadaGui {
     
    public FachadaGui(aplicacion.FachadaAplicacion fa){
      this.fa=fa;
-     //this.vp = new VPrincipalUsuario(fa);
-     //this.vpa = new VPrincipalAdmin(fa, usuario);
      this.vp = null;
      this.vpa = null;
      
@@ -41,25 +39,6 @@ public class FachadaGui {
       
     }
     
-   
-    public void visualizaLibro(Libro l, java.util.List<String>restoCategorias){
-        VLibro vl;
-        java.util.List<String> categorias = new java.util.ArrayList<String>();
-        
-        for(Categoria c:l.getCategorias()){
-            categorias.add(c.getNombre());
-        }
-        
-        vl=new VLibro(vp, true, fa, l, categorias, restoCategorias);
-        vl.setVisible(true);
-    }
-    
-    public void nuevoLibro(java.util.List<String>  restoCategorias){
-        VLibro vl;
-        
-        vl=new VLibro(vp, true, fa, restoCategorias);
-        vl.setVisible(true);
-    }
     
     public void muestraExcepcion(String txtExcepcion){
        VAviso va;
@@ -79,15 +58,6 @@ public class FachadaGui {
         VCategorias vc;
         vc = new VCategorias(vp, true, fa);
         vc.setVisible(true);
-    }
-
-    public void ventanaPrestamos(Ejemplar ejemplar, VLibro vlibro) {
-        VPrestamos vpres;
-        
-        vpres = new VPrestamos(vp, true, fa, ejemplar, vlibro);
-        vpres.setVisible(true);
-        
-        
     }
 
     public Usuario getUsuario() {
