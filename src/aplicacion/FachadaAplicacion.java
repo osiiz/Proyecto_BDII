@@ -101,8 +101,8 @@ public void actualizarUsuario(Usuario u, Boolean existeUsuario){
     cu.actualizarUsuario(u, existeUsuario);
 }
 
-public void borrarUsuario(String idUsuario){
-    cu.borrarUsuario(idUsuario);
+public void borrarUsuario(Usuario usuario){
+    cu.borrarUsuario(usuario);
 }
 
 public void ventanaCategorias(){

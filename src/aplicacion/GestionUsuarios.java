@@ -43,8 +43,8 @@ public class GestionUsuarios {
       }
   }
   
-  public void borrarUsuario(String idUsuario){
-      fbd.borrarUsuario(idUsuario);
+  public void borrarUsuario(Usuario usuario){
+      fbd.borrarUsuario(usuario);
   }
   
  

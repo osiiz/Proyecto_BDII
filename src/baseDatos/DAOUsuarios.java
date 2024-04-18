@@ -209,20 +209,36 @@ public class DAOUsuarios extends AbstractDAO {
         con=super.getConexion();
 
         try {
-        stmUsuario=con.prepareStatement("update usuario "+
-                                    "set nombre=?, "+
-                                    "    email=?, "+
-                                    "    tipo_usuario=?, "+
-                                    "    clave=?, "+
-                                    "    direccion=? "+
-                                    "where id_usuario=?");
-        stmUsuario.setString(1, u.getNombre());
-        stmUsuario.setString(2, u.getEmail());
-        stmUsuario.setString(3, u.getTipoUsuario().toString());
-        stmUsuario.setString(4, u.getClave());
-        stmUsuario.setString(5,u.getDireccion());
-        stmUsuario.setString(6, u.getIdUsuario());
-        stmUsuario.executeUpdate();
+            switch (u.getTipoUsuario().toString()){
+                case "Normal":
+                    stmUsuario=con.prepareStatement("update usuario set nombre=?, "+
+                                        "email=?, contraseña=?, direccion=? where id_usuario=?");
+                    stmUsuario.setString(1, u.getNombre());
+                    stmUsuario.setString(2, u.getEmail());
+                    stmUsuario.setString(3, u.getClave());
+                    stmUsuario.setString(4,u.getDireccion());
+                    stmUsuario.setString(5, u.getIdUsuario());
+                    stmUsuario.executeUpdate();
+                    break;
+                case "Gestor":
+                    stmUsuario=con.prepareStatement("update usuario_gestor set nombre=?, "+
+                                        "email=?, contraseña=?, direccion=? where id_gestor=?");
+                    stmUsuario.setString(1, u.getNombre());
+                    stmUsuario.setString(2, u.getEmail());
+                    stmUsuario.setString(3, u.getClave());
+                    stmUsuario.setString(4,u.getDireccion());
+                    stmUsuario.setString(5, u.getIdUsuario());
+                    stmUsuario.executeUpdate();
+                    break;
+                case "Administrador":
+                    stmUsuario=con.prepareStatement("update administrador set nombre=?, "+
+                                        "contraseña=?, where id_administrador=?");
+                    stmUsuario.setString(1, u.getNombre());
+                    stmUsuario.setString(2, u.getClave());
+                    stmUsuario.setString(3, u.getIdUsuario());
+                    stmUsuario.executeUpdate();
+                    break;
+            }
 
         } catch (SQLException e){
           System.out.println(e.getMessage());
@@ -233,26 +249,29 @@ public class DAOUsuarios extends AbstractDAO {
         
     }
     
-    public void borrarUsuario(String idUsuario){
+    public void borrarUsuario(Usuario usuario){
         Connection con = super.getConexion();
         PreparedStatement stmUsuario=null;
-        PreparedStatement stmPrestamos=null;
-        ResultSet rsPrestamos = null;
         
         try{
-            stmPrestamos=con.prepareStatement("select * from prestamo where usuario = ?");
-            stmUsuario = con.prepareStatement("delete from usuario where id_usuario = ? ");
-            
-            stmUsuario.setString(1, idUsuario);
-            stmPrestamos.setString(1, idUsuario);
-            
-            rsPrestamos = stmPrestamos.executeQuery();
-            if (rsPrestamos.next()){
-                this.getFachadaAplicacion().muestraExcepcion("No se puede eliminar un usuario con préstamos");
-                    try {stmPrestamos.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
-                    return;
+            switch (usuario.getTipoUsuario().toString()){
+                case "Normal":
+                    stmUsuario = con.prepareStatement("delete from usuario where id_usuario = ? ");
+                    stmUsuario.setString(1, usuario.getIdUsuario());
+                    stmUsuario.executeUpdate();
+                    break;
+                case "Gestor":
+                    stmUsuario = con.prepareStatement("delete from usuario_gestor where id_gestor = ? ");
+                    stmUsuario.setString(1, usuario.getIdUsuario());
+                    stmUsuario.executeUpdate();
+                    break;
+                case "Administrador":
+                    stmUsuario = con.prepareStatement("delete from administrador where id_administrador = ? ");
+                    stmUsuario.setString(1, usuario.getIdUsuario());
+                    stmUsuario.executeUpdate();
+                    break;
             }
-            stmUsuario.executeUpdate();
+            
         }catch (SQLException e){
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());

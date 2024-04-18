@@ -134,8 +134,8 @@ public class FachadaBaseDatos {
         daoUsuarios.modificarUsuario(u);
     }
 
-    public void borrarUsuario(String idUsuario){
-        daoUsuarios.borrarUsuario(idUsuario);
+    public void borrarUsuario(Usuario usuario){
+        daoUsuarios.borrarUsuario(usuario);
     }
 
     public void borrarCategoria(String nombre) {

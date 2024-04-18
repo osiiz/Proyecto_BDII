@@ -254,12 +254,21 @@ public class VUsuario extends javax.swing.JDialog {
     }//GEN-LAST:event_buscaUsuarioActionPerformed
 
     private void btnGuardarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarUsuarioActionPerformed
-        if(editaNombre.getText().equals("") || editaClave.getText().equals("") || 
+        if (editaNombre.getText().equals("Normal") || editaNombre.getText().equals("Gestor") || editaNombre.getText().equals("")){
+            if(editaNombre.getText().equals("") || editaClave.getText().equals("") || 
                 editaEmail.getText().equals("") || editaDireccion.getText().equals("") || 
                 editaTipo.getText().equals("") || editaId.getText().equals("")){
             jLabel6.setVisible(true);
             return;
+            }
+        }else{
+            if(editaNombre.getText().equals("") || editaClave.getText().equals("") || 
+            editaTipo.getText().equals("") || editaId.getText().equals("")){
+            jLabel6.setVisible(true);
+            return;
+            }
         }
+        
         jLabel6.setVisible(false);
         
         Usuario us;
@@ -324,7 +333,7 @@ public class VUsuario extends javax.swing.JDialog {
     private void btnBorrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarUsuarioActionPerformed
         ModeloTablaUsuarios m=(ModeloTablaUsuarios) tablaUsuarios.getModel();
         Usuario usuario = m.obtenerUsuario(tablaUsuarios.getSelectedRow());
-        fa.borrarUsuario(usuario.getIdUsuario());
+        fa.borrarUsuario(usuario);
         buscaUsuario();
     }//GEN-LAST:event_btnBorrarUsuarioActionPerformed
 
