@@ -43,6 +43,12 @@ public class Tarea {
     public Categoria getCategoria() {
         return categoria;
     }
+
+    public void setCompletada(Boolean completada) {
+        this.completada = completada;
+    }
+
+    
     
     
     

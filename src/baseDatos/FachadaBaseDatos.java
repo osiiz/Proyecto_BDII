@@ -103,4 +103,8 @@ public class FachadaBaseDatos {
     public List<Tarea> consultarTareas(String nombre, String categoria, Boolean completada, Usuario usuario) {
         return daoTareas.obtenerTareasBasicas(nombre, categoria, completada, usuario);
     }
+
+    public void actualizarCompletada(int idTarea, Boolean completada) {
+        daoTareas.actualizarCompletada(idTarea, completada);
+    }
 }

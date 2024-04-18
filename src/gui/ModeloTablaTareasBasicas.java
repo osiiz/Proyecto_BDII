@@ -14,9 +14,11 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ModeloTablaTareasBasicas extends AbstractTableModel {
     private List<Tarea> tareas;
+    private FachadaAplicacion fa;
 
-    public ModeloTablaTareasBasicas() {
+    public ModeloTablaTareasBasicas(FachadaAplicacion fa) {
         this.tareas = new ArrayList<>();
+        this.fa = fa;
     }
     
     @Override
@@ -59,7 +61,7 @@ public class ModeloTablaTareasBasicas extends AbstractTableModel {
 
     @Override
     public boolean isCellEditable(int row, int col){
-        return false;
+        return col == 4;
     }
 
     @Override
@@ -75,6 +77,15 @@ public class ModeloTablaTareasBasicas extends AbstractTableModel {
         }
         return resultado;
     }
+    
+    @Override
+    public void setValueAt(Object value, int row, int column) {
+        if (column == 4) {
+            tareas.get(row).setCompletada((Boolean) value);
+            fa.actualizarCompletada(tareas.get(row).getIdTarea(), tareas.get(row).getCompletada());
+        }
+    }
+    
 
     public void setFilas(List<Tarea> tareas){
         this.tareas=tareas;

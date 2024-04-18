@@ -21,29 +21,29 @@ public class FachadaAplicacion {
     Usuario usuario;
     
     
- public FachadaAplicacion(){
-   fgui =new gui.FachadaGui(this);
-   fbd = new baseDatos.FachadaBaseDatos(this);
-   cu = new GestionUsuarios(fgui, fbd);
-   cc = new GestionCategorias(fgui, fbd);
-   ct = new GestionTareas(fgui, fbd);
-   usuario = null;
- }
+    public FachadaAplicacion(){
+      fgui =new gui.FachadaGui(this);
+      fbd = new baseDatos.FachadaBaseDatos(this);
+      cu = new GestionUsuarios(fgui, fbd);
+      cc = new GestionCategorias(fgui, fbd);
+      ct = new GestionTareas(fgui, fbd);
+      usuario = null;
+    }
 
- public static void main(String args[]) {
-     FachadaAplicacion fa;
-     
-     fa= new FachadaAplicacion();
-     fa.iniciaInterfazUsuario();
- }
- 
- public void iniciaInterfazUsuario(){
-     fgui.iniciaVista();
- }
+    public static void main(String args[]) {
+        FachadaAplicacion fa;
 
- public void muestraExcepcion(String e){
-     fgui.muestraExcepcion(e);
- }
+        fa= new FachadaAplicacion();
+        fa.iniciaInterfazUsuario();
+    }
+
+    public void iniciaInterfazUsuario(){
+        fgui.iniciaVista();
+    }
+
+    public void muestraExcepcion(String e){
+        fgui.muestraExcepcion(e);
+    }
 
     public Usuario getUsuario() {
         return usuario;
@@ -53,53 +53,57 @@ public class FachadaAplicacion {
         this.usuario = us;
     }
  
-public Usuario comprobarAutentificacion(String idUsuario, String clave){
-    this.usuario = cu.comprobarAutentificacion(idUsuario, clave);
-    return usuario;
-}
- 
-public void ventanaUsuario(){
-    fgui.ventanaUsuario();
-}
-public java.util.List<Usuario> obtenerUsuarios(String id, String nombre){
-    return cu.obtenerUsuarios(id, nombre);
-}
+    public Usuario comprobarAutentificacion(String idUsuario, String clave){
+        this.usuario = cu.comprobarAutentificacion(idUsuario, clave);
+        return usuario;
+    }
 
-public void actualizarUsuario(Usuario u, Boolean existeUsuario){
-    cu.actualizarUsuario(u, existeUsuario);
-}
+    public void ventanaUsuario(){
+        fgui.ventanaUsuario();
+    }
+    public java.util.List<Usuario> obtenerUsuarios(String id, String nombre){
+        return cu.obtenerUsuarios(id, nombre);
+    }
 
-public void borrarUsuario(Usuario usuario){
-    cu.borrarUsuario(usuario);
-}
+    public void actualizarUsuario(Usuario u, Boolean existeUsuario){
+        cu.actualizarUsuario(u, existeUsuario);
+    }
 
-public void ventanaCategorias(){
-    fgui.ventanaCategorias();
-}
+    public void borrarUsuario(Usuario usuario){
+        cu.borrarUsuario(usuario);
+    }
 
-public List<Categoria> buscaCategorias() {
-    return cc.buscaCategorias();
-}
+    public void ventanaCategorias(){
+        fgui.ventanaCategorias();
+    }
 
-public void borrarCategoria(String nombre) {
-    cc.borrarCategoria(nombre);
-}
+    public List<Categoria> buscaCategorias() {
+        return cc.buscaCategorias();
+    }
 
-public void anhadirCategoria(Categoria categoria) {
-    cc.anhadirCategoria(categoria);
-}
+    public void borrarCategoria(String nombre) {
+        cc.borrarCategoria(nombre);
+    }
 
-public void nuevaTarea(){
-    
-}
+    public void anhadirCategoria(Categoria categoria) {
+        cc.anhadirCategoria(categoria);
+    }
 
-public void visualizarTarea(int idTarea){
-    
-}
+    public void nuevaTarea(){
 
-public List<Tarea> obtenerTareas(String nombre, String categoria, Boolean completada){
-    return ct.obtenerTareas(nombre, categoria, completada, usuario);
-}
+    }
+
+    public void visualizarTarea(int idTarea){
+
+    }
+
+    public List<Tarea> obtenerTareas(String nombre, String categoria, Boolean completada){
+        return ct.obtenerTareas(nombre, categoria, completada, usuario);
+    }
+
+    public void actualizarCompletada(int idTarea, Boolean completada) {
+        ct.actualizarCompletada(idTarea, completada);
+    }
 
 
 }

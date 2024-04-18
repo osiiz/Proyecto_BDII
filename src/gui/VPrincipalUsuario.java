@@ -73,7 +73,7 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
             }
         });
 
-        tablaTareas.setModel(new gui.ModeloTablaTareasBasicas());
+        tablaTareas.setModel(new gui.ModeloTablaTareasBasicas(fa));
         tablaTareas.setColumnSelectionAllowed(true);
         tablaTareas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaTareas.getTableHeader().setReorderingAllowed(false);
@@ -227,12 +227,10 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_buscaCategoriaActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-                // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        // TODO add your handling code here:
         buscarTareas();
     }//GEN-LAST:event_btnBuscarActionPerformed
 

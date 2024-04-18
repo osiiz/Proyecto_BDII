@@ -322,7 +322,7 @@ public class VUsuario extends javax.swing.JDialog {
     }//GEN-LAST:event_tablaUsuariosMouseClicked
 
     private void btnNuevoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoUsuarioActionPerformed
-        fa.
+        
     }//GEN-LAST:event_btnNuevoUsuarioActionPerformed
 
     private void btnBorrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarUsuarioActionPerformed

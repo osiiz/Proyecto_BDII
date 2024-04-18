@@ -63,4 +63,24 @@ public class DAOTareas extends AbstractDAO {
         return resultado;
         
     }
+
+    void actualizarCompletada(int idTarea, Boolean completada) {
+        Connection con;
+        PreparedStatement stmCompletar=null;
+
+        con=super.getConexion();
+        
+        
+        try{
+            stmCompletar = con.prepareStatement("UPDATE tarea_basica SET completada = ? WHERE id_tarea = ? ");
+            stmCompletar.setBoolean(1, completada);
+            stmCompletar.setInt(2, idTarea);
+            stmCompletar.executeUpdate();
+            stmCompletar.close();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }
+        
+    }
 }
