@@ -185,7 +185,7 @@ public class DAOTareas extends AbstractDAO {
         try{
             stmEliminarCategoriaTarea = con.prepareStatement("UPDATE tarea_basica "
                     + "SET categoria = null WHERE id_tarea = ?");
-            stmEliminarCategoriaTarea.setInt(4, idTarea);
+            stmEliminarCategoriaTarea.setInt(1, idTarea);
             
             stmEliminarCategoriaTarea.executeUpdate();
             
