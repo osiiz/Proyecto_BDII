@@ -321,8 +321,7 @@ public class VTarea extends javax.swing.JFrame {
         t = new Tarea(Integer.parseInt(txtId.getText()), txtNombre.getText(), checkCompletada.isSelected(), LocalDate.parse(txtFechaFin.getText()), tarea.getCategoria());
         fa.actualizarTarea(t);
         ((ModeloListaStrings)listaCategorias.getModel()).setElementos(fbd.obtenerRestoCategorias(tarea.getIdTarea()));
-        tarea.setCategoria(null);
-        txtCategoriaActual.setText(tarea.getCategoria().toString());
+        txtCategoriaActual.setText("");
     }//GEN-LAST:event_btnEliminarCategoriaActionPerformed
 
     
