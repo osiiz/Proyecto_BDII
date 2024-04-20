@@ -33,7 +33,7 @@ public class DAOTareas extends AbstractDAO {
 
         con=this.getConexion();
         
-        String consultaTareas = "SELECT id_tarea, tb.nombre, completada, fecha_fin, categoria "+
+        String consultaTareas = "SELECT id_tarea, tb.nombre, completada, fecha_fin, c.nombre "+
                 "FROM tarea_basica tb JOIN categoria_tarea_basica ctb ON (tb.id_tarea = ctb.tarea_basica) JOIN categoria c ON (ctb.categoria = c.nombre) "+
                 "WHERE tb.nombre LIKE ? AND c.nombre LIKE ? AND completada = ? AND id_usuario LIKE ?";
 
@@ -47,7 +47,7 @@ public class DAOTareas extends AbstractDAO {
             rsTareas = stmTareas.executeQuery();
             while (rsTareas.next()){
                 tareaActual = new Tarea(rsTareas.getInt("id_tarea"), rsTareas.getString("nombre"), rsTareas.getBoolean("completada"), 
-                        LocalDate.parse(rsTareas.getString("fecha_fin")), new Categoria("cat1", "descripcion1")); //rsTareas.getString("categoria"));
+                        LocalDate.parse(rsTareas.getString("fecha_fin")), new Categoria(rsTareas.getString("c.nombre")));
 
                 resultado.add(tareaActual);
             }
@@ -64,7 +64,7 @@ public class DAOTareas extends AbstractDAO {
         
     }
 
-    void actualizarCompletada(int idTarea, Boolean completada) {
+    public void actualizarCompletada(int idTarea, Boolean completada) {
         Connection con;
         PreparedStatement stmCompletar=null;
 
@@ -83,7 +83,7 @@ public class DAOTareas extends AbstractDAO {
         
     }
 
-    void borrarTarea(int idTarea) {
+    public void borrarTarea(int idTarea) {
         Connection con;
         PreparedStatement stmBorrar=null;
 
@@ -98,5 +98,32 @@ public class DAOTareas extends AbstractDAO {
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         }
+    }
+
+    public Tarea consultarTarea(Integer idTarea) {
+        Tarea resultado=null;
+        Connection con;
+        PreparedStatement stmTarea=null;
+        ResultSet rsTarea;
+        
+
+        con=super.getConexion();
+        
+        try{
+            stmTarea = con.prepareStatement("SELECT id_tarea, tb.nombre, completada, fecha_fin, c.nombre "+
+                "FROM tarea_basica tb JOIN categoria_tarea_basica ctb ON (tb.id_tarea = ctb.tarea_basica) JOIN categoria c ON (ctb.categoria = c.nombre) "+
+                "WHERE id_tarea = ?");
+            stmTarea.setInt(1, idTarea);
+            rsTarea = stmTarea.executeQuery();
+            if (rsTarea.next()){
+                resultado = new Tarea(rsTarea.getInt("id_tarea"), rsTarea.getString("nombre"), rsTarea.getBoolean("completada"), 
+                        LocalDate.parse(rsTarea.getString("fecha_fin")), new Categoria(rsTarea.getString("c.nombre")));
+            }
+            stmTarea.close();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }
+        return resultado;
     }
 }

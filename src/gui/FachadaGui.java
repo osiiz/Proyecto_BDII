@@ -67,6 +67,12 @@ public class FachadaGui {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
+
+    public void visualizaTarea(Tarea tarea) {
+        VTarea vt;
+        
+        
+    }
     
    
 

@@ -94,7 +94,7 @@ public class FachadaAplicacion {
     }
 
     public void visualizarTarea(int idTarea){
-
+        ct.visualizarTarea(idTarea);
     }
 
     public List<Tarea> obtenerTareas(String nombre, String categoria, Boolean completada){

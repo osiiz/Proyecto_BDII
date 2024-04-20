@@ -111,4 +111,8 @@ public class FachadaBaseDatos {
     public void borrarTarea(int idTarea) {
         daoTareas.borrarTarea(idTarea);
     }
+
+    public Tarea consultarTarea(Integer idTarea) {
+        return daoTareas.consultarTarea(idTarea);
+    }
 }
