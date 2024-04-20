@@ -25,11 +25,11 @@ public class GestionTareas{
     }
 
     public void visualizarTarea(Integer idTarea){
-        //List<String> restoCategorias;
+        List<String> restoCategorias;
         Tarea tarea;
         tarea = fbd.consultarTarea(idTarea);
-        //restoCategorias = fbd.obtenerRestoCategorias(idTarea);
-        fgui.visualizaTarea(tarea);
+        restoCategorias = fbd.obtenerRestoCategorias(idTarea);
+        fgui.visualizaTarea(tarea, restoCategorias);
     }
 
     public void nuevoLibro(){
