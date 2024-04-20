@@ -36,7 +36,7 @@ public class DAOTareas extends AbstractDAO {
         
         String consultaTareas = "SELECT id_tarea, tb.nombre, completada, fecha_fin, c.nombre as categoria "+
                 "FROM tarea_basica tb JOIN categoria_tarea_basica ctb ON (tb.id_tarea = ctb.tarea_basica) JOIN categoria c ON (ctb.categoria = c.nombre) "+
-                "WHERE tb.nombre LIKE ? AND c.nombre LIKE ? AND completada = ? AND id_usuario LIKE ?";
+                "WHERE tb.nombre LIKE ? AND c.nombre LIKE ? AND completada = ? AND id_usuario = ?";
 
 
         try  {
@@ -162,7 +162,7 @@ public class DAOTareas extends AbstractDAO {
                     + "WHERE id_tarea = ?");
             stmActualizarTarea.setString(1, t.getNombre());
             stmActualizarTarea.setBoolean(2, t.getCompletada());
-            stmActualizarTarea.setString(3, t.getFechaFin().toString());
+            stmActualizarTarea.setDate(3, Date.valueOf(t.getFechaFin()));
             stmActualizarTarea.setInt(4, t.getIdTarea());
             
             stmActualizarTarea.executeUpdate();
