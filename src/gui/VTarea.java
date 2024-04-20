@@ -30,6 +30,7 @@ public class VTarea extends javax.swing.JFrame {
      */
     public VTarea(FachadaAplicacion fa, List<String> restoCategorias, FachadaBaseDatos fbd) {
         this.fa = fa;
+        this.fbd = fbd;
         initComponents();
 
         ModeloListaStrings mListaRC=new ModeloListaStrings();
@@ -46,6 +47,7 @@ public class VTarea extends javax.swing.JFrame {
     
     public VTarea(FachadaAplicacion fa, List<String> restoCategorias, Tarea tarea, FachadaBaseDatos fbd){
         this.fa = fa;
+        this.fbd = fbd;
         initComponents();
         ModeloListaStrings mListaRC=new ModeloListaStrings();
         listaCategorias.setModel(mListaRC);
