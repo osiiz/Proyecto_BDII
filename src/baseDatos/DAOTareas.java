@@ -111,14 +111,14 @@ public class DAOTareas extends AbstractDAO {
         con=super.getConexion();
         
         try{
-            stmTarea = con.prepareStatement("SELECT id_tarea, tb.nombre, completada, fecha_fin, c.nombre "+
+            stmTarea = con.prepareStatement("SELECT id_tarea, tb.nombre, completada, fecha_fin, c.nombre as categoria "+
                 "FROM tarea_basica tb JOIN categoria_tarea_basica ctb ON (tb.id_tarea = ctb.tarea_basica) JOIN categoria c ON (ctb.categoria = c.nombre) "+
                 "WHERE id_tarea = ?");
             stmTarea.setInt(1, idTarea);
             rsTarea = stmTarea.executeQuery();
             if (rsTarea.next()){
                 resultado = new Tarea(rsTarea.getInt("id_tarea"), rsTarea.getString("nombre"), rsTarea.getBoolean("completada"), 
-                        LocalDate.parse(rsTarea.getString("fecha_fin")), new Categoria(rsTarea.getString("c.nombre")));
+                        LocalDate.parse(rsTarea.getString("fecha_fin")), new Categoria(rsTarea.getString("categoria")));
             }
             stmTarea.close();
         }catch (SQLException e){
