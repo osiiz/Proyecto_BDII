@@ -10,6 +10,7 @@
  */
 
 package gui;
+import aplicacion.*;
 
 /**
  *
@@ -17,10 +18,11 @@ package gui;
  */
 public class VAutentificacion extends javax.swing.JDialog {
 
-    aplicacion.FachadaAplicacion fa;
+    FachadaAplicacion fa;
     
-    /** Creates new form VAutentificacion */
-    public VAutentificacion(aplicacion.FachadaAplicacion fa) {
+    /** Creates new form VAutentificacion
+     * @param fa */
+    public VAutentificacion(FachadaAplicacion fa) {
         this.fa=fa;
         initComponents();
         etiquetaFallo.setVisible(false);
