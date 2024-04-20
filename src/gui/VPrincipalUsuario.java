@@ -246,11 +246,12 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnEditarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarTareaActionPerformed
-        // TODO add your handling code here:
+
         ModeloTablaTareasBasicas mtb = (ModeloTablaTareasBasicas) tablaTareas.getModel();
         int idTarea;
         idTarea = mtb.obtenerTareas(tablaTareas.getSelectedRow()).getIdTarea();
         fa.visualizarTarea(idTarea);
+        buscarTareas();
     }//GEN-LAST:event_btnEditarTareaActionPerformed
 
     private void btnNuevaTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaTareaActionPerformed

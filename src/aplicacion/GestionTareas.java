@@ -29,7 +29,7 @@ public class GestionTareas{
         Tarea tarea;
         tarea = fbd.consultarTarea(idTarea);
         restoCategorias = fbd.obtenerRestoCategorias(idTarea);
-        fgui.visualizaTarea(tarea, restoCategorias);
+        fgui.visualizaTarea(tarea, restoCategorias, fbd);
     }
 
     public void nuevoLibro(){
@@ -86,5 +86,9 @@ public class GestionTareas{
 
     public void actualizarTarea(Tarea t) {
         fbd.actualizarTarea(t);
+    }
+
+    public void eliminarCategoriaTarea(int idTarea) {
+        fbd.eliminarCategoriaTarea(idTarea);
     }
 }

@@ -25,7 +25,6 @@ public class DAOTareas extends AbstractDAO {
     }
     
     public List<Tarea> obtenerTareasBasicas(String nombre, String categoria, Boolean completada, Usuario usuario){
-        System.out.println("Usuario:" + usuario.getIdUsuario());
         List<Tarea> resultado = new java.util.ArrayList<>();
         
         Tarea tareaActual;
@@ -171,6 +170,24 @@ public class DAOTareas extends AbstractDAO {
             stmActualizarTarea.setInt(4, t.getIdTarea());
             
             stmActualizarTarea.executeUpdate();
+            
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }
+    }
+
+    public void eliminarCategoriaTarea(int idTarea) {
+        Connection con;
+        PreparedStatement stmEliminarCategoriaTarea;
+        con=super.getConexion();
+        
+        try{
+            stmEliminarCategoriaTarea = con.prepareStatement("UPDATE tarea_basica "
+                    + "SET categoria = null WHERE id_tarea = ?");
+            stmEliminarCategoriaTarea.setInt(4, idTarea);
+            
+            stmEliminarCategoriaTarea.executeUpdate();
             
         }catch (SQLException e){
             System.out.println(e.getMessage());

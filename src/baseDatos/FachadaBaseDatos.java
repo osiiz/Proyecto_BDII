@@ -110,4 +110,8 @@ public class FachadaBaseDatos {
     public void actualizarTarea(Tarea t) {
         daoTareas.actualizarTarea(t);
     }
+
+    public void eliminarCategoriaTarea(int idTarea) {
+        daoTareas.eliminarCategoriaTarea(idTarea);
+    }
 }

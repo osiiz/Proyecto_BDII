@@ -95,5 +95,9 @@ public class FachadaAplicacion {
         ct.actualizarTarea(t);
     }
 
+    public void eliminarCategoriaTarea(int idTarea) {
+        ct.eliminarCategoriaTarea(idTarea);
+    }
+
 
 }

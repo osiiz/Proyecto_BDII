@@ -6,6 +6,7 @@ package gui;
 
 import aplicacion.FachadaAplicacion;
 import aplicacion.Tarea;
+import baseDatos.FachadaBaseDatos;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -18,6 +19,7 @@ public class VTarea extends javax.swing.JFrame {
     private FachadaAplicacion fa;
     private Tarea tarea;
     private VPrincipalUsuario padre;
+    private FachadaBaseDatos fbd; 
 
     /**
      * Creates new form VTarea
@@ -26,7 +28,7 @@ public class VTarea extends javax.swing.JFrame {
      * @param fa
      * @param restoCategorias
      */
-    public VTarea(FachadaAplicacion fa, List<String> restoCategorias) {
+    public VTarea(FachadaAplicacion fa, List<String> restoCategorias, FachadaBaseDatos fbd) {
         this.fa = fa;
         initComponents();
 
@@ -42,7 +44,7 @@ public class VTarea extends javax.swing.JFrame {
         txtId.setEditable(false);
     }
     
-    public VTarea(FachadaAplicacion fa, List<String> restoCategorias, Tarea tarea){
+    public VTarea(FachadaAplicacion fa, List<String> restoCategorias, Tarea tarea, FachadaBaseDatos fbd){
         this.fa = fa;
         initComponents();
         ModeloListaStrings mListaRC=new ModeloListaStrings();
@@ -202,6 +204,11 @@ public class VTarea extends javax.swing.JFrame {
         });
 
         btnEliminarCategoria.setText("Eliminar categoría");
+        btnEliminarCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarCategoriaActionPerformed(evt);
+            }
+        });
 
         btnGuardarCategoria.setText("Guardar");
 
@@ -303,6 +310,14 @@ public class VTarea extends javax.swing.JFrame {
     private void btnSalirCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirCategoriaActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnSalirCategoriaActionPerformed
+
+    private void btnEliminarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCategoriaActionPerformed
+        fa.eliminarCategoriaTarea(tarea.getIdTarea());
+        Tarea t;
+        t = new Tarea(Integer.parseInt(txtId.getText()), txtNombre.getText(), checkCompletada.isSelected(), LocalDate.parse(txtFechaFin.getText()), tarea.getCategoria());
+        fa.actualizarTarea(t);
+        ((ModeloListaStrings)listaCategorias.getModel()).setElementos(fbd.obtenerRestoCategorias(tarea.getIdTarea()));
+    }//GEN-LAST:event_btnEliminarCategoriaActionPerformed
 
     
 
