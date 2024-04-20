@@ -21,7 +21,6 @@ import java.util.Properties;
 public class FachadaBaseDatos {
     private aplicacion.FachadaAplicacion fa;
     private java.sql.Connection conexion;
-    private DAOCategorias daoCategorias;
     private DAOUsuarios daoUsuarios;
     private DAOTareas daoTareas;
 
@@ -48,8 +47,7 @@ public class FachadaBaseDatos {
                     configuracion.getProperty("puerto")+"/"+
                     configuracion.getProperty("baseDatos"),
                     usuario);
-
-            daoCategorias = new DAOCategorias(conexion, fa);
+            
             daoUsuarios = new DAOUsuarios(conexion, fa);     
             daoTareas = new DAOTareas(conexion, fa);
 
@@ -72,9 +70,6 @@ public class FachadaBaseDatos {
         return daoUsuarios.validarUsuario(idUsuario, clave);
     }
    
-    public java.util.List<Categoria> consultarCategorias(){
-        return daoCategorias.consultarCategorias();
-    }
     
     public java.util.List<Usuario> consultarUsuarios(String id, String nombre){
         return daoUsuarios.consultarUsuarios(id,nombre);
@@ -92,14 +87,6 @@ public class FachadaBaseDatos {
         daoUsuarios.borrarUsuario(usuario);
     }
 
-    public void borrarCategoria(String nombre) {
-        daoCategorias.borrarCategoria(nombre);
-    }
-
-    public void anhadirCategoria(Categoria categoria) {
-        daoCategorias.anhadirCategoria(categoria);
-    }
-
     public List<Tarea> consultarTareas(String nombre, String categoria, Boolean completada, Usuario usuario) {
         return daoTareas.obtenerTareasBasicas(nombre, categoria, completada, usuario);
     }
@@ -114,5 +101,9 @@ public class FachadaBaseDatos {
 
     public Tarea consultarTarea(Integer idTarea) {
         return daoTareas.consultarTarea(idTarea);
+    }
+
+    public List<String> obtenerRestoCategorias(Integer idTarea) {
+        return daoTareas.obtenerRestoCategorias(idTarea);
     }
 }

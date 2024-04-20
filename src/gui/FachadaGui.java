@@ -55,11 +55,6 @@ public class FachadaGui {
         vu.setVisible(true);
     }
 
-    public void ventanaCategorias() {
-        VCategorias vc;
-        vc = new VCategorias(vp, true, fa);
-        vc.setVisible(true);
-    }
 
     public Usuario getUsuario() {
         return usuario;
@@ -71,11 +66,8 @@ public class FachadaGui {
 
     public void visualizaTarea(Tarea tarea, List<String> restoCategorias) {
         VTarea vt;
-        vt = new VTarea(vp, true, fa restoCategorias, tarea);
+        vt = new VTarea(vp, true, fa, restoCategorias, tarea);
         vt.setVisible(true);
-        
-        
-        
         
     }
     

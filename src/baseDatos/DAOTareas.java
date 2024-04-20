@@ -11,6 +11,7 @@ import aplicacion.Tarea;
 import aplicacion.Usuario;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  *
@@ -120,6 +121,29 @@ public class DAOTareas extends AbstractDAO {
                         LocalDate.parse(rsTarea.getString("fecha_fin")), new Categoria(rsTarea.getString("c.nombre")));
             }
             stmTarea.close();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }
+        return resultado;
+    }
+
+    public List<String> obtenerRestoCategorias(Integer idTarea) {
+        List <String> resultado = new ArrayList<>();
+        Connection con;
+        PreparedStatement stmRestoCategorias=null;
+        ResultSet rsRestoCategorias;
+        con=super.getConexion();
+        
+        try{
+            stmRestoCategorias = con.prepareStatement("select c.nombre from categoria c where not exists " +
+                    "(select * from categoria_tarea_basica ctb where ctb.tarea_basica = ? and ctb.categoria = c.nombre)");
+            stmRestoCategorias.setInt(1, idTarea);
+            rsRestoCategorias = stmRestoCategorias.executeQuery();
+            while (rsRestoCategorias.next()){
+                resultado.add(rsRestoCategorias.getString("nombre"));
+            }
+            stmRestoCategorias.close();
         }catch (SQLException e){
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());

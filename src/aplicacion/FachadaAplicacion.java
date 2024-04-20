@@ -16,7 +16,6 @@ public class FachadaAplicacion {
     gui.FachadaGui fgui;
     baseDatos.FachadaBaseDatos fbd;
     GestionUsuarios cu;
-    GestionCategorias cc;
     GestionTareas ct;
     Usuario usuario;
     
@@ -25,7 +24,6 @@ public class FachadaAplicacion {
       fgui =new gui.FachadaGui(this);
       fbd = new baseDatos.FachadaBaseDatos(this);
       cu = new GestionUsuarios(fgui, fbd);
-      cc = new GestionCategorias(fgui, fbd);
       ct = new GestionTareas(fgui, fbd);
       usuario = null;
     }
@@ -71,22 +69,6 @@ public class FachadaAplicacion {
 
     public void borrarUsuario(Usuario usuario){
         cu.borrarUsuario(usuario);
-    }
-
-    public void ventanaCategorias(){
-        fgui.ventanaCategorias();
-    }
-
-    public List<Categoria> buscaCategorias() {
-        return cc.buscaCategorias();
-    }
-
-    public void borrarCategoria(String nombre) {
-        cc.borrarCategoria(nombre);
-    }
-
-    public void anhadirCategoria(Categoria categoria) {
-        cc.anhadirCategoria(categoria);
     }
 
     public void nuevaTarea(){
