@@ -127,8 +127,8 @@ create table Categoria_tarea_basica(
 	categoria varchar(100),
 	tarea_basica int,
 	primary key (categoria, tarea_basica),
-	foreign key (categoria) references Categoria(nombre),
-	foreign key (tarea_basica) references Tarea_basica(id_tarea)
+	foreign key (categoria) references Categoria(nombre) on delete cascade on update cascade,
+	foreign key (tarea_basica) references Tarea_basica(id_tarea) on delete cascade on update cascade
 );
 create table Tener_notificacion_de_proyecto(
 	usuario varchar(100),
