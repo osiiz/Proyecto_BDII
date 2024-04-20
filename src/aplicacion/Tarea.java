@@ -48,6 +48,12 @@ public class Tarea {
         this.completada = completada;
     }
 
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+    
+    
+
     
     
     
