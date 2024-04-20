@@ -70,7 +70,6 @@ public class DAOTareas extends AbstractDAO {
 
         con=super.getConexion();
         
-        
         try{
             stmCompletar = con.prepareStatement("UPDATE tarea_basica SET completada = ? WHERE id_tarea = ? ");
             stmCompletar.setBoolean(1, completada);
@@ -82,5 +81,22 @@ public class DAOTareas extends AbstractDAO {
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         }
         
+    }
+
+    void borrarTarea(int idTarea) {
+        Connection con;
+        PreparedStatement stmBorrar=null;
+
+        con=super.getConexion();
+        
+        try{
+            stmBorrar = con.prepareStatement("delete from tarea_basica where id_tarea = ?");
+            stmBorrar.setInt(1, idTarea);
+            stmBorrar.executeUpdate();
+            stmBorrar.close();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }
     }
 }

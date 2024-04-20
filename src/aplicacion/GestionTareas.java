@@ -79,4 +79,8 @@ public class GestionTareas{
     void actualizarCompletada(int idTarea, Boolean completada) {
         fbd.actualizarCompletada(idTarea, completada);
     }
+
+    void borrarTarea(int idTarea) {
+        fbd.borrarTarea(idTarea);
+    }
 }

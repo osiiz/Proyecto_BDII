@@ -107,4 +107,8 @@ public class FachadaBaseDatos {
     public void actualizarCompletada(int idTarea, Boolean completada) {
         daoTareas.actualizarCompletada(idTarea, completada);
     }
+
+    public void borrarTarea(int idTarea) {
+        daoTareas.borrarTarea(idTarea);
+    }
 }
