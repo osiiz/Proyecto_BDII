@@ -25,6 +25,7 @@ public class DAOTareas extends AbstractDAO {
     }
     
     public List<Tarea> obtenerTareasBasicas(String nombre, String categoria, Boolean completada, Usuario usuario){
+        System.out.println("Usuario:" + usuario.getIdUsuario());
         List<Tarea> resultado = new java.util.ArrayList<>();
         
         Tarea tareaActual;
@@ -44,7 +45,7 @@ public class DAOTareas extends AbstractDAO {
             stmTareas.setString(1, "%"+nombre+"%");
             stmTareas.setString(2, "%"+categoria+"%");
             stmTareas.setBoolean(3, completada);
-            stmTareas.setString(4, "%"+usuario.getIdUsuario()+"%");
+            stmTareas.setString(4, usuario.getIdUsuario());
             rsTareas = stmTareas.executeQuery();
             while (rsTareas.next()){
                 tareaActual = new Tarea(rsTareas.getInt("id_tarea"), rsTareas.getString("nombre"), rsTareas.getBoolean("completada"), 
