@@ -5,6 +5,7 @@
 package gui;
 
 import aplicacion.*;
+import java.util.List;
 
 /**
  *
@@ -68,8 +69,12 @@ public class FachadaGui {
         this.usuario = usuario;
     }
 
-    public void visualizaTarea(Tarea tarea) {
+    public void visualizaTarea(Tarea tarea, List<String> restoCategorias) {
         VTarea vt;
+        vt = new VTarea(vp, true, fa restoCategorias, tarea);
+        vt.setVisible(true);
+        
+        
         
         
     }
