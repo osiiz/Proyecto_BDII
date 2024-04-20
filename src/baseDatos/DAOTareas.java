@@ -35,17 +35,21 @@ public class DAOTareas extends AbstractDAO {
 
         con=this.getConexion();
         
-        String consultaTareas = "SELECT id_tarea, tb.nombre, completada, fecha_fin, c.nombre as categoria "+
-                "FROM tarea_basica tb JOIN categoria_tarea_basica ctb ON (tb.id_tarea = ctb.tarea_basica) JOIN categoria c ON (ctb.categoria = c.nombre) "+
-                "WHERE tb.nombre LIKE ? AND c.nombre LIKE ? AND completada = ? AND id_usuario = ?";
-
+        String consultaTareas = "SELECT id_tarea, tb.nombre, completada, fecha_fin, ctb.categoria as categoria "+
+                "FROM tarea_basica tb LEFT JOIN categoria_tarea_basica ctb ON (tb.id_tarea = ctb.tarea_basica)"+
+                "WHERE tb.nombre LIKE ? AND completada = ? AND id_usuario = ? ";
+        String consultaTareasCategoria = "AND categoria LIKE ?";
+        
+        if (!categoria.isBlank()){
+            consultaTareas += consultaTareasCategoria;
+        }
 
         try  {
             stmTareas = con.prepareStatement(consultaTareas);
             stmTareas.setString(1, "%"+nombre+"%");
-            stmTareas.setString(2, "%"+categoria+"%");
-            stmTareas.setBoolean(3, completada);
-            stmTareas.setString(4, usuario.getIdUsuario());
+            stmTareas.setBoolean(2, completada);
+            stmTareas.setString(3, usuario.getIdUsuario());
+            if (!categoria.isBlank()) stmTareas.setString(4, "%"+categoria+"%");
             rsTareas = stmTareas.executeQuery();
             while (rsTareas.next()){
                 tareaActual = new Tarea(rsTareas.getInt("id_tarea"), rsTareas.getString("nombre"), rsTareas.getBoolean("completada"), 
