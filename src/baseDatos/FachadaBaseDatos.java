@@ -106,4 +106,8 @@ public class FachadaBaseDatos {
     public List<String> obtenerRestoCategorias(Integer idTarea) {
         return daoTareas.obtenerRestoCategorias(idTarea);
     }
+
+    public void actualizarTarea(Tarea t) {
+        daoTareas.actualizarTarea(t);
+    }
 }

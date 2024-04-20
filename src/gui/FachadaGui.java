@@ -66,7 +66,7 @@ public class FachadaGui {
 
     public void visualizaTarea(Tarea tarea, List<String> restoCategorias) {
         VTarea vt;
-        vt = new VTarea(vp, true, fa, restoCategorias, tarea);
+        vt = new VTarea(fa, restoCategorias, tarea);
         vt.setVisible(true);
         
     }

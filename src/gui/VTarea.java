@@ -287,13 +287,9 @@ public class VTarea extends javax.swing.JFrame {
 
     private void btnGuardarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarTareaActionPerformed
         Tarea t;
-        t=new Tarea(-1, txtNombre.getText(), checkCompletada.isSelected(), LocalDate.parse(txtFechaFin.getText()), tarea.getCategoria());
+        t = new Tarea(Integer.parseInt(txtId.getText()), txtNombre.getText(), checkCompletada.isSelected(), LocalDate.parse(txtFechaFin.getText()), tarea.getCategoria());
 
-        int idTarea=fa.actualizarTarea(t);
-        textoId.setText(idLibro.toString());
-        btnActualizarCategoriasLibro.setEnabled(true);
-        btnActualizarEjemplaresLibro.setEnabled(true);
-        btnBorrarLibro.setEnabled(true);
+        fa.actualizarTarea(t);
     }//GEN-LAST:event_btnGuardarTareaActionPerformed
 
     private void btnSalirTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirTareaActionPerformed

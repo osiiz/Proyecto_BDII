@@ -76,11 +76,15 @@ public class GestionTareas{
        return fbd.consultarEjemplaresLibro(idLibro);
     }*/
 
-    void actualizarCompletada(int idTarea, Boolean completada) {
+    public void actualizarCompletada(int idTarea, Boolean completada) {
         fbd.actualizarCompletada(idTarea, completada);
     }
 
-    void borrarTarea(int idTarea) {
+    public void borrarTarea(int idTarea) {
         fbd.borrarTarea(idTarea);
+    }
+
+    public void actualizarTarea(Tarea t) {
+        fbd.actualizarTarea(t);
     }
 }
