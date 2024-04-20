@@ -43,6 +43,7 @@ public class VTarea extends javax.swing.JFrame {
         
         btnEliminarCategoria.setEnabled(false);
         txtId.setEditable(false);
+        txtCategoriaActual.setEditable(false);
     }
     
     public VTarea(FachadaAplicacion fa, List<String> restoCategorias, Tarea tarea, FachadaBaseDatos fbd){
@@ -69,6 +70,7 @@ public class VTarea extends javax.swing.JFrame {
         txtCategoriaActual.setText(tarea.getCategoria().toString());
         btnEliminarCategoria.setEnabled(true);
         txtId.setEditable(false);
+        txtCategoriaActual.setEditable(false);
     }
 
     /**
@@ -319,6 +321,7 @@ public class VTarea extends javax.swing.JFrame {
         t = new Tarea(Integer.parseInt(txtId.getText()), txtNombre.getText(), checkCompletada.isSelected(), LocalDate.parse(txtFechaFin.getText()), tarea.getCategoria());
         fa.actualizarTarea(t);
         ((ModeloListaStrings)listaCategorias.getModel()).setElementos(fbd.obtenerRestoCategorias(tarea.getIdTarea()));
+        txtCategoriaActual.setText(t.getCategoria().toString());
     }//GEN-LAST:event_btnEliminarCategoriaActionPerformed
 
     
