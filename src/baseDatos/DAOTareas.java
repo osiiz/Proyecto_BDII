@@ -268,6 +268,8 @@ public class DAOTareas extends AbstractDAO {
             rsIdTarea.next();
             t.setIdTarea(rsIdTarea.getInt("idTarea"));
             
+            resultado = t;
+            
             rsIdTarea.close();
             
         }catch(SQLException e){
