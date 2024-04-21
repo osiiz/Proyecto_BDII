@@ -4,6 +4,7 @@
  */
 package gui;
 
+import aplicacion.Categoria;
 import aplicacion.FachadaAplicacion;
 import aplicacion.Tarea;
 import baseDatos.FachadaBaseDatos;
@@ -308,7 +309,9 @@ public class VTarea extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirTareaActionPerformed
 
     private void btnCambiarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiarCategoriaActionPerformed
-        // TODO add your handling code here:
+        Categoria cat = new Categoria(((ModeloListaStrings)listaCategorias.getModel()).getElementAt(listaCategorias.getSelectedIndex()));
+        fa.cambiarCategoriaTarea(tarea.getIdTarea(), cat.getNombre());
+        actualizarDatosTarea(tarea.getIdTarea());
     }//GEN-LAST:event_btnCambiarCategoriaActionPerformed
 
     private void btnSalirCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirCategoriaActionPerformed
@@ -317,13 +320,28 @@ public class VTarea extends javax.swing.JFrame {
 
     private void btnEliminarCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarCategoriaActionPerformed
         fa.eliminarCategoriaTarea(tarea.getIdTarea());
-        Tarea t;
+        actualizarDatosTarea(tarea.getIdTarea());
+        /*Tarea t;
         t = new Tarea(Integer.parseInt(txtId.getText()), txtNombre.getText(), checkCompletada.isSelected(), LocalDate.parse(txtFechaFin.getText()), tarea.getCategoria());
         fa.actualizarTarea(t);
         ((ModeloListaStrings)listaCategorias.getModel()).setElementos(fbd.obtenerRestoCategorias(tarea.getIdTarea()));
-        txtCategoriaActual.setText("");
+        txtCategoriaActual.setText("");*/
+        
+        
     }//GEN-LAST:event_btnEliminarCategoriaActionPerformed
 
+    public void actualizarDatosTarea(int idTarea){
+        Tarea tt = fa.actualizarDatosTarea(idTarea);
+        this.tarea = tt;
+        txtNombre.setText(tarea.getNombre());
+        txtId.setText(((Integer)tarea.getIdTarea()).toString());
+        checkCompletada.setSelected(tarea.getCompletada());
+        txtFechaFin.setText(tarea.getFechaFin().toString());
+        txtCategoriaActual.setText(tarea.getCategoria().toString());
+        ((ModeloListaStrings)listaCategorias.getModel()).setElementos(fbd.obtenerRestoCategorias(tarea.getIdTarea()));
+        
+    }
+    
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

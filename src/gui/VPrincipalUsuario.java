@@ -251,7 +251,7 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
         int idTarea;
         idTarea = mtb.obtenerTareas(tablaTareas.getSelectedRow()).getIdTarea();
         fa.visualizarTarea(idTarea);
-        buscarTareas();
+        
     }//GEN-LAST:event_btnEditarTareaActionPerformed
 
     private void btnNuevaTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaTareaActionPerformed

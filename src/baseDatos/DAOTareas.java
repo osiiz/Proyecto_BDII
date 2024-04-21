@@ -193,4 +193,50 @@ public class DAOTareas extends AbstractDAO {
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         }
     }
+
+    public void cambiarCategoriaTarea(int idTarea, String nombre) {
+        Connection con;
+        PreparedStatement stmCambiarCategoriaTarea;
+        con=super.getConexion();
+        
+        try{
+            stmCambiarCategoriaTarea = con.prepareStatement("delete from categoria_tarea_basica where tarea_basica = ? "
+                    + "insert into categoria_tarea_basica (tarea, categoria) values (?, ?)");
+            stmCambiarCategoriaTarea.setInt(1, idTarea);
+            stmCambiarCategoriaTarea.setInt(2, idTarea);
+            stmCambiarCategoriaTarea.setString(3, nombre); 
+            
+            stmCambiarCategoriaTarea.executeUpdate();
+            
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }
+    }
+
+    public Tarea actualizarDatosTarea(int idTarea) {
+        Tarea resultado = null;
+        Connection con;
+        PreparedStatement stmTarea;
+        ResultSet rsTarea;
+        con=super.getConexion();
+        
+        try{
+            stmTarea = con.prepareStatement("select id_tarea, nombre, completada, fecha_fin, categoria "
+                    + "from tarea_basica tb left join categoria_tarea_basica on (id_tarea = ctb.tarea_basica) "
+                    + "where id_tarea = ?");
+            stmTarea.setInt(1, idTarea);
+            rsTarea = stmTarea.executeQuery();
+            if (rsTarea.next()){
+                resultado = new Tarea(idTarea, rsTarea.getString("nombre"), rsTarea.getBoolean("completada"), 
+                rsTarea.getDate("fecha_fin").toLocalDate(), new Categoria(rsTarea.getString("categoria")));
+            }
+            rsTarea.close();
+            
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }
+        return resultado;
+    }
 }

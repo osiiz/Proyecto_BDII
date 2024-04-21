@@ -114,4 +114,12 @@ public class FachadaBaseDatos {
     public void eliminarCategoriaTarea(int idTarea) {
         daoTareas.eliminarCategoriaTarea(idTarea);
     }
+
+    public void cambiarCategoriaTarea(int idTarea, String nombre) {
+        daoTareas.cambiarCategoriaTarea(idTarea, nombre);
+    }
+
+    public Tarea actualizarDatosTarea(int idTarea) {
+        return daoTareas.actualizarDatosTarea(idTarea);
+    }
 }

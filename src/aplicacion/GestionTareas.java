@@ -91,4 +91,12 @@ public class GestionTareas{
     public void eliminarCategoriaTarea(int idTarea) {
         fbd.eliminarCategoriaTarea(idTarea);
     }
+
+    public void cambiarCategoriaTarea(int idTarea, String nombre) {
+        fbd.cambiarCategoriaTarea(idTarea, nombre);
+    }
+
+    public Tarea actualizarDatosTarea(int idTarea) {
+        return fbd.actualizarDatosTarea(idTarea);
+    }
 }

@@ -99,5 +99,14 @@ public class FachadaAplicacion {
         ct.eliminarCategoriaTarea(idTarea);
     }
 
+    public void cambiarCategoriaTarea(int idTarea, String nombre) {
+        ct.cambiarCategoriaTarea(idTarea, nombre);
+    }
+
+    public Tarea actualizarDatosTarea(int idTarea) {
+        return ct.actualizarDatosTarea(idTarea);
+        
+    }
+
 
 }
