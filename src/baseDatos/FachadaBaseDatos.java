@@ -122,4 +122,8 @@ public class FachadaBaseDatos {
     public Tarea actualizarDatosTarea(int idTarea) {
         return daoTareas.actualizarDatosTarea(idTarea);
     }
+
+    public Tarea anhadirTarea(Tarea t, int idUsuario) {
+        return daoTareas.anhadirTarea(t, idUsuario);
+    }
 }

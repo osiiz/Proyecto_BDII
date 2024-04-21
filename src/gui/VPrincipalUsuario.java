@@ -117,20 +117,9 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
 
         jLabel3.setText("Completada:");
 
-        buscaCompletada.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscaCompletadaActionPerformed(evt);
-            }
-        });
-
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/bell (1).png"))); // NOI18N
 
-        selecAscDesc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Descendente", "Ascendente" }));
-        selecAscDesc.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selecAscDescActionPerformed(evt);
-            }
-        });
+        selecAscDesc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascendente", "Descendente" }));
 
         btnBorrarTarea.setText("Borrar");
         btnBorrarTarea.addActionListener(new java.awt.event.ActionListener() {
@@ -246,7 +235,6 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void btnEditarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarTareaActionPerformed
-
         ModeloTablaTareasBasicas mtb = (ModeloTablaTareasBasicas) tablaTareas.getModel();
         int idTarea;
         idTarea = mtb.obtenerTareas(tablaTareas.getSelectedRow()).getIdTarea();
@@ -262,14 +250,6 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenu2MouseClicked
-
-    private void buscaCompletadaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaCompletadaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscaCompletadaActionPerformed
-
-    private void selecAscDescActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selecAscDescActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_selecAscDescActionPerformed
 
     private void btnBorrarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarTareaActionPerformed
         ModeloTablaTareasBasicas m;

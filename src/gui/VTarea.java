@@ -21,6 +21,7 @@ public class VTarea extends javax.swing.JFrame {
     private Tarea tarea;
     private VPrincipalUsuario padre;
     private FachadaBaseDatos fbd; 
+    private int idUsuario;
 
     /**
      * Creates new form VTarea
@@ -29,9 +30,10 @@ public class VTarea extends javax.swing.JFrame {
      * @param fa
      * @param restoCategorias
      */
-    public VTarea(FachadaAplicacion fa, List<String> restoCategorias, FachadaBaseDatos fbd) {
+    public VTarea(FachadaAplicacion fa, List<String> restoCategorias, FachadaBaseDatos fbd, int idUsuario) {
         this.fa = fa;
         this.fbd = fbd;
+        this.idUsuario = idUsuario;
         initComponents();
 
         ModeloListaStrings mListaRC=new ModeloListaStrings();
@@ -298,6 +300,15 @@ public class VTarea extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarTareaActionPerformed
+        if (txtNombre.getText().isBlank() || txtFechaFin.getText().isBlank() || checkCompletada.getText().isBlank()){
+            System.out.println("Debes completar todos los campos excepto el Id");
+            this.fa.muestraExcepcion("Debes completar todos los campos excepto el Id");
+        }
+        if (txtId.getText().isBlank()){
+            Tarea t = new Tarea(Integer.parseInt(txtId.getText()), txtNombre.getText(), checkCompletada.isSelected(), LocalDate.parse(txtFechaFin.getText()), tarea.getCategoria());
+            this.tarea = fa.anhadirTarea(t, idUsuario);
+            actualizarDatosTarea(tarea.getIdTarea());
+        }
         Tarea t;
         t = new Tarea(Integer.parseInt(txtId.getText()), txtNombre.getText(), checkCompletada.isSelected(), LocalDate.parse(txtFechaFin.getText()), tarea.getCategoria());
 

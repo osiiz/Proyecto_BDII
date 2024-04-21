@@ -32,14 +32,11 @@ public class GestionTareas{
         fgui.visualizaTarea(tarea, restoCategorias, fbd);
     }
 
-    public void nuevoLibro(){
-        /*java.util.List<String> restoCategorias = new java.util.ArrayList<String> ();
+    public void nuevaTarea(int idUsuario){
+        List<String> restoCategorias;
+        restoCategorias = fbd.obtenerRestoCategorias(-1);
 
-        for(Categoria c:fbd.consultarCategorias()){
-            restoCategorias.add(c.getNombre());
-        }
-
-        fgui.nuevaTarea(restoCategorias);*/
+        fgui.visualizaTarea(restoCategorias, fbd, idUsuario);
     }/*
     
     public Integer actualizarLibro(Libro l){
@@ -99,4 +96,9 @@ public class GestionTareas{
     public Tarea actualizarDatosTarea(int idTarea) {
         return fbd.actualizarDatosTarea(idTarea);
     }
+
+    public Tarea anhadirTarea(Tarea t, int idUsuario) {
+        return fbd.anhadirTarea(t, idUsuario);
+    }
+
 }

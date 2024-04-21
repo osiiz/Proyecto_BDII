@@ -31,9 +31,9 @@ public class DAOTareas extends AbstractDAO {
         Connection con;
         PreparedStatement stmTareas = null;
         ResultSet rsTareas;
-        String ascDesc = "desc";
+        String ascDesc = "asc";
         
-        if (descendente == 1) ascDesc = "asc";
+        if (descendente == 1) ascDesc = "desc";
 
         con=this.getConexion();
         
@@ -238,6 +238,37 @@ public class DAOTareas extends AbstractDAO {
                 rsTarea.getDate("fecha_fin").toLocalDate(), new Categoria(rsTarea.getString("categoria")));
             }
             rsTarea.close();
+            
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }
+        return resultado;
+    }
+
+    public Tarea anhadirTarea(Tarea t, int idUsuario) {
+        Tarea resultado = null;
+        Connection con;
+        PreparedStatement stmTarea;
+        PreparedStatement stmIdTarea;
+        ResultSet rsIdTarea;
+        con=super.getConexion();
+        
+        try{
+            stmTarea = con.prepareStatement("insert into tarea_basica (id_usuario, nombre, completada, fecha_fin) "
+                    + "values (?, ?, ?, ?)");
+            stmTarea.setInt(1, idUsuario);
+            stmTarea.setString(2, t.getNombre());
+            stmTarea.setBoolean(3, t.getCompletada());
+            stmTarea.setDate(4, Date.valueOf(t.getFechaFin()));
+            stmTarea.executeUpdate();
+            
+            stmIdTarea=con.prepareStatement("select currval('tarea_basica_id_seq') as idTarea");
+            rsIdTarea=stmIdTarea.executeQuery();
+            rsIdTarea.next();
+            t.setIdTarea(rsIdTarea.getInt("idLibro"));
+            
+            rsIdTarea.close();
             
         }catch(SQLException e){
             System.out.println(e.getMessage());

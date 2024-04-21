@@ -72,7 +72,7 @@ public class FachadaAplicacion {
     }
 
     public void nuevaTarea(){
-
+        ct.nuevaTarea(Integer.parseInt(usuario.getIdUsuario()));
     }
 
     public void visualizarTarea(int idTarea){
@@ -106,6 +106,10 @@ public class FachadaAplicacion {
     public Tarea actualizarDatosTarea(int idTarea) {
         return ct.actualizarDatosTarea(idTarea);
         
+    }
+
+    public Tarea anhadirTarea(Tarea t, int idUsuario) {
+        return ct.anhadirTarea(t, idUsuario);
     }
 
 

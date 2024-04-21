@@ -51,6 +51,10 @@ public class Tarea {
     public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
+
+    public void setIdTarea(int idTarea) {
+        this.idTarea = idTarea;
+    }
     
     
 
