@@ -125,7 +125,7 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/bell (1).png"))); // NOI18N
 
-        selecAscDesc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Descendente", "ascendente" }));
+        selecAscDesc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Descendente", "Ascendente" }));
         selecAscDesc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 selecAscDescActionPerformed(evt);
@@ -285,7 +285,7 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
         ModeloTablaTareasBasicas m;
 
         m = (ModeloTablaTareasBasicas) tablaTareas.getModel();
-        m.setFilas(fa.obtenerTareas(buscaNombre.getText(), buscaCategoria.getText(), buscaCompletada.isSelected()));
+        m.setFilas(fa.obtenerTareas(buscaNombre.getText(), buscaCategoria.getText(), buscaCompletada.isSelected(), selecAscDesc.getSelectedIndex()));
         if (m.getRowCount() > 0) {
             tablaTareas.setRowSelectionInterval(0, 0);
             btnEditarTarea.setEnabled(true);

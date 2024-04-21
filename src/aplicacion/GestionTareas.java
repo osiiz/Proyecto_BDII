@@ -20,8 +20,8 @@ public class GestionTareas{
      this.fbd=fbd;
     }
 
-    public java.util.List<Tarea> obtenerTareas(String nombre, String categoria, Boolean completada, Usuario usuario){
-        return fbd.consultarTareas(nombre, categoria, completada, usuario);
+    public java.util.List<Tarea> obtenerTareas(String nombre, String categoria, Boolean completada, Usuario usuario, int descendente){
+        return fbd.consultarTareas(nombre, categoria, completada, usuario, descendente);
     }
 
     public void visualizarTarea(Integer idTarea){

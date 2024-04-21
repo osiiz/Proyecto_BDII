@@ -79,8 +79,8 @@ public class FachadaAplicacion {
         ct.visualizarTarea(idTarea);
     }
 
-    public List<Tarea> obtenerTareas(String nombre, String categoria, Boolean completada){
-        return ct.obtenerTareas(nombre, categoria, completada, usuario);
+    public List<Tarea> obtenerTareas(String nombre, String categoria, Boolean completada, int descendente){
+        return ct.obtenerTareas(nombre, categoria, completada, usuario, descendente);
     }
 
     public void actualizarCompletada(int idTarea, Boolean completada) {

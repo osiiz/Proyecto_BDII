@@ -24,31 +24,38 @@ public class DAOTareas extends AbstractDAO {
         super.setFachadaAplicacion(fa);
     }
     
-    public List<Tarea> obtenerTareasBasicas(String nombre, String categoria, Boolean completada, Usuario usuario){
+    public List<Tarea> obtenerTareasBasicas(String nombre, String categoria, Boolean completada, Usuario usuario, int descendente){
         List<Tarea> resultado = new java.util.ArrayList<>();
         
         Tarea tareaActual;
         Connection con;
         PreparedStatement stmTareas = null;
         ResultSet rsTareas;
+        String ascDesc = "desc";
+        
+        if (descendente == 1) ascDesc = "asc";
 
         con=this.getConexion();
         
         String consultaTareas = "SELECT id_tarea, tb.nombre, completada, fecha_fin, ctb.categoria as categoria "+
                 "FROM tarea_basica tb LEFT JOIN categoria_tarea_basica ctb ON (tb.id_tarea = ctb.tarea_basica)"+
                 "WHERE tb.nombre LIKE ? AND completada = ? AND id_usuario = ? ";
-        String consultaTareasCategoria = "AND categoria LIKE ?";
+                
         
-        if (!categoria.isBlank()){
-            consultaTareas += consultaTareasCategoria;
-        }
-
+        if (!categoria.isBlank()) consultaTareas += "AND categoria LIKE ? order by ?";
+        else consultaTareas += "order by ?";
+        
         try  {
             stmTareas = con.prepareStatement(consultaTareas);
             stmTareas.setString(1, "%"+nombre+"%");
             stmTareas.setBoolean(2, completada);
             stmTareas.setString(3, usuario.getIdUsuario());
-            if (!categoria.isBlank()) stmTareas.setString(4, "%"+categoria+"%");
+            if (!categoria.isBlank()){
+                stmTareas.setString(4, "%"+categoria+"%");
+                stmTareas.setString(5, ascDesc);
+            }else{
+                stmTareas.setString(4, ascDesc);
+            }
             rsTareas = stmTareas.executeQuery();
             while (rsTareas.next()){
                 tareaActual = new Tarea(rsTareas.getInt("id_tarea"), rsTareas.getString("nombre"), rsTareas.getBoolean("completada"), 
