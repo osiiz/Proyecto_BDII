@@ -56,7 +56,7 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
         btnEditarTarea = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         buscaCompletada = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
+        btnNoti = new javax.swing.JButton();
         selecAscDesc = new javax.swing.JComboBox<>();
         btnBorrarTarea = new javax.swing.JButton();
         jMenuBar2 = new javax.swing.JMenuBar();
@@ -117,7 +117,12 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
 
         jLabel3.setText("Completada:");
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/bell (1).png"))); // NOI18N
+        btnNoti.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/bell (1).png"))); // NOI18N
+        btnNoti.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNotiActionPerformed(evt);
+            }
+        });
 
         selecAscDesc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascendente", "Descendente" }));
 
@@ -180,7 +185,7 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(buscaCompletada)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addComponent(btnNoti)
                         .addGap(24, 24, 24))))
         );
         layout.setVerticalGroup(
@@ -205,7 +210,7 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
                             .addComponent(selecAscDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(btnNoti)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -261,6 +266,10 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btnBorrarTareaActionPerformed
 
+    private void btnNotiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNotiActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnNotiActionPerformed
+
     public void buscarTareas() {
         ModeloTablaTareasBasicas m;
 
@@ -282,13 +291,13 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
     private javax.swing.JButton btnBorrarTarea;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEditarTarea;
+    private javax.swing.JButton btnNoti;
     private javax.swing.JButton btnNuevaTarea;
     private javax.swing.JButton btnSalir;
     private javax.swing.JTextField buscaCategoria;
     private javax.swing.JCheckBox buscaCompletada;
     private javax.swing.JTextField buscaNombre;
     private javax.swing.JLabel etiquetaTitulo;
-    private javax.swing.JButton jButton1;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
