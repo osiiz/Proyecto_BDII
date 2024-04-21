@@ -108,7 +108,7 @@ public class FachadaAplicacion {
         
     }
 
-    public Tarea anhadirTarea(Tarea t, int idUsuario) {
+    public Tarea anhadirTarea(Tarea t, String idUsuario) {
         return ct.anhadirTarea(t, idUsuario);
     }
 

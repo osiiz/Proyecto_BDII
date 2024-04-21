@@ -97,7 +97,7 @@ public class GestionTareas{
         return fbd.actualizarDatosTarea(idTarea);
     }
 
-    public Tarea anhadirTarea(Tarea t, int idUsuario) {
+    public Tarea anhadirTarea(Tarea t, String idUsuario) {
         return fbd.anhadirTarea(t, idUsuario);
     }
 
