@@ -42,20 +42,16 @@ public class DAOTareas extends AbstractDAO {
                 "WHERE tb.nombre LIKE ? AND completada = ? AND id_usuario = ? ";
                 
         
-        if (!categoria.isBlank()) consultaTareas += "AND categoria LIKE ? order by fecha_fin ?";
-        else consultaTareas += "order by fecha_fin ?";
+        if (!categoria.isBlank()) consultaTareas += "AND categoria LIKE ? order by fecha_fin " + ascDesc;
+        else consultaTareas += "order by fecha_fin " + ascDesc;
         
         try  {
             stmTareas = con.prepareStatement(consultaTareas);
             stmTareas.setString(1, "%"+nombre+"%");
             stmTareas.setBoolean(2, completada);
             stmTareas.setString(3, usuario.getIdUsuario());
-            if (!categoria.isBlank()){
-                stmTareas.setString(4, "%"+categoria+"%");
-                stmTareas.setString(5, ascDesc);
-            }else{
-                stmTareas.setString(4, ascDesc);
-            }
+            if (!categoria.isBlank()) stmTareas.setString(4, "%"+categoria+"%");
+            
             rsTareas = stmTareas.executeQuery();
             while (rsTareas.next()){
                 tareaActual = new Tarea(rsTareas.getInt("id_tarea"), rsTareas.getString("nombre"), rsTareas.getBoolean("completada"), 
