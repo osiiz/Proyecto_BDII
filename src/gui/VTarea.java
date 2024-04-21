@@ -25,10 +25,10 @@ public class VTarea extends javax.swing.JFrame {
 
     /**
      * Creates new form VTarea
-     * @param parent
-     * @param modal
      * @param fa
      * @param restoCategorias
+     * @param fbd
+     * @param idUsuario
      */
     public VTarea(FachadaAplicacion fa, List<String> restoCategorias, FachadaBaseDatos fbd, int idUsuario) {
         this.fa = fa;
@@ -305,9 +305,10 @@ public class VTarea extends javax.swing.JFrame {
             this.fa.muestraExcepcion("Debes completar todos los campos excepto el Id");
         }
         if (txtId.getText().isBlank()){
-            Tarea t = new Tarea(Integer.parseInt(txtId.getText()), txtNombre.getText(), checkCompletada.isSelected(), LocalDate.parse(txtFechaFin.getText()), tarea.getCategoria());
+            Tarea t = new Tarea(Integer.parseInt(txtId.getText()), txtNombre.getText(), checkCompletada.isSelected(), LocalDate.parse(txtFechaFin.getText()), null);
             this.tarea = fa.anhadirTarea(t, idUsuario);
             actualizarDatosTarea(tarea.getIdTarea());
+            return;
         }
         Tarea t;
         t = new Tarea(Integer.parseInt(txtId.getText()), txtNombre.getText(), checkCompletada.isSelected(), LocalDate.parse(txtFechaFin.getText()), tarea.getCategoria());

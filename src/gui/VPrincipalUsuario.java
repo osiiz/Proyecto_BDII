@@ -243,7 +243,6 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEditarTareaActionPerformed
 
     private void btnNuevaTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaTareaActionPerformed
-        // TODO add your handling code here:
         fa.nuevaTarea();
     }//GEN-LAST:event_btnNuevaTareaActionPerformed
 
