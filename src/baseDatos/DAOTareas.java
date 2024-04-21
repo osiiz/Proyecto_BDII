@@ -116,7 +116,7 @@ public class DAOTareas extends AbstractDAO {
         
         try{
             stmTarea = con.prepareStatement("SELECT id_tarea, tb.nombre, completada, fecha_fin, c.nombre as categoria "+
-                "FROM tarea_basica tb JOIN categoria_tarea_basica ctb ON (tb.id_tarea = ctb.tarea_basica) JOIN categoria c ON (ctb.categoria = c.nombre) "+
+                "FROM tarea_basica tb LEFT JOIN categoria_tarea_basica ctb ON (tb.id_tarea = ctb.tarea_basica)"+
                 "WHERE id_tarea = ?");
             stmTarea.setInt(1, idTarea);
             rsTarea = stmTarea.executeQuery();

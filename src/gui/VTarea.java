@@ -47,7 +47,7 @@ public class VTarea extends javax.swing.JFrame {
         txtCategoriaActual.setEditable(false);
     }
     
-    public VTarea(FachadaAplicacion fa, List<String> restoCategorias, Tarea tarea, FachadaBaseDatos fbd){
+    public VTarea(FachadaAplicacion fa, List<String> restoCategorias, Tarea t, FachadaBaseDatos fbd){
         this.fa = fa;
         this.fbd = fbd;
         initComponents();
@@ -59,7 +59,7 @@ public class VTarea extends javax.swing.JFrame {
             btnCambiarCategoria.setEnabled(true);
         } else btnCambiarCategoria.setEnabled(false);
         
-        this.tarea = tarea;
+        this.tarea = t;
         
         txtNombre.setText(tarea.getNombre());
         txtId.setText(((Integer)tarea.getIdTarea()).toString());
