@@ -39,10 +39,7 @@ public class VTarea extends javax.swing.JFrame {
         ModeloListaStrings mListaRC=new ModeloListaStrings();
         listaCategorias.setModel(mListaRC);
         mListaRC.setElementos(restoCategorias);
-        if (mListaRC.getSize()>0) {
-            listaCategorias.setSelectedIndex(0);
-            btnCambiarCategoria.setEnabled(true);
-        } else btnCambiarCategoria.setEnabled(false);
+        btnCambiarCategoria.setEnabled(false);
         
         btnEliminarCategoria.setEnabled(false);
         txtId.setEditable(false);
@@ -308,6 +305,10 @@ public class VTarea extends javax.swing.JFrame {
             Tarea t = new Tarea(-1, txtNombre.getText(), checkCompletada.isSelected(), LocalDate.parse(txtFechaFin.getText()), null);
             this.tarea = fa.anhadirTarea(t, idUsuario);
             actualizarDatosTarea(tarea.getIdTarea());
+            if (listaCategorias.getModel().getSize() > 0){
+                btnCambiarCategoria.setEnabled(true);
+            }
+           
             return;
         }
         Tarea t;
