@@ -300,12 +300,12 @@ public class VTarea extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarTareaActionPerformed
-        if (txtNombre.getText().isBlank() || txtFechaFin.getText().isBlank() || checkCompletada.getText().isBlank()){
+        if (txtNombre.getText().isBlank() || txtFechaFin.getText().isBlank()){
             System.out.println("Debes completar todos los campos excepto el Id");
             this.fa.muestraExcepcion("Debes completar todos los campos excepto el Id");
         }
         if (txtId.getText().isBlank()){
-            Tarea t = new Tarea(Integer.parseInt(txtId.getText()), txtNombre.getText(), checkCompletada.isSelected(), LocalDate.parse(txtFechaFin.getText()), null);
+            Tarea t = new Tarea(-1, txtNombre.getText(), checkCompletada.isSelected(), LocalDate.parse(txtFechaFin.getText()), null);
             this.tarea = fa.anhadirTarea(t, idUsuario);
             actualizarDatosTarea(tarea.getIdTarea());
             return;
