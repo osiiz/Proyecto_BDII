@@ -266,7 +266,7 @@ public class DAOTareas extends AbstractDAO {
             stmIdTarea=con.prepareStatement("select currval('tarea_basica_id_seq') as idTarea");
             rsIdTarea=stmIdTarea.executeQuery();
             rsIdTarea.next();
-            t.setIdTarea(rsIdTarea.getInt("idLibro"));
+            t.setIdTarea(rsIdTarea.getInt("idTarea"));
             
             rsIdTarea.close();
             
