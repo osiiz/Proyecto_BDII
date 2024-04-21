@@ -202,7 +202,7 @@ public class DAOTareas extends AbstractDAO {
         
         try{
             stmQuitarCategoriaTarea = con.prepareStatement("delete from categoria_tarea_basica where tarea_basica = ?");
-            stmAnhadirCategoriaTarea = con.prepareStatement("insert into categoria_tarea_basica (tarea, categoria) values (?, ?)");
+            stmAnhadirCategoriaTarea = con.prepareStatement("insert into categoria_tarea_basica (tarea_basica, categoria) values (?, ?)");
             stmQuitarCategoriaTarea.setInt(1, idTarea);
             stmAnhadirCategoriaTarea.setInt(1, idTarea);
             stmAnhadirCategoriaTarea.setString(2, nombre); 
