@@ -32,7 +32,7 @@ public class GestionTareas{
         fgui.visualizaTarea(tarea, restoCategorias, fbd);
     }
 
-    public void nuevaTarea(int idUsuario){
+    public void nuevaTarea(String idUsuario){
         List<String> restoCategorias;
         restoCategorias = fbd.obtenerRestoCategorias(-1);
 

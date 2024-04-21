@@ -21,7 +21,7 @@ public class VTarea extends javax.swing.JFrame {
     private Tarea tarea;
     private VPrincipalUsuario padre;
     private FachadaBaseDatos fbd; 
-    private int idUsuario;
+    private String idUsuario;
 
     /**
      * Creates new form VTarea
@@ -30,7 +30,7 @@ public class VTarea extends javax.swing.JFrame {
      * @param fbd
      * @param idUsuario
      */
-    public VTarea(FachadaAplicacion fa, List<String> restoCategorias, FachadaBaseDatos fbd, int idUsuario) {
+    public VTarea(FachadaAplicacion fa, List<String> restoCategorias, FachadaBaseDatos fbd, String idUsuario) {
         this.fa = fa;
         this.fbd = fbd;
         this.idUsuario = idUsuario;

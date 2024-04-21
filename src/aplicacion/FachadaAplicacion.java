@@ -72,7 +72,7 @@ public class FachadaAplicacion {
     }
 
     public void nuevaTarea(){
-        ct.nuevaTarea(Integer.parseInt(usuario.getIdUsuario()));
+        ct.nuevaTarea(usuario.getIdUsuario());
     }
 
     public void visualizarTarea(int idTarea){
