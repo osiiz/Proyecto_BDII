@@ -184,15 +184,15 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                               <Component id="txtCategoriaActual" min="-2" pref="157" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="btnCambiarCategoria" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="btnEliminarCategoria" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -208,8 +208,6 @@
                       <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnGuardarCategoria" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="btnSalirCategoria" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -229,21 +227,18 @@
                           <Component id="jScrollPane1" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                                       <Component id="btnCambiarCategoria" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="txtCategoriaActual" alignment="0" min="-2" pref="75" max="-2" attributes="0"/>
+                                  <Component id="txtCategoriaActual" min="-2" pref="81" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnEliminarCategoria" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="btnSalirCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnGuardarCategoria" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="btnSalirCategoria" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -304,11 +299,6 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEliminarCategoriaActionPerformed"/>
               </Events>
-            </Component>
-            <Component class="javax.swing.JButton" name="btnGuardarCategoria">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Guardar"/>
-              </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="btnSalirCategoria">
               <Properties>

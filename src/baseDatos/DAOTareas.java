@@ -246,7 +246,7 @@ public class DAOTareas extends AbstractDAO {
         return resultado;
     }
 
-    public Tarea anhadirTarea(Tarea t, int idUsuario) {
+    public Tarea anhadirTarea(Tarea t, String idUsuario) {
         Tarea resultado = null;
         Connection con;
         PreparedStatement stmTarea;
@@ -257,7 +257,7 @@ public class DAOTareas extends AbstractDAO {
         try{
             stmTarea = con.prepareStatement("insert into tarea_basica (id_usuario, nombre, completada, fecha_fin) "
                     + "values (?, ?, ?, ?)");
-            stmTarea.setInt(1, idUsuario);
+            stmTarea.setString(1, idUsuario);
             stmTarea.setString(2, t.getNombre());
             stmTarea.setBoolean(3, t.getCompletada());
             stmTarea.setDate(4, Date.valueOf(t.getFechaFin()));
@@ -266,7 +266,9 @@ public class DAOTareas extends AbstractDAO {
             stmIdTarea=con.prepareStatement("select currval('tarea_basica_id_seq') as idTarea");
             rsIdTarea=stmIdTarea.executeQuery();
             rsIdTarea.next();
-            t.setIdTarea(rsIdTarea.getInt("idLibro"));
+            t.setIdTarea(rsIdTarea.getInt("idTarea"));
+            
+            resultado = t;
             
             rsIdTarea.close();
             

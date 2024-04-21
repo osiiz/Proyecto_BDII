@@ -123,7 +123,7 @@ public class FachadaBaseDatos {
         return daoTareas.actualizarDatosTarea(idTarea);
     }
 
-    public Tarea anhadirTarea(Tarea t, int idUsuario) {
+    public Tarea anhadirTarea(Tarea t, String idUsuario) {
         return daoTareas.anhadirTarea(t, idUsuario);
     }
 }

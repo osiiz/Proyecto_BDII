@@ -21,16 +21,16 @@ public class VTarea extends javax.swing.JFrame {
     private Tarea tarea;
     private VPrincipalUsuario padre;
     private FachadaBaseDatos fbd; 
-    private int idUsuario;
+    private String idUsuario;
 
     /**
      * Creates new form VTarea
-     * @param parent
-     * @param modal
      * @param fa
      * @param restoCategorias
+     * @param fbd
+     * @param idUsuario
      */
-    public VTarea(FachadaAplicacion fa, List<String> restoCategorias, FachadaBaseDatos fbd, int idUsuario) {
+    public VTarea(FachadaAplicacion fa, List<String> restoCategorias, FachadaBaseDatos fbd, String idUsuario) {
         this.fa = fa;
         this.fbd = fbd;
         this.idUsuario = idUsuario;
@@ -39,10 +39,7 @@ public class VTarea extends javax.swing.JFrame {
         ModeloListaStrings mListaRC=new ModeloListaStrings();
         listaCategorias.setModel(mListaRC);
         mListaRC.setElementos(restoCategorias);
-        if (mListaRC.getSize()>0) {
-            listaCategorias.setSelectedIndex(0);
-            btnCambiarCategoria.setEnabled(true);
-        } else btnCambiarCategoria.setEnabled(false);
+        btnCambiarCategoria.setEnabled(false);
         
         btnEliminarCategoria.setEnabled(false);
         txtId.setEditable(false);
@@ -105,7 +102,6 @@ public class VTarea extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         btnCambiarCategoria = new javax.swing.JButton();
         btnEliminarCategoria = new javax.swing.JButton();
-        btnGuardarCategoria = new javax.swing.JButton();
         btnSalirCategoria = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -217,8 +213,6 @@ public class VTarea extends javax.swing.JFrame {
             }
         });
 
-        btnGuardarCategoria.setText("Guardar");
-
         btnSalirCategoria.setText("Salir");
         btnSalirCategoria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,14 +225,14 @@ public class VTarea extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
                         .addComponent(txtCategoriaActual, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnCambiarCategoria))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addGap(30, 30, 30)
                         .addComponent(btnEliminarCategoria)))
                 .addGap(7, 7, 7)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
@@ -250,9 +244,7 @@ public class VTarea extends javax.swing.JFrame {
                 .addComponent(jLabel6)
                 .addGap(34, 34, 34))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnGuardarCategoria)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSalirCategoria)
                 .addContainerGap())
         );
@@ -271,13 +263,11 @@ public class VTarea extends javax.swing.JFrame {
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(21, 21, 21)
                                 .addComponent(btnCambiarCategoria))
-                            .addComponent(txtCategoriaActual, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtCategoriaActual, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEliminarCategoria)))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSalirCategoria)
-                    .addComponent(btnGuardarCategoria))
+                .addComponent(btnSalirCategoria)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -300,14 +290,19 @@ public class VTarea extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarTareaActionPerformed
-        if (txtNombre.getText().isBlank() || txtFechaFin.getText().isBlank() || checkCompletada.getText().isBlank()){
+        if (txtNombre.getText().isBlank() || txtFechaFin.getText().isBlank()){
             System.out.println("Debes completar todos los campos excepto el Id");
             this.fa.muestraExcepcion("Debes completar todos los campos excepto el Id");
         }
         if (txtId.getText().isBlank()){
-            Tarea t = new Tarea(Integer.parseInt(txtId.getText()), txtNombre.getText(), checkCompletada.isSelected(), LocalDate.parse(txtFechaFin.getText()), tarea.getCategoria());
+            Tarea t = new Tarea(-1, txtNombre.getText(), checkCompletada.isSelected(), LocalDate.parse(txtFechaFin.getText()), null);
             this.tarea = fa.anhadirTarea(t, idUsuario);
             actualizarDatosTarea(tarea.getIdTarea());
+            if (listaCategorias.getModel().getSize() > 0){
+                btnCambiarCategoria.setEnabled(true);
+            }
+           
+            return;
         }
         Tarea t;
         t = new Tarea(Integer.parseInt(txtId.getText()), txtNombre.getText(), checkCompletada.isSelected(), LocalDate.parse(txtFechaFin.getText()), tarea.getCategoria());
@@ -323,6 +318,9 @@ public class VTarea extends javax.swing.JFrame {
         Categoria cat = new Categoria(((ModeloListaStrings)listaCategorias.getModel()).getElementAt(listaCategorias.getSelectedIndex()));
         fa.cambiarCategoriaTarea(tarea.getIdTarea(), cat.getNombre());
         actualizarDatosTarea(tarea.getIdTarea());
+        if (!txtCategoriaActual.getText().isBlank()){
+            btnEliminarCategoria.setEnabled(true);
+        }
     }//GEN-LAST:event_btnCambiarCategoriaActionPerformed
 
     private void btnSalirCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirCategoriaActionPerformed
@@ -358,7 +356,6 @@ public class VTarea extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCambiarCategoria;
     private javax.swing.JButton btnEliminarCategoria;
-    private javax.swing.JButton btnGuardarCategoria;
     private javax.swing.JButton btnGuardarTarea;
     private javax.swing.JButton btnSalirCategoria;
     private javax.swing.JButton btnSalirTarea;
