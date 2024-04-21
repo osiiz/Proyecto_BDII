@@ -42,8 +42,8 @@ public class DAOTareas extends AbstractDAO {
                 "WHERE tb.nombre LIKE ? AND completada = ? AND id_usuario = ? ";
                 
         
-        if (!categoria.isBlank()) consultaTareas += "AND categoria LIKE ? order by ?";
-        else consultaTareas += "order by ?";
+        if (!categoria.isBlank()) consultaTareas += "AND categoria LIKE ? order by fecha_fin ?";
+        else consultaTareas += "order by fecha_fin ?";
         
         try  {
             stmTareas = con.prepareStatement(consultaTareas);
