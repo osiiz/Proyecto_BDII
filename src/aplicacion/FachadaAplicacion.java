@@ -17,6 +17,7 @@ public class FachadaAplicacion {
     baseDatos.FachadaBaseDatos fbd;
     GestionUsuarios cu;
     GestionTareas ct;
+    GestionForos cf;
     Usuario usuario;
     
     
@@ -25,6 +26,7 @@ public class FachadaAplicacion {
       fbd = new baseDatos.FachadaBaseDatos(this);
       cu = new GestionUsuarios(fgui, fbd);
       ct = new GestionTareas(fgui, fbd);
+      cf = new GestionForos(fgui, fbd);
       usuario = null;
     }
 
@@ -110,6 +112,31 @@ public class FachadaAplicacion {
 
     public Tarea anhadirTarea(Tarea t, String idUsuario) {
         return ct.anhadirTarea(t, idUsuario);
+    }
+    
+    public void visualizarForos() {
+        fgui.ventanaForos(usuario);
+    }
+
+    public void nuevoForo(String text, int idProyecto) {
+        cf.nuevoForo(text, idProyecto);
+    }
+
+    public List<Foro> obtenerForos(int idProyecto) {
+        return cf.obtenerForos(idProyecto);
+        
+    }
+
+    public void ventanaNuevoForo(int idProyecto) {
+        fgui.ventanaNuevoForo(idProyecto);
+    }
+
+    public void borrarForo(int idForo) {
+        cf.borrarForo(idForo);
+    }
+
+    public void buscarPublicaciones(int idForo) {
+        cf.buscarPublicaciones(idForo);
     }
 
 

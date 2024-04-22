@@ -4,8 +4,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/home/alumnogreibd/BDII/Proyecto_BDII/src/gui/VNotificaciones.java</file>
             <file>file:/home/alumnogreibd/BDII/Proyecto_BDII/src/gui/VPrincipalUsuario.java</file>
+=======
+            <file>file:/home/alumnogreibd/BDII/Proyecto_BDII/src/gui/VTarea.java</file>
+            <file>file:/home/alumnogreibd/BDII/Proyecto_BDII/src/aplicacion/FachadaAplicacion.java</file>
+            <file>file:/home/alumnogreibd/BDII/Proyecto_BDII/src/gui/VPrincipalUsuario.java</file>
+            <file>file:/home/alumnogreibd/BDII/Proyecto_BDII/src/baseDatos/FachadaBaseDatos.java</file>
+            <file>file:/home/alumnogreibd/BDII/Proyecto_BDII/src/gui/FachadaGui.java</file>
+>>>>>>> cfc69d531e86bb3bbaa6dd55f9105a2b15a09884
         </group>
     </open-files>
 </project-private>

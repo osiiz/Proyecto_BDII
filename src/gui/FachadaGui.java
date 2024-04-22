@@ -16,7 +16,7 @@ public class FachadaGui {
     aplicacion.FachadaAplicacion fa;
     VPrincipalUsuario vp;
     VPrincipalAdmin vpa;
-    Usuario usuario; //true es admin y false no admin
+    Usuario usuario;
     
    public FachadaGui(aplicacion.FachadaAplicacion fa){
      this.fa=fa;
@@ -75,6 +75,19 @@ public class FachadaGui {
         VTarea vt;
         vt = new VTarea(fa, restoCategorias, fbd, idUsuario);
         vt.setVisible(true);
+    }
+    
+    public void ventanaForos(Usuario usuario) {
+        VForos vf;
+        vf = new VForos(fa, usuario, 2);
+        vf.setVisible(true);
+        
+    }
+    
+    public void ventanaNuevoForo(int idProyecto){
+        VNuevoForo vnf;
+        vnf = new VNuevoForo(vp, true, fa, idProyecto);
+        vnf.setVisible(true);
     }
     
    

@@ -67,6 +67,8 @@
                               <Component id="btnBorrarTarea" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="btnEditarTarea" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+                              <Component id="btnForos" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="btnSalir" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -144,6 +146,7 @@
                   <Component id="btnNuevaTarea" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnEditarTarea" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnBorrarTarea" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnForos" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="14" max="32767" attributes="0"/>
           </Group>
@@ -265,6 +268,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBorrarTareaActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnForos">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Foros (provisional)"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnForosActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
