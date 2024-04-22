@@ -277,7 +277,7 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBorrarTareaActionPerformed
 
     private void btnNotificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNotificacionActionPerformed
-        // TODO add your handling code here:
+        fa.ventanaNotificaciones();
     }//GEN-LAST:event_btnNotificacionActionPerformed
 
     private void btnForosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnForosActionPerformed

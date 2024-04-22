@@ -17,6 +17,7 @@ public class FachadaAplicacion {
     baseDatos.FachadaBaseDatos fbd;
     GestionUsuarios cu;
     GestionTareas ct;
+    GestionNotificaciones cn;
     GestionForos cf;
     Usuario usuario;
     
@@ -26,6 +27,7 @@ public class FachadaAplicacion {
       fbd = new baseDatos.FachadaBaseDatos(this);
       cu = new GestionUsuarios(fgui, fbd);
       ct = new GestionTareas(fgui, fbd);
+      cn = new GestionNotificaciones(fgui, fbd);
       cf = new GestionForos(fgui, fbd);
       usuario = null;
     }
@@ -61,6 +63,9 @@ public class FachadaAplicacion {
     public void ventanaUsuario(){
         fgui.ventanaUsuario();
     }
+    public void ventanaNotificaciones(){
+        fgui.ventanaNotificaciones();
+    }
     public java.util.List<Usuario> obtenerUsuarios(String id, String nombre){
         return cu.obtenerUsuarios(id, nombre);
     }
@@ -83,6 +88,10 @@ public class FachadaAplicacion {
 
     public List<Tarea> obtenerTareas(String nombre, String categoria, Boolean completada, int descendente){
         return ct.obtenerTareas(nombre, categoria, completada, usuario, descendente);
+    }
+    
+    public List<NotificacionBasica> obtenerNotificaciones(){
+        return cn.obtenerNotificaciones(usuario.getIdUsuario());
     }
 
     public void actualizarCompletada(int idTarea, Boolean completada) {

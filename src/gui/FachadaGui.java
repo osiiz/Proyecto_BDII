@@ -55,6 +55,13 @@ public class FachadaGui {
         vu = new VUsuario(vp, true, fa);
         vu.setVisible(true);
     }
+    
+    public void ventanaNotificaciones(){
+        VNotificaciones vn;
+        
+        vn = new VNotificaciones(vp, true, fa);
+        vn.setVisible(true);
+    }
 
 
     public Usuario getUsuario() {
