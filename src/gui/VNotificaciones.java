@@ -9,12 +9,13 @@ package gui;
  * @author alumnogreibd
  */
 public class VNotificaciones extends javax.swing.JDialog {
-
+    aplicacion.FachadaAplicacion fa;
     /**
      * Creates new form VNotificaciones
      */
-    public VNotificaciones(java.awt.Frame parent, boolean modal) {
+    public VNotificaciones(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa) {
         super(parent, modal);
+        this.fa = fa;
         initComponents();
     }
 
