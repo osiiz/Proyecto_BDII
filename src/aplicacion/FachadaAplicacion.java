@@ -17,6 +17,7 @@ public class FachadaAplicacion {
     baseDatos.FachadaBaseDatos fbd;
     GestionUsuarios cu;
     GestionTareas ct;
+    GestionForos cf;
     Usuario usuario;
     
     
@@ -25,6 +26,7 @@ public class FachadaAplicacion {
       fbd = new baseDatos.FachadaBaseDatos(this);
       cu = new GestionUsuarios(fgui, fbd);
       ct = new GestionTareas(fgui, fbd);
+      cf = new GestionForos(fgui, fbd);
       usuario = null;
     }
 
@@ -110,6 +112,18 @@ public class FachadaAplicacion {
 
     public Tarea anhadirTarea(Tarea t, String idUsuario) {
         return ct.anhadirTarea(t, idUsuario);
+    }
+    
+    public void visualizarForos() {
+        fgui.ventanaForos(usuario);
+    }
+
+    public void nuevoForo(String text, int idProyecto) {
+        cf.nuevoForo(text, idProyecto);
+    }
+
+    public void obtenerForos(int idProyecto) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 

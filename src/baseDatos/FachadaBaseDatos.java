@@ -9,8 +9,6 @@ import aplicacion.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Properties;
 
@@ -23,6 +21,7 @@ public class FachadaBaseDatos {
     private java.sql.Connection conexion;
     private DAOUsuarios daoUsuarios;
     private DAOTareas daoTareas;
+    private DAOForos daoForos;
 
     public FachadaBaseDatos (aplicacion.FachadaAplicacion fa){
         
@@ -50,6 +49,7 @@ public class FachadaBaseDatos {
             
             daoUsuarios = new DAOUsuarios(conexion, fa);     
             daoTareas = new DAOTareas(conexion, fa);
+            daoForos = new DAOForos(conexion, fa);
 
 
         } catch (FileNotFoundException f){
@@ -125,5 +125,9 @@ public class FachadaBaseDatos {
 
     public Tarea anhadirTarea(Tarea t, String idUsuario) {
         return daoTareas.anhadirTarea(t, idUsuario);
+    }
+    
+    public void nuevoForo(String text, int idProyecto) {
+        daoForos.nuevoForo(text, idProyecto);
     }
 }
