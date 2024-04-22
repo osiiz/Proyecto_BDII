@@ -5,12 +5,14 @@
 package gui;
 
 import aplicacion.*;
+import gui.ModeloListaStrings;
+import java.util.ArrayList;
 
 /**
  *
  * @author alumnogreibd
  */
-public class VForos extends javax.swing.JFrame {
+public final class VForos extends javax.swing.JFrame {
     
     FachadaAplicacion fa;
     Usuario usuario;
@@ -20,10 +22,12 @@ public class VForos extends javax.swing.JFrame {
      * Creates new form VForos
      * @param fa
      * @param usuario
+     * @param idProyecto
      */
     public VForos(FachadaAplicacion fa, Usuario usuario, int idProyecto) {
         this.fa = fa;
         this.usuario = usuario;
+        this.idProyecto = idProyecto;
         initComponents();
         
         if (usuario.getTipoUsuario() == TipoUsuario.Normal){
@@ -31,7 +35,7 @@ public class VForos extends javax.swing.JFrame {
             btnBorrarForo.setVisible(false);
         }
         
-        fa.obtenerForos(idProyecto);
+        buscarForos();
     }
 
     /**
@@ -43,18 +47,15 @@ public class VForos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        listaForos = new javax.swing.JList<>();
         btnSalir = new javax.swing.JButton();
         btnEntrarForo = new javax.swing.JButton();
         btnNuevoForo = new javax.swing.JButton();
         btnBorrarForo = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaForos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Foros");
-
-        listaForos.setModel(new ModeloListaStrings());
-        jScrollPane1.setViewportView(listaForos);
 
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -73,34 +74,41 @@ public class VForos extends javax.swing.JFrame {
         });
 
         btnBorrarForo.setText("Borrar Foro");
+        btnBorrarForo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarForoActionPerformed(evt);
+            }
+        });
+
+        tablaForos.setModel(new ModeloTablaForos());
+        jScrollPane2.setViewportView(tablaForos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(15, 15, 15)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 9, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(btnEntrarForo)
-                        .addGap(27, 27, 27)
+                        .addGap(18, 18, 18)
                         .addComponent(btnNuevoForo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnBorrarForo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSalir)))
+                        .addComponent(btnBorrarForo)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSalir))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalir)
                     .addComponent(btnEntrarForo)
@@ -117,16 +125,34 @@ public class VForos extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnNuevoForoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoForoActionPerformed
-        
+        fa.ventanaNuevoForo(idProyecto);
+        buscarForos();
     }//GEN-LAST:event_btnNuevoForoActionPerformed
 
+    private void btnBorrarForoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarForoActionPerformed
+        fa.borrarForo((int)((ModeloTablaForos)tablaForos.getModel()).getValueAt(tablaForos.getSelectedRow(), 0));
+        buscarForos();
+    }//GEN-LAST:event_btnBorrarForoActionPerformed
+
+    private void buscarForos(){
+        ModeloTablaForos m;
+
+        m = (ModeloTablaForos) tablaForos.getModel();
+        m.setFilas(fa.obtenerForos(idProyecto));
+        if (m.getRowCount() > 0) {
+            tablaForos.setRowSelectionInterval(0, 0);
+            btnBorrarForo.setEnabled(true);
+        } else {
+            btnBorrarForo.setEnabled(false);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBorrarForo;
     private javax.swing.JButton btnEntrarForo;
     private javax.swing.JButton btnNuevoForo;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<String> listaForos;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tablaForos;
     // End of variables declaration//GEN-END:variables
 }

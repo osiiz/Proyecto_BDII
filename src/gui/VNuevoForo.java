@@ -101,6 +101,7 @@ public class VNuevoForo extends javax.swing.JDialog {
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         fa.nuevoForo(txtNombre.getText(), idProyecto);
+        this.dispose();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     

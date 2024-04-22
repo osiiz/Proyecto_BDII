@@ -130,4 +130,16 @@ public class FachadaBaseDatos {
     public void nuevoForo(String text, int idProyecto) {
         daoForos.nuevoForo(text, idProyecto);
     }
+
+    public List<Foro> obtenerForos(int idProyecto) {
+        return daoForos.obtenerForos(idProyecto);
+    }
+
+    public void borrarForo(int idForo) {
+        daoForos.borrarForo(idForo);
+    }
+
+    public void buscarPublicaciones(int idForo) {
+        daoForos.buscarPublicaciones(idForo);
+    }
 }

@@ -6,6 +6,7 @@ package baseDatos;
 
 
 import aplicacion.Foro;
+import aplicacion.Publicacion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -71,7 +72,57 @@ public class DAOForos extends AbstractDAO {
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         }
         return resultado;
+    }
+
+    public void borrarForo(int idForo) {
+        Connection con;
+        PreparedStatement stmBorrarForo;
+        con=super.getConexion();
         
+        try{
+            stmBorrarForo = con.prepareStatement("delete from foro where id_foro = ?");
+            stmBorrarForo.setInt(1, idForo);
+            stmBorrarForo.executeUpdate();
+            
+            stmBorrarForo.close();
+            
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }
+    }
+
+    public List<Publicacion> buscarPublicaciones(int idForo) {
+        List<Publicacion> resultado = new java.util.ArrayList<>();
+        
+        Publicacion publicacionActual;
+        Connection con;
+        PreparedStatement stmPublicaciones;
+        ResultSet rsPublicaciones;
+        
+        con=this.getConexion();
+        
+        String consultaTareas = "select id_publicacion, mensaje, id_usuario, fecha from publicacion where id_foro = ?";
+                
+        try  {
+            stmPublicaciones = con.prepareStatement(consultaTareas);
+            stmPublicaciones.setInt(1, idForo);
+            rsPublicaciones = stmPublicaciones.executeQuery();
+            while (rsPublicaciones.next()){
+                publicacionActual = new Publicacion(rsPublicaciones.getInt("id_publicacion"), 
+                        rsPublicaciones.getString("mensaje"), rsPublicaciones.getInt("id_usuario"),
+                        rsPublicaciones.getTimestamp("fecha").toLocalDateTime());
+                resultado.add(publicacionActual);
+            }
+            
+            rsPublicaciones.close();
+            stmPublicaciones.close();
+
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }
+        return resultado;
         
     }
     

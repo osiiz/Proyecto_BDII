@@ -59,6 +59,7 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
         btnNotificacion = new javax.swing.JButton();
         selecAscDesc = new javax.swing.JComboBox<>();
         btnBorrarTarea = new javax.swing.JButton();
+        btnForos = new javax.swing.JButton();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
 
@@ -133,6 +134,13 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
             }
         });
 
+        btnForos.setText("Foros (provisional)");
+        btnForos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnForosActionPerformed(evt);
+            }
+        });
+
         jMenu2.setText("Proyectos");
         jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -159,6 +167,8 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
                                 .addComponent(btnBorrarTarea)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnEditarTarea)
+                                .addGap(75, 75, 75)
+                                .addComponent(btnForos)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnSalir))
                             .addGroup(layout.createSequentialGroup()
@@ -218,7 +228,8 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
                     .addComponent(btnSalir)
                     .addComponent(btnNuevaTarea)
                     .addComponent(btnEditarTarea)
-                    .addComponent(btnBorrarTarea))
+                    .addComponent(btnBorrarTarea)
+                    .addComponent(btnForos))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -269,6 +280,10 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnNotificacionActionPerformed
 
+    private void btnForosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnForosActionPerformed
+        fa.visualizarForos();
+    }//GEN-LAST:event_btnForosActionPerformed
+
     public void buscarTareas() {
         ModeloTablaTareasBasicas m;
 
@@ -290,6 +305,7 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
     private javax.swing.JButton btnBorrarTarea;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEditarTarea;
+    private javax.swing.JButton btnForos;
     private javax.swing.JButton btnNotificacion;
     private javax.swing.JButton btnNuevaTarea;
     private javax.swing.JButton btnSalir;

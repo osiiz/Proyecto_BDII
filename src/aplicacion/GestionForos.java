@@ -6,6 +6,7 @@ package aplicacion;
 
 import baseDatos.FachadaBaseDatos;
 import gui.FachadaGui;
+import java.util.List;
 
 /**
  *
@@ -21,8 +22,20 @@ public class GestionForos {
         this.fbd = fbd;
     }
 
-    void nuevoForo(String text, int idProyecto) {
+    public void nuevoForo(String text, int idProyecto) {
         fbd.nuevoForo(text, idProyecto);
+    }
+
+    public List<Foro> obtenerForos(int idProyecto) {
+        return fbd.obtenerForos(idProyecto);
+    }
+
+    public void borrarForo(int idForo) {
+        fbd.borrarForo(idForo);
+    }
+
+    public void buscarPublicaciones(int idForo) {
+        fbd.buscarPublicaciones(idForo);
     }
     
 }

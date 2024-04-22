@@ -122,8 +122,21 @@ public class FachadaAplicacion {
         cf.nuevoForo(text, idProyecto);
     }
 
-    public void obtenerForos(int idProyecto) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public List<Foro> obtenerForos(int idProyecto) {
+        return cf.obtenerForos(idProyecto);
+        
+    }
+
+    public void ventanaNuevoForo(int idProyecto) {
+        fgui.ventanaNuevoForo(idProyecto);
+    }
+
+    public void borrarForo(int idForo) {
+        cf.borrarForo(idForo);
+    }
+
+    public void buscarPublicaciones(int idForo) {
+        cf.buscarPublicaciones(idForo);
     }
 
 

@@ -84,6 +84,12 @@ public class FachadaGui {
         
     }
     
+    public void ventanaNuevoForo(int idProyecto){
+        VNuevoForo vnf;
+        vnf = new VNuevoForo(vp, true, fa, idProyecto);
+        vnf.setVisible(true);
+    }
+    
    
 
     
