@@ -140,10 +140,11 @@ public final class VForos extends javax.swing.JFrame {
     private void btnEntrarForoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarForoActionPerformed
         int idForo = (int)((ModeloTablaForos)tablaForos.getModel()).getValueAt(tablaForos.getSelectedRow(), 0);
         String nombreForo = (String)((ModeloTablaForos)tablaForos.getModel()).getValueAt(tablaForos.getSelectedRow(), 1);
-        fa.ventanaPublicaciones(new Foro(idForo, nombreForo, idProyecto));
+        fa.ventanaPublicaciones(new Foro(idForo, nombreForo, idProyecto), this);
+        buscarForos();
     }//GEN-LAST:event_btnEntrarForoActionPerformed
 
-    private void buscarForos(){
+    public void buscarForos(){
         ModeloTablaForos m;
 
         m = (ModeloTablaForos) tablaForos.getModel();

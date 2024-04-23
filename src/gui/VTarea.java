@@ -341,8 +341,9 @@ public class VTarea extends javax.swing.JFrame {
         Categoria cat = new Categoria(((ModeloListaStrings)listaCategorias.getModel()).getElementAt(listaCategorias.getSelectedIndex()));
         fa.cambiarCategoriaTarea(tarea.getIdTarea(), cat.getNombre());
         consultarTarea(tarea.getIdTarea());
-        if (((ModeloListaStrings)listaCategoriasActuales.getModel()).getSize() > 0){
-            btnQuitarCategoria.setEnabled(true);
+        btnAnhadirCategoria.setEnabled(false);
+        if (((ModeloListaStrings)listaCategorias.getModel()).getSize() > 0){
+            btnAnhadirCategoria.setEnabled(true);
         }
     }//GEN-LAST:event_btnAnhadirCategoriaActionPerformed
 
@@ -354,6 +355,10 @@ public class VTarea extends javax.swing.JFrame {
         fa.eliminarCategoriaTarea(tarea.getIdTarea(), 
                 ((ModeloListaStrings)listaCategoriasActuales.getModel()).getElementAt(listaCategoriasActuales.getSelectedIndex()));
         consultarTarea(tarea.getIdTarea());
+        btnQuitarCategoria.setEnabled(false);
+        if (((ModeloListaStrings)listaCategoriasActuales.getModel()).getSize() > 0){
+            btnQuitarCategoria.setEnabled(true);
+        }
         
     }//GEN-LAST:event_btnQuitarCategoriaActionPerformed
 

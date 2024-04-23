@@ -165,5 +165,24 @@ public class DAOForos extends AbstractDAO {
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         }
     }
+
+    public void cambiarNombreForo(String nombre, int idForo) {
+        Connection con;
+        PreparedStatement stmCambiarNombre;
+        con=super.getConexion();
+        
+        try{
+            stmCambiarNombre = con.prepareStatement("update foro set titulo = ? where id_foro = ?");
+            stmCambiarNombre.setString(1, nombre);
+            stmCambiarNombre.setInt(2, idForo);
+            stmCambiarNombre.executeUpdate();
+            
+            stmCambiarNombre.close();
+            
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }
+    }
     
 }

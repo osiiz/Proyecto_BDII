@@ -5,6 +5,7 @@
 
 package aplicacion;
 
+import gui.VForos;
 import java.util.List;
 
 
@@ -136,8 +137,8 @@ public class FachadaAplicacion {
         return cf.buscarPublicaciones(idForo);
     }
     
-    public void ventanaPublicaciones(Foro foro){
-        cf.ventanaPublicaciones(foro);
+    public void ventanaPublicaciones(Foro foro, VForos vf){
+        cf.ventanaPublicaciones(foro, vf);
     }
 
     public void nuevaPublicacion(String text, String idUsuario, int idForo) {
@@ -151,6 +152,10 @@ public class FachadaAplicacion {
 
     public void ventanaBorrarPublicacion(int idForo) {
         cf.ventanaBorrarPublicaciones(idForo);
+    }
+
+    public void cambiarNombreForo(String nombre, int idForo) {
+        cf.cambiarNombreForo(nombre, idForo);
     }
 
 

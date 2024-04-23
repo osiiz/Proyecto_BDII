@@ -23,6 +23,11 @@ public class VBorrarPublicacion extends javax.swing.JDialog {
         this.idForo = idForo;
         initComponents();
         ((ModeloTablaPublicaciones) tablaPublicaciones.getModel()).setFilas(fa.buscarPublicaciones(idForo));
+        if (((ModeloTablaPublicaciones) tablaPublicaciones.getModel()).getRowCount() <= 0){
+            btnBorrar.setEnabled(false);
+        }else{
+            btnBorrar.setEnabled(true);
+        }
       
     }
 
@@ -41,6 +46,7 @@ public class VBorrarPublicacion extends javax.swing.JDialog {
         btnBorrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Gestión Publicaciones");
 
         tablaPublicaciones.setModel(new ModeloTablaPublicaciones());
         jScrollPane1.setViewportView(tablaPublicaciones);
@@ -95,6 +101,9 @@ public class VBorrarPublicacion extends javax.swing.JDialog {
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
         fa.borrarPublicacion((int) ((ModeloTablaPublicaciones) tablaPublicaciones.getModel()).getValueAt(tablaPublicaciones.getSelectedRow(), 0));
         ((ModeloTablaPublicaciones) tablaPublicaciones.getModel()).setFilas(fa.buscarPublicaciones(idForo));
+        if (((ModeloTablaPublicaciones) tablaPublicaciones.getModel()).getRowCount() > 0){
+            btnBorrar.setEnabled(false);
+        }
         
     }//GEN-LAST:event_btnBorrarActionPerformed
 

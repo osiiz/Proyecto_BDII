@@ -86,9 +86,9 @@ public class FachadaGui {
         vnf.setVisible(true);
     }
 
-    public void ventanaPublicaciones(Foro foro) {
+    public void ventanaPublicaciones(Foro foro, VForos vf) {
         VPublicaciones vp;
-        vp = new VPublicaciones(fa, usuario, foro);
+        vp = new VPublicaciones(fa, usuario, foro, vf);
         vp.setVisible(true);
     }
 

@@ -30,6 +30,18 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
         this.fa = fa;
         this.usuario = fa.getUsuario();
         initComponents();
+        if (usuario.getTipoUsuario() == TipoUsuario.Gestor){
+            btnEditarTarea.setEnabled(false);
+            btnBorrarTarea.setEnabled(false);
+            btnNuevaTarea.setEnabled(false);
+            btnBuscar.setEnabled(false);
+            buscaNombre.setEnabled(false);
+            buscaCategoria.setEnabled(false);
+            selecAscDesc.setEnabled(false);
+            buscaCompletada.setEnabled(false);
+            btnNotificacion.setEnabled(false);
+        }
+        
     }
 
     /**
@@ -73,12 +85,6 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
         jLabel1.setText("Nombre:");
 
         jLabel2.setText("Categoría:");
-
-        buscaCategoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscaCategoriaActionPerformed(evt);
-            }
-        });
 
         tablaTareas.setModel(new gui.ModeloTablaTareasBasicas(fa));
         tablaTareas.setColumnSelectionAllowed(true);
@@ -237,10 +243,6 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void buscaCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaCategoriaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscaCategoriaActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         System.exit(0);

@@ -147,4 +147,8 @@ public class FachadaBaseDatos {
     public void borrarPublicacion(int idPublicacion) {
         daoForos.borrarPublicacion(idPublicacion);
     }
+
+    public void cambiarNombreForo(String nombre, int idForo) {
+        daoForos.cambiarNombreForo(nombre, idForo);
+    }
 }
