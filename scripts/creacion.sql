@@ -65,8 +65,8 @@ create table Tarea_basica(
 	nombre varchar(100),
 	completada bool,
 	fecha_fin date,
-	primary key (id_tarea)
-	foreign key (id_usuario) references Tarea_basica(id_usuario) on delete cascade
+	primary key (id_tarea),
+	foreign key (id_usuario) references Usuario(id_usuario) on delete cascade
 );
 create table Tarea_de_proyecto(
 	id_tarea int,
@@ -89,8 +89,10 @@ create table Notificacion_basica(
 	mensaje varchar(255),
 	leida bool,
 	id_tarea int,
+	id_usuario varchar(100),
 	primary key (id_notificacion),
-	foreign key (id_tarea) references Tarea_basica(id_tarea) on delete cascade
+	foreign key (id_tarea) references Tarea_basica(id_tarea) on delete cascade,
+	foreign key (id_usuario) references Usuario(id_usuario) on delete cascade
 );
 create table Notificacion_de_proyecto(
 	id_notificacion int,
@@ -119,6 +121,7 @@ create table Publicacion(
 	mensaje varchar(255),
 	id_foro int,
 	id_usuario varchar(100),
+	fecha timestamp,
 	primary key (id_publicacion),
 	foreign key (id_foro) references Foro(id_foro) on delete cascade,
 	foreign key (id_usuario) references Usuario(id_usuario) on delete cascade

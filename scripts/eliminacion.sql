@@ -1,5 +1,5 @@
-drop table if exists Tener_notificacion_de_proyecto;
 drop table if exists Categoria_tarea_basica;
+drop table if exists Tener_notificacion_de_proyecto;
 drop table if exists Publicacion;
 drop table if exists Participar;
 drop table if exists Foro;
