@@ -85,16 +85,16 @@ public class GestionTareas{
         fbd.actualizarTarea(t);
     }
 
-    public void eliminarCategoriaTarea(int idTarea) {
-        fbd.eliminarCategoriaTarea(idTarea);
+    public void eliminarCategoriaTarea(int idTarea, String nombre) {
+        fbd.eliminarCategoriaTarea(idTarea, nombre);
     }
 
     public void cambiarCategoriaTarea(int idTarea, String nombre) {
         fbd.cambiarCategoriaTarea(idTarea, nombre);
     }
 
-    public Tarea actualizarDatosTarea(int idTarea) {
-        return fbd.actualizarDatosTarea(idTarea);
+    public Tarea consultarTarea(int idTarea) {
+        return fbd.consultarTarea(idTarea);
     }
 
     public Tarea anhadirTarea(Tarea t, String idUsuario) {

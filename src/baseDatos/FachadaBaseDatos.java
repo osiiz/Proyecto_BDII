@@ -111,17 +111,14 @@ public class FachadaBaseDatos {
         daoTareas.actualizarTarea(t);
     }
 
-    public void eliminarCategoriaTarea(int idTarea) {
-        daoTareas.eliminarCategoriaTarea(idTarea);
+    public void eliminarCategoriaTarea(int idTarea, String nombre) {
+        daoTareas.eliminarCategoriaTarea(idTarea, nombre);
     }
 
     public void cambiarCategoriaTarea(int idTarea, String nombre) {
         daoTareas.cambiarCategoriaTarea(idTarea, nombre);
     }
 
-    public Tarea actualizarDatosTarea(int idTarea) {
-        return daoTareas.actualizarDatosTarea(idTarea);
-    }
 
     public Tarea anhadirTarea(Tarea t, String idUsuario) {
         return daoTareas.anhadirTarea(t, idUsuario);

@@ -92,23 +92,24 @@ public class FachadaAplicacion {
     public void borrarTarea(int idTarea) {
         ct.borrarTarea(idTarea);
     }
-
-    public void actualizarTarea(Tarea t) {
-        ct.actualizarTarea(t);
+    
+    public Tarea consultarTarea(int idTarea){
+        return ct.consultarTarea(idTarea);
+    }
+    
+    public void actualizarTarea(Tarea tarea){
+        ct.actualizarTarea(tarea);
     }
 
-    public void eliminarCategoriaTarea(int idTarea) {
-        ct.eliminarCategoriaTarea(idTarea);
+
+    public void eliminarCategoriaTarea(int idTarea, String nombre) {
+        ct.eliminarCategoriaTarea(idTarea, nombre);
     }
 
     public void cambiarCategoriaTarea(int idTarea, String nombre) {
         ct.cambiarCategoriaTarea(idTarea, nombre);
     }
 
-    public Tarea actualizarDatosTarea(int idTarea) {
-        return ct.actualizarDatosTarea(idTarea);
-        
-    }
 
     public Tarea anhadirTarea(Tarea t, String idUsuario) {
         return ct.anhadirTarea(t, idUsuario);

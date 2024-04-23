@@ -26,36 +26,43 @@ public class DAOTareas extends AbstractDAO {
     
     public List<Tarea> obtenerTareasBasicas(String nombre, String categoria, Boolean completada, Usuario usuario, int descendente){
         List<Tarea> resultado = new java.util.ArrayList<>();
+        List<Categoria> categoriasActuales;
         
         Tarea tareaActual;
         Connection con;
         PreparedStatement stmTareas = null;
-        ResultSet rsTareas;
+        PreparedStatement stmCategorias = null;
+        ResultSet rsTareas = null;
+        ResultSet rsCategorias = null;
         String ascDesc = "asc";
         
         if (descendente == 1) ascDesc = "desc";
 
         con=this.getConexion();
         
-        String consultaTareas = "SELECT id_tarea, tb.nombre, completada, fecha_fin, ctb.categoria as categoria "+
-                "FROM tarea_basica tb LEFT JOIN categoria_tarea_basica ctb ON (tb.id_tarea = ctb.tarea_basica)"+
-                "WHERE tb.nombre LIKE ? AND completada = ? AND id_usuario = ? ";
+        String consultaTareas = "SELECT id_tarea, tb.nombre, completada, fecha_fin "+
+                "FROM tarea_basica tb WHERE tb.nombre LIKE ? AND completada = ? AND id_usuario = ? " +
+                "order by fecha_fin " + ascDesc;
+        String consultaCategorias = "SELECT categoria FROM categoria_tarea_basica ctb WHERE tarea_basica = ? ";
                 
-        
-        if (!categoria.isBlank()) consultaTareas += "AND categoria LIKE ? order by fecha_fin " + ascDesc;
-        else consultaTareas += "order by fecha_fin " + ascDesc;
         
         try  {
             stmTareas = con.prepareStatement(consultaTareas);
             stmTareas.setString(1, "%"+nombre+"%");
             stmTareas.setBoolean(2, completada);
             stmTareas.setString(3, usuario.getIdUsuario());
-            if (!categoria.isBlank()) stmTareas.setString(4, "%"+categoria+"%");
+            stmCategorias = con.prepareStatement(consultaCategorias);
             
             rsTareas = stmTareas.executeQuery();
             while (rsTareas.next()){
+                stmCategorias.setInt(1, rsTareas.getInt("id_tarea"));
+                categoriasActuales = new ArrayList<>();
+                rsCategorias = stmCategorias.executeQuery();
+                while (rsCategorias.next()){
+                    categoriasActuales.add(new Categoria(rsCategorias.getString("categoria")));
+                }
                 tareaActual = new Tarea(rsTareas.getInt("id_tarea"), rsTareas.getString("nombre"), rsTareas.getBoolean("completada"), 
-                        LocalDate.parse(rsTareas.getString("fecha_fin")), new Categoria(rsTareas.getString("categoria")));
+                        LocalDate.parse(rsTareas.getString("fecha_fin")), categoriasActuales);
 
                 resultado.add(tareaActual);
             }
@@ -66,6 +73,9 @@ public class DAOTareas extends AbstractDAO {
         }finally{
             try {
                 if (stmTareas != null) stmTareas.close();
+                if (stmCategorias != null) stmCategorias.close();
+                if (rsTareas != null) rsTareas.close();
+                if (rsCategorias != null) rsCategorias.close();
             } catch (SQLException e){System.out.println("Imposible cerrar cursores");}
         }
         return resultado;
@@ -110,22 +120,32 @@ public class DAOTareas extends AbstractDAO {
 
     public Tarea consultarTarea(Integer idTarea) {
         Tarea resultado=null;
+        List<Categoria> categoriasActuales;
+        
         Connection con;
         PreparedStatement stmTarea=null;
         ResultSet rsTarea;
+        PreparedStatement stmCategorias = null;
+        ResultSet rsCategorias = null;
         
 
         con=super.getConexion();
         
         try{
-            stmTarea = con.prepareStatement("SELECT id_tarea, tb.nombre, completada, fecha_fin, categoria "+
-                "FROM tarea_basica tb LEFT JOIN categoria_tarea_basica ctb ON (tb.id_tarea = ctb.tarea_basica)"+
-                "WHERE id_tarea = ?");
+            stmTarea = con.prepareStatement("SELECT id_tarea, nombre, completada, fecha_fin "+
+                "FROM tarea_basica tb WHERE id_tarea = ?");
             stmTarea.setInt(1, idTarea);
+            stmCategorias = con.prepareStatement("SELECT categoria FROM categoria_tarea_basica ctb WHERE tarea_basica = ?");
+            stmCategorias.setInt(1, idTarea);
             rsTarea = stmTarea.executeQuery();
             if (rsTarea.next()){
+                categoriasActuales = new ArrayList<>();
+                rsCategorias = stmCategorias.executeQuery();
+                while (rsCategorias.next()){
+                    categoriasActuales.add(new Categoria(rsCategorias.getString("categoria")));
+                }
                 resultado = new Tarea(rsTarea.getInt("id_tarea"), rsTarea.getString("nombre"), rsTarea.getBoolean("completada"), 
-                        LocalDate.parse(rsTarea.getString("fecha_fin")), new Categoria(rsTarea.getString("categoria")));
+                        LocalDate.parse(rsTarea.getString("fecha_fin")), categoriasActuales);
             }
             stmTarea.close();
         }catch (SQLException e){
@@ -180,14 +200,15 @@ public class DAOTareas extends AbstractDAO {
         }
     }
 
-    public void eliminarCategoriaTarea(int idTarea) {
+    public void eliminarCategoriaTarea(int idTarea, String nombre) {
         Connection con;
         PreparedStatement stmEliminarCategoriaTarea;
         con=super.getConexion();
         
         try{
-            stmEliminarCategoriaTarea = con.prepareStatement("delete from categoria_tarea_basica where tarea_basica = ?");
+            stmEliminarCategoriaTarea = con.prepareStatement("delete from categoria_tarea_basica where tarea_basica = ? and categoria = ?");
             stmEliminarCategoriaTarea.setInt(1, idTarea);
+            stmEliminarCategoriaTarea.setString(2, nombre);
             
             stmEliminarCategoriaTarea.executeUpdate();
             
@@ -199,51 +220,20 @@ public class DAOTareas extends AbstractDAO {
 
     public void cambiarCategoriaTarea(int idTarea, String nombre) {
         Connection con;
-        PreparedStatement stmQuitarCategoriaTarea;
         PreparedStatement stmAnhadirCategoriaTarea;
         con=super.getConexion();
         
         try{
-            stmQuitarCategoriaTarea = con.prepareStatement("delete from categoria_tarea_basica where tarea_basica = ?");
             stmAnhadirCategoriaTarea = con.prepareStatement("insert into categoria_tarea_basica (tarea_basica, categoria) values (?, ?)");
-            stmQuitarCategoriaTarea.setInt(1, idTarea);
             stmAnhadirCategoriaTarea.setInt(1, idTarea);
-            stmAnhadirCategoriaTarea.setString(2, nombre); 
+            stmAnhadirCategoriaTarea.setString(2, nombre);
             
-            stmQuitarCategoriaTarea.executeUpdate();
             stmAnhadirCategoriaTarea.executeUpdate();
-            
             
         }catch (SQLException e){
             System.out.println(e.getMessage());
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         }
-    }
-
-    public Tarea actualizarDatosTarea(int idTarea) {
-        Tarea resultado = null;
-        Connection con;
-        PreparedStatement stmTarea;
-        ResultSet rsTarea;
-        con=super.getConexion();
-        
-        try{
-            stmTarea = con.prepareStatement("select id_tarea, nombre, completada, fecha_fin, categoria "
-                    + "from tarea_basica tb left join categoria_tarea_basica ctb on (tb.id_tarea = ctb.tarea_basica) "
-                    + "where id_tarea = ?");
-            stmTarea.setInt(1, idTarea);
-            rsTarea = stmTarea.executeQuery();
-            if (rsTarea.next()){
-                resultado = new Tarea(idTarea, rsTarea.getString("nombre"), rsTarea.getBoolean("completada"), 
-                rsTarea.getDate("fecha_fin").toLocalDate(), new Categoria(rsTarea.getString("categoria")));
-            }
-            rsTarea.close();
-            
-        }catch(SQLException e){
-            System.out.println(e.getMessage());
-            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
-        }
-        return resultado;
     }
 
     public Tarea anhadirTarea(Tarea t, String idUsuario) {
