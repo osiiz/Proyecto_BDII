@@ -56,6 +56,7 @@ public final class VPublicaciones extends javax.swing.JFrame {
         nombreForo = new javax.swing.JLabel();
         txtMensaje = new javax.swing.JTextField();
         btnEnviar = new javax.swing.JButton();
+        btnBorrarPublicacion = new javax.swing.JButton();
 
         jButton1.setText("jButton1");
 
@@ -85,6 +86,13 @@ public final class VPublicaciones extends javax.swing.JFrame {
             }
         });
 
+        btnBorrarPublicacion.setText("Borrar publicacion");
+        btnBorrarPublicacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBorrarPublicacionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -96,6 +104,8 @@ public final class VPublicaciones extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(nombreForo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnBorrarPublicacion)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnSalir))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(txtMensaje)
@@ -109,7 +119,8 @@ public final class VPublicaciones extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSalir)
-                    .addComponent(nombreForo))
+                    .addComponent(nombreForo)
+                    .addComponent(btnBorrarPublicacion))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -137,7 +148,12 @@ public final class VPublicaciones extends javax.swing.JFrame {
         actualizarPublicaciones();
     }//GEN-LAST:event_btnEnviarActionPerformed
 
-    private List<Publicacion> buscarPublicaciones(){
+    private void btnBorrarPublicacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarPublicacionActionPerformed
+        fa.ventanaBorrarPublicacion(foro.getIdForo());
+        actualizarPublicaciones();
+    }//GEN-LAST:event_btnBorrarPublicacionActionPerformed
+
+    public List<Publicacion> buscarPublicaciones(){
         return fa.buscarPublicaciones(foro.getIdForo());
     }
     
@@ -155,6 +171,7 @@ public final class VPublicaciones extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaMensajes;
+    private javax.swing.JButton btnBorrarPublicacion;
     private javax.swing.JButton btnEnviar;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton jButton1;

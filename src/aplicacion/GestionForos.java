@@ -45,5 +45,13 @@ public class GestionForos {
     public void nuevaPublicacion(String text, String idUsuario, int idForo) {
         fbd.nuevaPublicacion(text, idUsuario, idForo);
     }
+
+    public void borrarPublicacion(int idPublicacion) {
+        fbd.borrarPublicacion(idPublicacion);
+    }
+
+    public void ventanaBorrarPublicaciones(int idForo) {
+        fgui.ventanaBorrarPublicaciones(idForo);
+    }
     
 }

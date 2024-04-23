@@ -147,5 +147,23 @@ public class DAOForos extends AbstractDAO {
             this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         }
     }
+
+    public void borrarPublicacion(int idPublicacion) {
+        Connection con;
+        PreparedStatement stmBorrar;
+        con=super.getConexion();
+        
+        try{
+            stmBorrar = con.prepareStatement("delete from publicacion where id_publicacion = ?");
+            stmBorrar.setInt(1, idPublicacion);
+            stmBorrar.executeUpdate();
+            
+            stmBorrar.close();
+            
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }
+    }
     
 }

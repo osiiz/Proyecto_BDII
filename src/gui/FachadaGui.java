@@ -91,6 +91,13 @@ public class FachadaGui {
         vp = new VPublicaciones(fa, usuario, foro);
         vp.setVisible(true);
     }
+
+    public void ventanaBorrarPublicaciones(int idForo) {
+        VBorrarPublicacion vbp;
+        vbp = new VBorrarPublicacion(vp, true, fa, idForo);
+        vbp.setVisible(true);
+        
+    }
     
    
 

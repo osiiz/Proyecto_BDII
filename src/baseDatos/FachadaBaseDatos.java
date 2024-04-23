@@ -143,4 +143,8 @@ public class FachadaBaseDatos {
     public void nuevaPublicacion(String text, String idUsuario, int idForo) {
         daoForos.nuevaPublicacion(text, idUsuario, idForo);
     }
+
+    public void borrarPublicacion(int idPublicacion) {
+        daoForos.borrarPublicacion(idPublicacion);
+    }
 }

@@ -144,5 +144,14 @@ public class FachadaAplicacion {
         cf.nuevaPublicacion(text, idUsuario, idForo);
     }
 
+    public void borrarPublicacion(int idPublicacion) {
+        cf.borrarPublicacion(idPublicacion);
+    
+    }
+
+    public void ventanaBorrarPublicacion(int idForo) {
+        cf.ventanaBorrarPublicaciones(idForo);
+    }
+
 
 }
