@@ -13,10 +13,10 @@ import java.time.LocalDateTime;
 public class Publicacion {
     private int idPublicacion;
     private String texto;
-    private int idUsuario;
+    private String idUsuario;
     private LocalDateTime fecha;
 
-    public Publicacion(int idPublicacion, String texto, int idUsuario, LocalDateTime fecha) {
+    public Publicacion(int idPublicacion, String texto, String idUsuario, LocalDateTime fecha) {
         this.idPublicacion = idPublicacion;
         this.texto = texto;
         this.idUsuario = idUsuario;
@@ -27,13 +27,19 @@ public class Publicacion {
         return texto;
     }
 
-    public int getIdUsuario() {
+    public String getIdUsuario() {
         return idUsuario;
     }
 
     public LocalDateTime getFecha() {
         return fecha;
     }
+
+    public int getIdPublicacion() {
+        return idPublicacion;
+    }
+    
+    
     
     
     

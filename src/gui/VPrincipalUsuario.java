@@ -66,7 +66,7 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jEditorPane1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Biblioteca de Informática");
+        setTitle("Programa de Gestión de Tareas");
         setName("vPrincipal"); // NOI18N
         setResizable(false);
 

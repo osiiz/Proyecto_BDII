@@ -102,7 +102,8 @@ public class DAOForos extends AbstractDAO {
         
         con=this.getConexion();
         
-        String consultaTareas = "select id_publicacion, mensaje, id_usuario, fecha from publicacion where id_foro = ?";
+        String consultaTareas = "select id_publicacion, mensaje, id_usuario, fecha from publicacion where id_foro = ? "
+                + "order by fecha asc";
                 
         try  {
             stmPublicaciones = con.prepareStatement(consultaTareas);
@@ -110,7 +111,7 @@ public class DAOForos extends AbstractDAO {
             rsPublicaciones = stmPublicaciones.executeQuery();
             while (rsPublicaciones.next()){
                 publicacionActual = new Publicacion(rsPublicaciones.getInt("id_publicacion"), 
-                        rsPublicaciones.getString("mensaje"), rsPublicaciones.getInt("id_usuario"),
+                        rsPublicaciones.getString("mensaje"), rsPublicaciones.getString("id_usuario"),
                         rsPublicaciones.getTimestamp("fecha").toLocalDateTime());
                 resultado.add(publicacionActual);
             }
@@ -124,6 +125,27 @@ public class DAOForos extends AbstractDAO {
         }
         return resultado;
         
+    }
+
+    public void nuevaPublicacion(String text, String idUsuario, int idForo) {
+        Connection con;
+        PreparedStatement stmPubli;
+        con=super.getConexion();
+        
+        try{
+            stmPubli = con.prepareStatement("INSERT INTO publicacion (mensaje, id_foro, id_usuario, fecha) "
+                    + "VALUES (?, ?, ?, now())");
+            stmPubli.setString(1, text);
+            stmPubli.setInt(2, idForo);
+            stmPubli.setString(3, idUsuario);
+            stmPubli.executeUpdate();
+            
+            stmPubli.close();
+            
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }
     }
     
 }

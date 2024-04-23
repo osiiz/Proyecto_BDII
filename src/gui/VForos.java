@@ -5,8 +5,6 @@
 package gui;
 
 import aplicacion.*;
-import gui.ModeloListaStrings;
-import java.util.ArrayList;
 
 /**
  *
@@ -65,6 +63,11 @@ public final class VForos extends javax.swing.JFrame {
         });
 
         btnEntrarForo.setText("Entrar");
+        btnEntrarForo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEntrarForoActionPerformed(evt);
+            }
+        });
 
         btnNuevoForo.setText("Nuevo Foro");
         btnNuevoForo.addActionListener(new java.awt.event.ActionListener() {
@@ -133,6 +136,12 @@ public final class VForos extends javax.swing.JFrame {
         fa.borrarForo((int)((ModeloTablaForos)tablaForos.getModel()).getValueAt(tablaForos.getSelectedRow(), 0));
         buscarForos();
     }//GEN-LAST:event_btnBorrarForoActionPerformed
+
+    private void btnEntrarForoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarForoActionPerformed
+        int idForo = (int)((ModeloTablaForos)tablaForos.getModel()).getValueAt(tablaForos.getSelectedRow(), 0);
+        String nombreForo = (String)((ModeloTablaForos)tablaForos.getModel()).getValueAt(tablaForos.getSelectedRow(), 1);
+        fa.ventanaPublicaciones(new Foro(idForo, nombreForo, idProyecto));
+    }//GEN-LAST:event_btnEntrarForoActionPerformed
 
     private void buscarForos(){
         ModeloTablaForos m;

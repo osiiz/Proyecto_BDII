@@ -48,10 +48,6 @@ public class FachadaAplicacion {
     public Usuario getUsuario() {
         return usuario;
     }
-
-    public void setUsuario(Usuario us) {
-        this.usuario = us;
-    }
  
     public Usuario comprobarAutentificacion(String idUsuario, String clave){
         this.usuario = cu.comprobarAutentificacion(idUsuario, clave);
@@ -136,8 +132,16 @@ public class FachadaAplicacion {
         cf.borrarForo(idForo);
     }
 
-    public void buscarPublicaciones(int idForo) {
-        cf.buscarPublicaciones(idForo);
+    public List<Publicacion> buscarPublicaciones(int idForo) {
+        return cf.buscarPublicaciones(idForo);
+    }
+    
+    public void ventanaPublicaciones(Foro foro){
+        cf.ventanaPublicaciones(foro);
+    }
+
+    public void nuevaPublicacion(String text, String idUsuario, int idForo) {
+        cf.nuevaPublicacion(text, idUsuario, idForo);
     }
 
 

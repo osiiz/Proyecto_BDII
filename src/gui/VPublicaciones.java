@@ -6,7 +6,12 @@ package gui;
 
 import aplicacion.FachadaAplicacion;
 import aplicacion.Foro;
+import aplicacion.Publicacion;
 import aplicacion.Usuario;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -22,7 +27,7 @@ public final class VPublicaciones extends javax.swing.JFrame {
      * Creates new form VPublicaciones
      * @param fa
      * @param usuario
-     * @param idForo
+     * @param foro
      */
     public VPublicaciones(FachadaAplicacion fa, Usuario usuario, Foro foro) {
         initComponents();
@@ -30,8 +35,7 @@ public final class VPublicaciones extends javax.swing.JFrame {
         this.usuario = usuario;
         this.foro = foro;
         nombreForo.setText(foro.getTitulo());
-        
-        buscarPublicaciones();
+        actualizarPublicaciones();
     }
 
     /**
@@ -75,6 +79,11 @@ public final class VPublicaciones extends javax.swing.JFrame {
         nombreForo.setText("jLabel1");
 
         btnEnviar.setText("Enviar");
+        btnEnviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEnviarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,12 +92,12 @@ public final class VPublicaciones extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(nombreForo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnSalir))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(txtMensaje)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEnviar)))
@@ -102,12 +111,12 @@ public final class VPublicaciones extends javax.swing.JFrame {
                     .addComponent(btnSalir)
                     .addComponent(nombreForo))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 383, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEnviar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnEnviar)
+                    .addComponent(txtMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         pack();
@@ -117,8 +126,29 @@ public final class VPublicaciones extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void buscarPublicaciones(){
-        fa.buscarPublicaciones(foro.getIdForo());
+    private void btnEnviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEnviarActionPerformed
+        if (txtMensaje.getText().isBlank()){
+            return;
+        }
+        System.out.println(txtMensaje.getText());
+        System.out.println(usuario.getIdUsuario());
+        System.out.println(foro.getIdForo());
+        fa.nuevaPublicacion(txtMensaje.getText(), usuario.getIdUsuario(), foro.getIdForo());
+        actualizarPublicaciones();
+    }//GEN-LAST:event_btnEnviarActionPerformed
+
+    private List<Publicacion> buscarPublicaciones(){
+        return fa.buscarPublicaciones(foro.getIdForo());
+    }
+    
+    private void actualizarPublicaciones(){
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/YYYY HH:mm");
+        areaMensajes.setText("");
+        for (Publicacion pub : buscarPublicaciones()){
+            String publi = "[" + pub.getFecha().format(formato) + "] " + pub.getIdUsuario() + ": "
+                      + pub.getTexto() +"\n";
+            areaMensajes.append(publi);
+        }
     }
     
     

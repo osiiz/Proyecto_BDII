@@ -34,8 +34,16 @@ public class GestionForos {
         fbd.borrarForo(idForo);
     }
 
-    public void buscarPublicaciones(int idForo) {
-        fbd.buscarPublicaciones(idForo);
+    public List<Publicacion> buscarPublicaciones(int idForo) {
+        return fbd.buscarPublicaciones(idForo);
+    }
+
+    public void ventanaPublicaciones(Foro foro) {
+        fgui.ventanaPublicaciones(foro);
+    }
+
+    public void nuevaPublicacion(String text, String idUsuario, int idForo) {
+        fbd.nuevaPublicacion(text, idUsuario, idForo);
     }
     
 }
