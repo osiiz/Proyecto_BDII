@@ -22,6 +22,7 @@ public class FachadaBaseDatos {
     private DAOUsuarios daoUsuarios;
     private DAOTareas daoTareas;
     private DAOForos daoForos;
+    private DAONotificaciones daoNotis;
 
     public FachadaBaseDatos (aplicacion.FachadaAplicacion fa){
         
@@ -50,6 +51,7 @@ public class FachadaBaseDatos {
             daoUsuarios = new DAOUsuarios(conexion, fa);     
             daoTareas = new DAOTareas(conexion, fa);
             daoForos = new DAOForos(conexion, fa);
+            daoNotis = new DAONotificaciones(conexion, fa);
 
 
         } catch (FileNotFoundException f){
@@ -150,5 +152,17 @@ public class FachadaBaseDatos {
 
     public void cambiarNombreForo(String nombre, int idForo) {
         daoForos.cambiarNombreForo(nombre, idForo);
+    }
+    
+    public List<Notificacion> obtenerNotificaciones(String usuario){
+        return daoNotis.obtenerNotificacionBasica(usuario);
+    }
+    
+    public List<Tarea> notiTareaBasica(String idUsuario){
+        return daoTareas.notiTareaBasica(idUsuario);
+    }
+    
+    public List<Tarea> notiTareaProyecto(String idUsuario){
+        return daoTareas.notiTareaProyecto(idUsuario);
     }
 }

@@ -268,4 +268,66 @@ public class DAOTareas extends AbstractDAO {
         }
         return resultado;
     }
+    
+    public List<Tarea> notiTareaBasica(String idUsuario){
+        List<Tarea> resultado = new java.util.ArrayList<>();
+        Tarea tareaActual;
+        Connection con;
+        PreparedStatement stmTarea;
+        ResultSet rsTarea;
+        con=super.getConexion();
+        
+        try{
+            stmTarea = con.prepareStatement("select id_tarea, nombre, completada, fecha_fin "
+                    + "from tarea_basica tb "
+                    + "where id_usuario = ? "
+                    + "and fecha_fin - CURRENT_DATE <= 1");
+            stmTarea.setString(1, idUsuario);
+            rsTarea = stmTarea.executeQuery();
+            while (rsTarea.next()){
+                tareaActual = new Tarea(rsTarea.getInt("id_tarea"), rsTarea.getString("nombre"), rsTarea.getBoolean("completada"), 
+                rsTarea.getDate("fecha_fin").toLocalDate(), null);
+                
+                resultado.add(tareaActual);
+            }
+            rsTarea.close();
+            
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }
+        return resultado;
+    }
+    
+    public List<Tarea> notiTareaProyecto(String idUsuario){
+        List<Tarea> resultado = new java.util.ArrayList<>();
+        Tarea tareaActual;
+        Connection con;
+        PreparedStatement stmTarea;
+        ResultSet rsTarea;
+        con=super.getConexion();
+        
+        try{
+            stmTarea = con.prepareStatement("select tp.id_tarea, tp.nombre, tp.completada, tp.fecha_fin "
+                    + "from Tarea_de_proyecto tp, Participar p, Seccion s "
+                    + "where s.id_proyecto = p.id_proyecto "
+                    + "and tp.id_seccion = s.id_seccion "
+                    + "and p.id_usuario = ? "
+                    + "and fecha_fin - CURRENT_DATE <= 1");
+            stmTarea.setString(1, idUsuario);
+            rsTarea = stmTarea.executeQuery();
+            while (rsTarea.next()){
+                tareaActual = new Tarea(rsTarea.getInt("id_tarea"), rsTarea.getString("nombre"), rsTarea.getBoolean("completada"), 
+                rsTarea.getDate("fecha_fin").toLocalDate(), null);
+                
+                resultado.add(tareaActual);
+            }
+            rsTarea.close();
+            
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }
+        return resultado;
+    }
 }
