@@ -100,5 +100,12 @@ public class GestionTareas{
     public Tarea anhadirTarea(Tarea t, String idUsuario) {
         return fbd.anhadirTarea(t, idUsuario);
     }
-
+    
+    public List<Tarea> notiTareaBasica(String idUsuario){
+        return fbd.notiTareaBasica(idUsuario);
+    }
+    
+    public List<Tarea> notiTareaProyecto(String idUsuario){
+        return fbd.notiTareaProyecto(idUsuario);
+    }
 }

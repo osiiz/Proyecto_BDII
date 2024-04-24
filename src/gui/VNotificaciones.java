@@ -9,13 +9,25 @@ package gui;
  * @author alumnogreibd
  */
 public class VNotificaciones extends javax.swing.JDialog {
-
+    aplicacion.FachadaAplicacion fa;
     /**
      * Creates new form VNotificaciones
      */
-    public VNotificaciones(java.awt.Frame parent, boolean modal) {
+    public VNotificaciones(java.awt.Frame parent, boolean modal, aplicacion.FachadaAplicacion fa) {
         super(parent, modal);
+        this.fa = fa;
         initComponents();
+        
+        ModeloTablaNotificaciones m;
+
+        m = (ModeloTablaNotificaciones) tablaNotis.getModel();
+        m.setFilas(fa.obtenerNotificaciones());
+        if (m.getRowCount() > 0) {
+            tablaNotis.setRowSelectionInterval(0, 0);
+            btnBorrar.setEnabled(true);
+        } else {
+            btnBorrar.setEnabled(false);
+        }
     }
 
     /**
@@ -30,13 +42,18 @@ public class VNotificaciones extends javax.swing.JDialog {
         btnSalir = new javax.swing.JButton();
         btnBorrar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaNotis = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         btnSalir.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
 
         btnBorrar.setFont(new java.awt.Font("sansserif", 0, 18)); // NOI18N
         btnBorrar.setText("Borrar");
@@ -46,7 +63,11 @@ public class VNotificaciones extends javax.swing.JDialog {
             }
         });
 
-        jScrollPane1.setViewportView(jTable1);
+        tablaNotis.setModel(new ModeloTablaNotificaciones());
+        tablaNotis.setColumnSelectionAllowed(true);
+        tablaNotis.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tablaNotis);
+        tablaNotis.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 24)); // NOI18N
         jLabel1.setText("NOTIFICACIONES");
@@ -86,8 +107,12 @@ public class VNotificaciones extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnBorrarActionPerformed
+
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnSalirActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -95,6 +120,6 @@ public class VNotificaciones extends javax.swing.JDialog {
     private javax.swing.JButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaNotis;
     // End of variables declaration//GEN-END:variables
 }

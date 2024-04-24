@@ -9,8 +9,10 @@
  * Created on 27-ene-2011, 10:31:24
  */
 package gui;
-
 import aplicacion.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 
 /**
  *
@@ -30,6 +32,9 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
         this.fa = fa;
         this.usuario = fa.getUsuario();
         initComponents();
+      
+        añadirNotificaciones();
+      
         if (usuario.getTipoUsuario() == TipoUsuario.Gestor){
             btnEditarTarea.setEnabled(false);
             btnBorrarTarea.setEnabled(false);
@@ -259,7 +264,7 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBorrarTareaActionPerformed
 
     private void btnNotificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNotificacionActionPerformed
-        // TODO add your handling code here:
+        fa.ventanaNotificaciones();
     }//GEN-LAST:event_btnNotificacionActionPerformed
 
     public void buscarTareas() {
@@ -272,6 +277,25 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
             btnEditarTarea.setEnabled(true);
         } else {
             btnEditarTarea.setEnabled(false);
+        }
+    }
+    
+    public void añadirNotificaciones(){
+        for (Tarea tarea: fa.notiTareaBasica()){
+            String m = String.format("La tarea '%s' termina pronto, ¡date prisa!", tarea.getNombre());
+            LocalDate fechaActual = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("DD-MM-YYYY");
+            String fechaString = fechaActual.format(formatter);
+            Notificacion n = new Notificacion(-1, m, false, fechaString, tarea.getIdTarea(), TipoNotificacion.Basica);
+            
+        }
+        for (Tarea tarea: fa.notiTareaProyecto()){
+            String m = String.format("La tarea '%s' termina pronto, ¡date prisa!", tarea.getNombre());
+            LocalDate fechaActual = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("DD-MM-YYYY");
+            String fechaString = fechaActual.format(formatter);
+            Notificacion n = new Notificacion(-1, m, false, fechaString, tarea.getIdTarea(), TipoNotificacion.Proyecto);
+            
         }
     }
 
@@ -299,5 +323,4 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> selecAscDesc;
     private javax.swing.JTable tablaTareas;
     // End of variables declaration//GEN-END:variables
-
 }
