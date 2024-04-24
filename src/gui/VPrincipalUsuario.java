@@ -36,7 +36,6 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
             btnNuevaTarea.setEnabled(false);
             btnBuscar.setEnabled(false);
             buscaNombre.setEnabled(false);
-            buscaCategoria.setEnabled(false);
             selecAscDesc.setEnabled(false);
             buscaCompletada.setEnabled(false);
             btnNotificacion.setEnabled(false);
@@ -58,8 +57,6 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
         etiquetaTitulo = new javax.swing.JLabel();
         buscaNombre = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        buscaCategoria = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaTareas = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
@@ -83,8 +80,6 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
         setResizable(false);
 
         jLabel1.setText("Nombre:");
-
-        jLabel2.setText("Categoría:");
 
         tablaTareas.setModel(new gui.ModeloTablaTareasBasicas(fa));
         tablaTareas.setColumnSelectionAllowed(true);
@@ -185,22 +180,18 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buscaCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(12, 12, 12)
-                                .addComponent(selecAscDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(41, 41, 41)
-                                .addComponent(btnBuscar))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buscaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(buscaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(selecAscDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(176, 176, 176)
                                 .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buscaCompletada)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(buscaCompletada)
+                                .addGap(30, 30, 30)
+                                .addComponent(btnBuscar)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                         .addComponent(btnNotificacion)
                         .addGap(24, 24, 24))))
         );
@@ -212,21 +203,20 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(etiquetaTitulo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel1)
-                                .addComponent(buscaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel3))
-                            .addComponent(buscaCompletada))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(buscaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(buscaCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnBuscar)
-                            .addComponent(selecAscDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(selecAscDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel3)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnNotificacion)))
+                        .addComponent(btnNotificacion))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(buscaCompletada)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -290,7 +280,7 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
         ModeloTablaTareasBasicas m;
 
         m = (ModeloTablaTareasBasicas) tablaTareas.getModel();
-        m.setFilas(fa.obtenerTareas(buscaNombre.getText(), buscaCategoria.getText(), buscaCompletada.isSelected(), selecAscDesc.getSelectedIndex()));
+        m.setFilas(fa.obtenerTareas(buscaNombre.getText(), buscaCompletada.isSelected(), selecAscDesc.getSelectedIndex()));
         if (m.getRowCount() > 0) {
             tablaTareas.setRowSelectionInterval(0, 0);
             btnEditarTarea.setEnabled(true);
@@ -311,13 +301,11 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
     private javax.swing.JButton btnNotificacion;
     private javax.swing.JButton btnNuevaTarea;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JTextField buscaCategoria;
     private javax.swing.JCheckBox buscaCompletada;
     private javax.swing.JTextField buscaNombre;
     private javax.swing.JLabel etiquetaTitulo;
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar2;

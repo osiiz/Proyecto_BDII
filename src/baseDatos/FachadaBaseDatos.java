@@ -87,8 +87,8 @@ public class FachadaBaseDatos {
         daoUsuarios.borrarUsuario(usuario);
     }
 
-    public List<Tarea> consultarTareas(String nombre, String categoria, Boolean completada, Usuario usuario, int descendente) {
-        return daoTareas.obtenerTareasBasicas(nombre, categoria, completada, usuario, descendente);
+    public List<Tarea> consultarTareas(String nombre, Boolean completada, Usuario usuario, int descendente) {
+        return daoTareas.obtenerTareasBasicas(nombre, completada, usuario, descendente);
     }
 
     public void actualizarCompletada(int idTarea, Boolean completada) {

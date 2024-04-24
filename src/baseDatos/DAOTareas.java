@@ -24,7 +24,7 @@ public class DAOTareas extends AbstractDAO {
         super.setFachadaAplicacion(fa);
     }
     
-    public List<Tarea> obtenerTareasBasicas(String nombre, String categoria, Boolean completada, Usuario usuario, int descendente){
+    public List<Tarea> obtenerTareasBasicas(String nombre, Boolean completada, Usuario usuario, int descendente){
         List<Tarea> resultado = new java.util.ArrayList<>();
         List<Categoria> categoriasActuales;
         
