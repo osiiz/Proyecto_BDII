@@ -9,6 +9,7 @@ import aplicacion.*;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -22,6 +23,7 @@ public class FachadaBaseDatos {
     private DAOUsuarios daoUsuarios;
     private DAOTareas daoTareas;
     private DAOForos daoForos;
+    private DAOProyectos daoProyectos;
 
     public FachadaBaseDatos (aplicacion.FachadaAplicacion fa){
         
@@ -50,6 +52,7 @@ public class FachadaBaseDatos {
             daoUsuarios = new DAOUsuarios(conexion, fa);     
             daoTareas = new DAOTareas(conexion, fa);
             daoForos = new DAOForos(conexion, fa);
+            daoProyectos = new DAOProyectos(conexion,fa);
 
 
         } catch (FileNotFoundException f){
@@ -150,5 +153,9 @@ public class FachadaBaseDatos {
 
     public void cambiarNombreForo(String nombre, int idForo) {
         daoForos.cambiarNombreForo(nombre, idForo);
+    }
+    
+    public ArrayList<Proyecto> obtenerProyectos(Usuario usuario){
+        return daoProyectos.obtenerProyectos(usuario);
     }
 }
