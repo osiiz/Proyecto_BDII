@@ -13,14 +13,17 @@ public class ModeloListaStrings extends javax.swing.AbstractListModel {
     java.util.List<String> elementos;
 
     public ModeloListaStrings(){
-        this.elementos=new java.util.ArrayList<String>();
+        this.elementos=new java.util.ArrayList<>();
     }
 
+    @Override
     public int getSize(){
         return this.elementos.size();
     }
 
+    @Override
     public String getElementAt(int i){
+        if (i < 0) i = 0;
         return elementos.get(i);
     }
 

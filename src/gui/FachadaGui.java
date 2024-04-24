@@ -30,6 +30,7 @@ public class FachadaGui {
     
       va = new VAutentificacion(fa);
       va.setVisible(true);
+      this.usuario = fa.getUsuario();
       
       if(fa.getUsuario().getTipoUsuario() == TipoUsuario.Normal || fa.getUsuario().getTipoUsuario() == TipoUsuario.Gestor){
           vp = new VPrincipalUsuario(fa);
@@ -63,11 +64,6 @@ public class FachadaGui {
         vn.setVisible(true);
     }
 
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
@@ -95,6 +91,19 @@ public class FachadaGui {
         VNuevoForo vnf;
         vnf = new VNuevoForo(vp, true, fa, idProyecto);
         vnf.setVisible(true);
+    }
+
+    public void ventanaPublicaciones(Foro foro, VForos vf) {
+        VPublicaciones vp;
+        vp = new VPublicaciones(fa, usuario, foro, vf);
+        vp.setVisible(true);
+    }
+
+    public void ventanaBorrarPublicaciones(int idForo) {
+        VBorrarPublicacion vbp;
+        vbp = new VBorrarPublicacion(vp, true, fa, idForo);
+        vbp.setVisible(true);
+        
     }
     
    

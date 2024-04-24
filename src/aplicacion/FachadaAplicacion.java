@@ -5,6 +5,7 @@
 
 package aplicacion;
 
+import gui.VForos;
 import java.util.List;
 
 
@@ -50,10 +51,6 @@ public class FachadaAplicacion {
     public Usuario getUsuario() {
         return usuario;
     }
-
-    public void setUsuario(Usuario us) {
-        this.usuario = us;
-    }
  
     public Usuario comprobarAutentificacion(String idUsuario, String clave){
         this.usuario = cu.comprobarAutentificacion(idUsuario, clave);
@@ -86,8 +83,8 @@ public class FachadaAplicacion {
         ct.visualizarTarea(idTarea);
     }
 
-    public List<Tarea> obtenerTareas(String nombre, String categoria, Boolean completada, int descendente){
-        return ct.obtenerTareas(nombre, categoria, completada, usuario, descendente);
+    public List<Tarea> obtenerTareas(String nombre, Boolean completada, int descendente){
+        return ct.obtenerTareas(nombre, completada, usuario, descendente);
     }
     
     public List<Notificacion> obtenerNotificaciones(){
@@ -101,23 +98,24 @@ public class FachadaAplicacion {
     public void borrarTarea(int idTarea) {
         ct.borrarTarea(idTarea);
     }
-
-    public void actualizarTarea(Tarea t) {
-        ct.actualizarTarea(t);
+    
+    public Tarea consultarTarea(int idTarea){
+        return ct.consultarTarea(idTarea);
+    }
+    
+    public void actualizarTarea(Tarea tarea){
+        ct.actualizarTarea(tarea);
     }
 
-    public void eliminarCategoriaTarea(int idTarea) {
-        ct.eliminarCategoriaTarea(idTarea);
+
+    public void eliminarCategoriaTarea(int idTarea, String nombre) {
+        ct.eliminarCategoriaTarea(idTarea, nombre);
     }
 
     public void cambiarCategoriaTarea(int idTarea, String nombre) {
         ct.cambiarCategoriaTarea(idTarea, nombre);
     }
 
-    public Tarea actualizarDatosTarea(int idTarea) {
-        return ct.actualizarDatosTarea(idTarea);
-        
-    }
 
     public Tarea anhadirTarea(Tarea t, String idUsuario) {
         return ct.anhadirTarea(t, idUsuario);
@@ -144,8 +142,29 @@ public class FachadaAplicacion {
         cf.borrarForo(idForo);
     }
 
-    public void buscarPublicaciones(int idForo) {
-        cf.buscarPublicaciones(idForo);
+    public List<Publicacion> buscarPublicaciones(int idForo) {
+        return cf.buscarPublicaciones(idForo);
+    }
+    
+    public void ventanaPublicaciones(Foro foro, VForos vf){
+        cf.ventanaPublicaciones(foro, vf);
+    }
+
+    public void nuevaPublicacion(String text, String idUsuario, int idForo) {
+        cf.nuevaPublicacion(text, idUsuario, idForo);
+    }
+
+    public void borrarPublicacion(int idPublicacion) {
+        cf.borrarPublicacion(idPublicacion);
+    
+    }
+
+    public void ventanaBorrarPublicacion(int idForo) {
+        cf.ventanaBorrarPublicaciones(idForo);
+    }
+
+    public void cambiarNombreForo(String nombre, int idForo) {
+        cf.cambiarNombreForo(nombre, idForo);
     }
     
     public List<Tarea> notiTareaBasica(){

@@ -6,6 +6,7 @@ package aplicacion;
 
 import baseDatos.FachadaBaseDatos;
 import gui.FachadaGui;
+import gui.VForos;
 import java.util.List;
 
 /**
@@ -34,8 +35,29 @@ public class GestionForos {
         fbd.borrarForo(idForo);
     }
 
-    public void buscarPublicaciones(int idForo) {
-        fbd.buscarPublicaciones(idForo);
+    public List<Publicacion> buscarPublicaciones(int idForo) {
+        return fbd.buscarPublicaciones(idForo);
+    }
+
+    public void ventanaPublicaciones(Foro foro, VForos vf) {
+        fgui.ventanaPublicaciones(foro, vf);
+    }
+
+    public void nuevaPublicacion(String text, String idUsuario, int idForo) {
+        fbd.nuevaPublicacion(text, idUsuario, idForo);
+    }
+
+    public void borrarPublicacion(int idPublicacion) {
+        fbd.borrarPublicacion(idPublicacion);
+    }
+
+    public void ventanaBorrarPublicaciones(int idForo) {
+        fgui.ventanaBorrarPublicaciones(idForo);
+    }
+
+    public void cambiarNombreForo(String nombre, int idForo) {
+        fbd.cambiarNombreForo(nombre, idForo);
+
     }
     
 }

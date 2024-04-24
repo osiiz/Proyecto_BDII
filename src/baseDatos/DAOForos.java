@@ -102,7 +102,8 @@ public class DAOForos extends AbstractDAO {
         
         con=this.getConexion();
         
-        String consultaTareas = "select id_publicacion, mensaje, id_usuario, fecha from publicacion where id_foro = ?";
+        String consultaTareas = "select id_publicacion, mensaje, id_usuario, fecha from publicacion where id_foro = ? "
+                + "order by fecha asc";
                 
         try  {
             stmPublicaciones = con.prepareStatement(consultaTareas);
@@ -110,7 +111,7 @@ public class DAOForos extends AbstractDAO {
             rsPublicaciones = stmPublicaciones.executeQuery();
             while (rsPublicaciones.next()){
                 publicacionActual = new Publicacion(rsPublicaciones.getInt("id_publicacion"), 
-                        rsPublicaciones.getString("mensaje"), rsPublicaciones.getInt("id_usuario"),
+                        rsPublicaciones.getString("mensaje"), rsPublicaciones.getString("id_usuario"),
                         rsPublicaciones.getTimestamp("fecha").toLocalDateTime());
                 resultado.add(publicacionActual);
             }
@@ -124,6 +125,64 @@ public class DAOForos extends AbstractDAO {
         }
         return resultado;
         
+    }
+
+    public void nuevaPublicacion(String text, String idUsuario, int idForo) {
+        Connection con;
+        PreparedStatement stmPubli;
+        con=super.getConexion();
+        
+        try{
+            stmPubli = con.prepareStatement("INSERT INTO publicacion (mensaje, id_foro, id_usuario, fecha) "
+                    + "VALUES (?, ?, ?, now())");
+            stmPubli.setString(1, text);
+            stmPubli.setInt(2, idForo);
+            stmPubli.setString(3, idUsuario);
+            stmPubli.executeUpdate();
+            
+            stmPubli.close();
+            
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }
+    }
+
+    public void borrarPublicacion(int idPublicacion) {
+        Connection con;
+        PreparedStatement stmBorrar;
+        con=super.getConexion();
+        
+        try{
+            stmBorrar = con.prepareStatement("delete from publicacion where id_publicacion = ?");
+            stmBorrar.setInt(1, idPublicacion);
+            stmBorrar.executeUpdate();
+            
+            stmBorrar.close();
+            
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }
+    }
+
+    public void cambiarNombreForo(String nombre, int idForo) {
+        Connection con;
+        PreparedStatement stmCambiarNombre;
+        con=super.getConexion();
+        
+        try{
+            stmCambiarNombre = con.prepareStatement("update foro set titulo = ? where id_foro = ?");
+            stmCambiarNombre.setString(1, nombre);
+            stmCambiarNombre.setInt(2, idForo);
+            stmCambiarNombre.executeUpdate();
+            
+            stmCambiarNombre.close();
+            
+        }catch(SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }
     }
     
 }

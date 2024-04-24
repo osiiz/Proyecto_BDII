@@ -89,8 +89,8 @@ public class FachadaBaseDatos {
         daoUsuarios.borrarUsuario(usuario);
     }
 
-    public List<Tarea> consultarTareas(String nombre, String categoria, Boolean completada, Usuario usuario, int descendente) {
-        return daoTareas.obtenerTareasBasicas(nombre, categoria, completada, usuario, descendente);
+    public List<Tarea> consultarTareas(String nombre, Boolean completada, Usuario usuario, int descendente) {
+        return daoTareas.obtenerTareasBasicas(nombre, completada, usuario, descendente);
     }
 
     public void actualizarCompletada(int idTarea, Boolean completada) {
@@ -113,17 +113,14 @@ public class FachadaBaseDatos {
         daoTareas.actualizarTarea(t);
     }
 
-    public void eliminarCategoriaTarea(int idTarea) {
-        daoTareas.eliminarCategoriaTarea(idTarea);
+    public void eliminarCategoriaTarea(int idTarea, String nombre) {
+        daoTareas.eliminarCategoriaTarea(idTarea, nombre);
     }
 
     public void cambiarCategoriaTarea(int idTarea, String nombre) {
         daoTareas.cambiarCategoriaTarea(idTarea, nombre);
     }
 
-    public Tarea actualizarDatosTarea(int idTarea) {
-        return daoTareas.actualizarDatosTarea(idTarea);
-    }
 
     public Tarea anhadirTarea(Tarea t, String idUsuario) {
         return daoTareas.anhadirTarea(t, idUsuario);
@@ -141,8 +138,20 @@ public class FachadaBaseDatos {
         daoForos.borrarForo(idForo);
     }
 
-    public void buscarPublicaciones(int idForo) {
-        daoForos.buscarPublicaciones(idForo);
+    public List<Publicacion> buscarPublicaciones(int idForo) {
+        return daoForos.buscarPublicaciones(idForo);
+    }
+
+    public void nuevaPublicacion(String text, String idUsuario, int idForo) {
+        daoForos.nuevaPublicacion(text, idUsuario, idForo);
+    }
+
+    public void borrarPublicacion(int idPublicacion) {
+        daoForos.borrarPublicacion(idPublicacion);
+    }
+
+    public void cambiarNombreForo(String nombre, int idForo) {
+        daoForos.cambiarNombreForo(nombre, idForo);
     }
     
     public List<Notificacion> obtenerNotificaciones(String usuario){

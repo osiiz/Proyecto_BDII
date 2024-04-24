@@ -4,6 +4,7 @@
  */
 package aplicacion;
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  *
@@ -14,12 +15,12 @@ public class Tarea {
     private String nombre;
     private Boolean completada;
     private LocalDate fechaFin;
-    private Categoria categoria;
+    private List<Categoria> categorias;
 
-    public Tarea(int id_tarea, String nombre, Boolean completada, LocalDate fechaFin, Categoria categoria) {
+    public Tarea(int id_tarea, String nombre, Boolean completada, LocalDate fechaFin, List<Categoria> categorias) {
         this.idTarea = id_tarea;
         this.nombre = nombre;
-        this.categoria = categoria;
+        this.categorias = categorias;
         this.completada = completada;
         this.fechaFin = fechaFin;
     }
@@ -40,16 +41,16 @@ public class Tarea {
         return fechaFin;
     }
 
-    public Categoria getCategoria() {
-        return categoria;
+    public List <Categoria> getCategorias() {
+        return categorias;
     }
 
     public void setCompletada(Boolean completada) {
         this.completada = completada;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
+    public void setCategoria(List <Categoria> categorias) {
+        this.categorias = categorias;
     }
 
     public void setIdTarea(int idTarea) {

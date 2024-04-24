@@ -20,8 +20,8 @@ public class GestionTareas{
      this.fbd=fbd;
     }
 
-    public java.util.List<Tarea> obtenerTareas(String nombre, String categoria, Boolean completada, Usuario usuario, int descendente){
-        return fbd.consultarTareas(nombre, categoria, completada, usuario, descendente);
+    public java.util.List<Tarea> obtenerTareas(String nombre, Boolean completada, Usuario usuario, int descendente){
+        return fbd.consultarTareas(nombre, completada, usuario, descendente);
     }
 
     public void visualizarTarea(Integer idTarea){
@@ -85,16 +85,16 @@ public class GestionTareas{
         fbd.actualizarTarea(t);
     }
 
-    public void eliminarCategoriaTarea(int idTarea) {
-        fbd.eliminarCategoriaTarea(idTarea);
+    public void eliminarCategoriaTarea(int idTarea, String nombre) {
+        fbd.eliminarCategoriaTarea(idTarea, nombre);
     }
 
     public void cambiarCategoriaTarea(int idTarea, String nombre) {
         fbd.cambiarCategoriaTarea(idTarea, nombre);
     }
 
-    public Tarea actualizarDatosTarea(int idTarea) {
-        return fbd.actualizarDatosTarea(idTarea);
+    public Tarea consultarTarea(int idTarea) {
+        return fbd.consultarTarea(idTarea);
     }
 
     public Tarea anhadirTarea(Tarea t, String idUsuario) {

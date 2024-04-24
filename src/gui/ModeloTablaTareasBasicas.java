@@ -23,7 +23,7 @@ public class ModeloTablaTareasBasicas extends AbstractTableModel {
     
     @Override
     public int getColumnCount(){
-        return 5;
+        return 4;
     }
     
     @Override
@@ -38,9 +38,8 @@ public class ModeloTablaTareasBasicas extends AbstractTableModel {
         switch (col){
             case 0: nombre= "Id"; break;
             case 1: nombre= "Nombre"; break;
-            case 2: nombre= "Categoría"; break;
-            case 3: nombre= "Fecha_fin"; break;
-            case 4: nombre= "Completada"; break;
+            case 2: nombre= "Fecha_fin"; break;
+            case 3: nombre= "Completada"; break;
         }
         return nombre;
     }
@@ -52,16 +51,15 @@ public class ModeloTablaTareasBasicas extends AbstractTableModel {
         switch (col){
             case 0: clase= java.lang.Integer.class; break;
             case 1: clase= java.lang.String.class; break;
-            case 2: clase=java.lang.String.class; break;
-            case 3: clase=java.time.LocalDate.class; break;
-            case 4: clase=java.lang.Boolean.class; break;
+            case 2: clase=java.time.LocalDate.class; break;
+            case 3: clase=java.lang.Boolean.class; break;
         }
         return clase;
     }
 
     @Override
     public boolean isCellEditable(int row, int col){
-        return col == 4;
+        return col == 3;
     }
 
     @Override
@@ -71,16 +69,15 @@ public class ModeloTablaTareasBasicas extends AbstractTableModel {
         switch (col){
             case 0: resultado= tareas.get(row).getIdTarea(); break;
             case 1: resultado= tareas.get(row).getNombre(); break;
-            case 2: resultado= tareas.get(row).getCategoria();break;
-            case 3: resultado= tareas.get(row).getFechaFin(); break;
-            case 4: resultado= tareas.get(row).getCompletada(); break;
+            case 2: resultado= tareas.get(row).getFechaFin(); break;
+            case 3: resultado= tareas.get(row).getCompletada(); break;
         }
         return resultado;
     }
     
     @Override
     public void setValueAt(Object value, int row, int column) {
-        if (column == 4) {
+        if (column == 3) {
             tareas.get(row).setCompletada((Boolean) value);
             fa.actualizarCompletada(tareas.get(row).getIdTarea(), tareas.get(row).getCompletada());
         }
