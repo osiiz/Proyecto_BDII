@@ -345,6 +345,10 @@ public class VTarea extends javax.swing.JFrame {
         if (((ModeloListaStrings)listaCategorias.getModel()).getSize() > 0){
             btnAnhadirCategoria.setEnabled(true);
         }
+        btnQuitarCategoria.setEnabled(false);
+        if (((ModeloListaStrings)listaCategoriasActuales.getModel()).getSize() > 0){
+            btnQuitarCategoria.setEnabled(true);
+        }
     }//GEN-LAST:event_btnAnhadirCategoriaActionPerformed
 
     private void btnSalirCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirCategoriaActionPerformed
@@ -358,6 +362,10 @@ public class VTarea extends javax.swing.JFrame {
         btnQuitarCategoria.setEnabled(false);
         if (((ModeloListaStrings)listaCategoriasActuales.getModel()).getSize() > 0){
             btnQuitarCategoria.setEnabled(true);
+        }
+        btnAnhadirCategoria.setEnabled(false);
+        if (((ModeloListaStrings)listaCategorias.getModel()).getSize() > 0){
+            btnAnhadirCategoria.setEnabled(true);
         }
         
     }//GEN-LAST:event_btnQuitarCategoriaActionPerformed

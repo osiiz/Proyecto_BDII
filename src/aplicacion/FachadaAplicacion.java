@@ -6,6 +6,7 @@
 package aplicacion;
 
 import gui.VForos;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -20,6 +21,7 @@ public class FachadaAplicacion {
     GestionTareas ct;
     GestionNotificaciones cn;
     GestionForos cf;
+    GestionProyectos gp;
     Usuario usuario;
     
     
@@ -30,6 +32,7 @@ public class FachadaAplicacion {
       ct = new GestionTareas(fgui, fbd);
       cn = new GestionNotificaciones(fgui, fbd);
       cf = new GestionForos(fgui, fbd);
+      gp = new GestionProyectos(fgui,fbd);
       usuario = null;
     }
 
@@ -166,6 +169,20 @@ public class FachadaAplicacion {
     public void cambiarNombreForo(String nombre, int idForo) {
         cf.cambiarNombreForo(nombre, idForo);
     }
+
+
+    public void nuevoVPrincipalProyectos() {
+        fgui.nuevoVPProyecto();
+    }
+
+    public ArrayList<Proyecto> obtenerProyectos(Usuario usuario) {
+        return gp.obtenerProyectos(usuario);
+    }
+
+    public void nuevoVProyecto(Proyecto p) {
+        fgui.nuevoVProyecto(p);
+    }
+       
     
     public List<Tarea> notiTareaBasica(){
         return ct.notiTareaBasica(usuario.getIdUsuario());
