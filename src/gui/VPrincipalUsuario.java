@@ -9,8 +9,10 @@
  * Created on 27-ene-2011, 10:31:24
  */
 package gui;
-
 import aplicacion.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 
 /**
  *
@@ -30,6 +32,8 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
         this.fa = fa;
         this.usuario = fa.getUsuario();
         initComponents();
+        
+        añadirNotificaciones();
     }
 
     /**
@@ -296,6 +300,25 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
             btnEditarTarea.setEnabled(false);
         }
     }
+    
+    public void añadirNotificaciones(){
+        for (Tarea tarea: fa.notiTareaBasica()){
+            String m = String.format("La tarea '%s' termina pronto, ¡date prisa!", tarea.getNombre());
+            LocalDate fechaActual = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("DD-MM-YYYY");
+            String fechaString = fechaActual.format(formatter);
+            Notificacion n = new Notificacion(-1, m, false, fechaString, tarea.getIdTarea(), TipoNotificacion.Basica);
+            
+        }
+        for (Tarea tarea: fa.notiTareaProyecto()){
+            String m = String.format("La tarea '%s' termina pronto, ¡date prisa!", tarea.getNombre());
+            LocalDate fechaActual = LocalDate.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("DD-MM-YYYY");
+            String fechaString = fechaActual.format(formatter);
+            Notificacion n = new Notificacion(-1, m, false, fechaString, tarea.getIdTarea(), TipoNotificacion.Proyecto);
+            
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -324,5 +347,4 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> selecAscDesc;
     private javax.swing.JTable tablaTareas;
     // End of variables declaration//GEN-END:variables
-
 }

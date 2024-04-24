@@ -6,13 +6,13 @@ package gui;
 import javax.swing.table.*;
 import java.util.List;
 import java.util.ArrayList;
-import aplicacion.NotificacionBasica;
+import aplicacion.Notificacion;
 /**
  *
  * @author alumnogreibd
  */
 public class ModeloTablaNotificaciones extends AbstractTableModel{
-    private List<NotificacionBasica> notis;
+    private List<Notificacion> notis;
     
     public ModeloTablaNotificaciones(){
         this.notis = new ArrayList<>();
@@ -33,7 +33,7 @@ public class ModeloTablaNotificaciones extends AbstractTableModel{
         String nombre="";
 
         switch (col){
-            case 0: nombre= "Id"; break;
+            case 0: nombre= "Fecha"; break;
             case 1: nombre= "Mensaje"; break;
         }
         return nombre;
@@ -44,7 +44,7 @@ public class ModeloTablaNotificaciones extends AbstractTableModel{
         Class clase=null;
 
         switch (col){
-            case 0: clase= java.lang.Integer.class; break;
+            case 0: clase= java.lang.String.class; break;
             case 1: clase= java.lang.String.class; break;
         }
         return clase;
@@ -60,18 +60,18 @@ public class ModeloTablaNotificaciones extends AbstractTableModel{
         Object resultado=null;
 
         switch (col){
-            case 0: resultado= notis.get(row).getIdNotificacion(); break;
+            case 0: resultado= notis.get(row).getFecha(); break;
             case 1: resultado= notis.get(row).getMensaje(); break;
         }
         return resultado;
     }
 
-    public void setFilas(List<NotificacionBasica> notis){
+    public void setFilas(List<Notificacion> notis){
         this.notis=notis;
         fireTableDataChanged();
     }
 
-    public NotificacionBasica obtenerNotificacion(int i){
+    public Notificacion obtenerNotificacion(int i){
         return this.notis.get(i);
     }
     

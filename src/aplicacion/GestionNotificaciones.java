@@ -21,7 +21,7 @@ public class GestionNotificaciones {
         this.fbd = fbd;
     }
     
-    public List<NotificacionBasica> obtenerNotificaciones(String usuario){
+    public List<Notificacion> obtenerNotificaciones(String usuario){
         return fbd.obtenerNotificaciones(usuario);
     }
     

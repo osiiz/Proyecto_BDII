@@ -90,7 +90,7 @@ public class FachadaAplicacion {
         return ct.obtenerTareas(nombre, categoria, completada, usuario, descendente);
     }
     
-    public List<NotificacionBasica> obtenerNotificaciones(){
+    public List<Notificacion> obtenerNotificaciones(){
         return cn.obtenerNotificaciones(usuario.getIdUsuario());
     }
 
@@ -147,6 +147,13 @@ public class FachadaAplicacion {
     public void buscarPublicaciones(int idForo) {
         cf.buscarPublicaciones(idForo);
     }
-
+    
+    public List<Tarea> notiTareaBasica(){
+        return ct.notiTareaBasica(usuario.getIdUsuario());
+    }
+    
+    public List<Tarea> notiTareaProyecto(){
+        return ct.notiTareaProyecto(usuario.getIdUsuario());
+    }
 
 }

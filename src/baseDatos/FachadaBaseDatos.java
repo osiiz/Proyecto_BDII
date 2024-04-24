@@ -145,7 +145,15 @@ public class FachadaBaseDatos {
         daoForos.buscarPublicaciones(idForo);
     }
     
-    public List<NotificacionBasica> obtenerNotificaciones(String usuario){
+    public List<Notificacion> obtenerNotificaciones(String usuario){
         return daoNotis.obtenerNotificacionBasica(usuario);
+    }
+    
+    public List<Tarea> notiTareaBasica(String idUsuario){
+        return daoTareas.notiTareaBasica(idUsuario);
+    }
+    
+    public List<Tarea> notiTareaProyecto(String idUsuario){
+        return daoTareas.notiTareaProyecto(idUsuario);
     }
 }
