@@ -191,5 +191,12 @@ public class FachadaAplicacion {
     public List<Tarea> notiTareaProyecto(){
         return ct.notiTareaProyecto(usuario.getIdUsuario());
     }
-
+    
+    public void insertarNotificacionBasica(Notificacion n){
+        cn.insertarNotificacionBasica(n, usuario.getIdUsuario());
+    }
+    
+    public void insertarNotificacionProyecto(Notificacion n){
+        cn.insertarNotificacionProyecto(n, usuario.getIdUsuario());
+    }
 }

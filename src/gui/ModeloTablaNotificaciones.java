@@ -60,7 +60,7 @@ public class ModeloTablaNotificaciones extends AbstractTableModel{
         Object resultado=null;
 
         switch (col){
-            case 0: resultado= notis.get(row).getFecha(); break;
+            case 0: resultado= notis.get(row).getFecha().toString(); break;
             case 1: resultado= notis.get(row).getMensaje(); break;
         }
         return resultado;
