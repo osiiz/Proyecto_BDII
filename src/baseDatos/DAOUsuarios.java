@@ -157,41 +157,52 @@ public class DAOUsuarios extends AbstractDAO {
         return resultado;
     }
     
-    public void insertarUsuario(Usuario u){
+    public void insertarUsuario(Usuario u, String idAntiguo){
         Connection con;
         PreparedStatement stmUsuario=null;
+        PreparedStatement stmBorrar=null;
 
         con=super.getConexion();
 
         try {
             switch (u.getTipoUsuario().toString()){
                 case "Normal": 
+                    stmBorrar = con.prepareStatement("delete from usuario where id_usuario = ?");
                     stmUsuario=con.prepareStatement("insert into usuario(id_usuario, nombre, email, contraseña, direccion) "+
-                                              "values (?,?,?,?,?)");
+                                              "values (?,?,?,hash(?),?)");
+                    stmBorrar.setString(1, idAntiguo);
                     stmUsuario.setString(1, u.getIdUsuario());
                     stmUsuario.setString(2, u.getNombre());
                     stmUsuario.setString(3, u.getEmail());
                     stmUsuario.setString(4, u.getClave());
                     stmUsuario.setString(5, u.getDireccion());
+                    stmBorrar.executeUpdate();
                     stmUsuario.executeUpdate();
                     break;
                 case "Gestor": 
+                    stmBorrar = con.prepareStatement("delete from usuario where id_gestor = ?");
                     stmUsuario=con.prepareStatement("insert into usuario_gestor(id_gestor, nombre, email, contraseña, direccion) "+
-                                              "values (?,?,?,?,?)");
+                                              "values (?,?,?, hash(?),?)");
+                    stmBorrar.setString(1, idAntiguo);
                     stmUsuario.setString(1, u.getIdUsuario());
                     stmUsuario.setString(2, u.getNombre());
                     stmUsuario.setString(3, u.getEmail());
                     stmUsuario.setString(4, u.getClave());
                     stmUsuario.setString(5, u.getDireccion());
+                    stmBorrar.executeUpdate();
                     stmUsuario.executeUpdate();
                     break;
                 case "Administrador": 
+                    stmBorrar = con.prepareStatement("delete from usuario where id_administrador = ?");
                     stmUsuario=con.prepareStatement("insert into administrador(id_administrador, nombre, contraseña) "+
-                                              "values (?,?,?)");
+                                              "values (?,?,hash(?))");
+                    stmBorrar.setString(1, idAntiguo);
                     stmUsuario.setString(1, u.getIdUsuario());
                     stmUsuario.setString(2, u.getNombre());
                     stmUsuario.setString(3, u.getClave());
-                    stmUsuario.executeUpdate(); break;
+                    stmBorrar.executeUpdate();
+                    stmUsuario.executeUpdate(); 
+                    break;
             }
             
         } catch (SQLException e){
@@ -202,9 +213,12 @@ public class DAOUsuarios extends AbstractDAO {
         }
     }
     
-    public void modificarUsuario(Usuario u){
+    public void modificarUsuario(Usuario u, Boolean clave_modificada){
         Connection con;
         PreparedStatement stmUsuario=null;
+        String clave_mod;
+        if (clave_modificada) clave_mod = "hash(?) ";
+        else clave_mod = "?";
 
         con=super.getConexion();
 
@@ -212,17 +226,17 @@ public class DAOUsuarios extends AbstractDAO {
             switch (u.getTipoUsuario().toString()){
                 case "Normal":
                     stmUsuario=con.prepareStatement("update usuario set nombre=?, "+
-                                        "email=?, contraseña=?, direccion=? where id_usuario=?");
+                                        "email=?, contraseña = "+clave_mod+", direccion=? where id_usuario=?");
                     stmUsuario.setString(1, u.getNombre());
                     stmUsuario.setString(2, u.getEmail());
                     stmUsuario.setString(3, u.getClave());
-                    stmUsuario.setString(4,u.getDireccion());
+                    stmUsuario.setString(4, u.getDireccion());
                     stmUsuario.setString(5, u.getIdUsuario());
                     stmUsuario.executeUpdate();
                     break;
                 case "Gestor":
                     stmUsuario=con.prepareStatement("update usuario_gestor set nombre=?, "+
-                                        "email=?, contraseña=?, direccion=? where id_gestor=?");
+                                        "email=?, contraseña = "+clave_mod+", direccion=? where id_gestor=?");
                     stmUsuario.setString(1, u.getNombre());
                     stmUsuario.setString(2, u.getEmail());
                     stmUsuario.setString(3, u.getClave());
@@ -232,7 +246,7 @@ public class DAOUsuarios extends AbstractDAO {
                     break;
                 case "Administrador":
                     stmUsuario=con.prepareStatement("update administrador set nombre=?, "+
-                                        "contraseña=? where id_administrador=?");
+                                        "contraseña = "+clave_mod+" where id_administrador=?");
                     stmUsuario.setString(1, u.getNombre());
                     stmUsuario.setString(2, u.getClave());
                     stmUsuario.setString(3, u.getIdUsuario());

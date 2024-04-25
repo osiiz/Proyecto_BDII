@@ -36,6 +36,7 @@ public class VPrincipalAdmin extends javax.swing.JFrame {
         btnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Gestión");
 
         btnGestUsuarios.setText("Gestión Usuarios");
         btnGestUsuarios.addActionListener(new java.awt.event.ActionListener() {

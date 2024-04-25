@@ -58,8 +58,10 @@ public class VUsuario extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Gestión de Usuarios");
 
         jLabel2.setText("Nombre:");
 
@@ -71,12 +73,6 @@ public class VUsuario extends javax.swing.JDialog {
         });
 
         jLabel9.setText("Dirección:");
-
-        editaId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editaIdActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("Id:");
 
@@ -124,40 +120,57 @@ public class VUsuario extends javax.swing.JDialog {
 
         jLabel7.setText("Nombre:");
 
-        editaNombre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editaNombreActionPerformed(evt);
-            }
-        });
-
         jLabel1.setText("Id:");
 
         jLabel8.setText("E-mail:");
 
         jLabel6.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel6.setText("¡Completa todos los campos!");
+        jLabel6.setText("¡Tipo Incorrecto!");
+
+        jLabel10.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel10.setText("¡Completa todos los campos!");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(194, 194, 194)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel8)
-                                    .addComponent(jLabel4)))
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(buscaId, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 136, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(buscaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(94, 94, 94)
+                        .addComponent(buscaUsuario))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnNuevoUsuario)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnGuardarUsuario)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btnGuardarUsuario)
+                                .addGap(56, 56, 56)
+                                .addComponent(jLabel10))
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(editaId, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(editaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel4)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(editaClave, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
                                     .addComponent(editaEmail))
@@ -172,35 +185,14 @@ public class VUsuario extends javax.swing.JDialog {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(editaDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(21, 21, 21)
                                 .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                                 .addComponent(btnBorrarUsuario)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(editaId))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(editaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(buscaId, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jLabel2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(buscaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(buscaUsuario))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 648, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -226,26 +218,23 @@ public class VUsuario extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(editaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel8)
                     .addComponent(editaEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
-                    .addComponent(editaDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(editaDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNuevoUsuario)
                     .addComponent(btnGuardarUsuario)
                     .addComponent(btnBorrarUsuario)
                     .addComponent(btnSalir)
-                    .addComponent(jLabel6))
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel10))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void editaNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editaNombreActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editaNombreActionPerformed
 
     private void buscaUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscaUsuarioActionPerformed
         // TODO add your handling code here:
@@ -254,44 +243,51 @@ public class VUsuario extends javax.swing.JDialog {
     }//GEN-LAST:event_buscaUsuarioActionPerformed
 
     private void btnGuardarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarUsuarioActionPerformed
-        if (editaNombre.getText().equals("Normal") || editaNombre.getText().equals("Gestor") || editaNombre.getText().equals("")){
-            if(editaNombre.getText().equals("") || editaClave.getText().equals("") || 
-                editaEmail.getText().equals("") || editaDireccion.getText().equals("") || 
-                editaTipo.getText().equals("") || editaId.getText().equals("")){
+        if (!editaTipo.getText().equals("Normal") && !editaTipo.getText().equals("Gestor") && !editaTipo.getText().equals("Administrador")){
             jLabel6.setVisible(true);
             return;
-            }
-        }else{
-            if(editaNombre.getText().equals("") || editaClave.getText().equals("") || 
-            editaTipo.getText().equals("") || editaId.getText().equals("")){
+        }
+        if(editaNombre.getText().equals("") || editaClave.getText().equals("") || 
+           editaId.getText().equals("")){
             jLabel6.setVisible(true);
             return;
-            }
         }
         
         jLabel6.setVisible(false);
         
         Usuario us;
         try{
-        us=new Usuario(editaId.getText(), editaClave.getText(), editaNombre.getText(), 
-                editaDireccion.getText(), editaEmail.getText(), TipoUsuario.valueOf(editaTipo.getText()));
-        
-        ModeloTablaUsuarios m=(ModeloTablaUsuarios) tablaUsuarios.getModel();
-        
-        Boolean existeUsuario = false;
-        if (m.getRowCount() > 0){
-            for (int i = 0; i < m.getRowCount(); i++){
-                Usuario usActual = m.obtenerUsuario(i);
-                if (editaId.getText().equals(usActual.getIdUsuario())){
-                    existeUsuario = true;
+            us=new Usuario(editaId.getText(), editaClave.getText(), editaNombre.getText(), 
+                    editaDireccion.getText(), editaEmail.getText(), TipoUsuario.valueOf(editaTipo.getText()));
+
+            ModeloTablaUsuarios m=(ModeloTablaUsuarios) tablaUsuarios.getModel();
+
+            Boolean existeUsuario = false;
+            Boolean clave_modificada = true;
+            Boolean id_modificado = true;
+            String idAntiguo = "";
+            if (m.getRowCount() > 0){
+                for (int i = 0; i < m.getRowCount(); i++){
+                    Usuario usActual = m.obtenerUsuario(i);
+                    if (editaId.getText().equals(usActual.getIdUsuario())){
+                        existeUsuario = true;
+                        id_modificado = false;
+                        break;
+                    }
+                }
+                Usuario usActual = m.obtenerUsuario(tablaUsuarios.getSelectedRow());
+                if (editaClave.getText().equals(usActual.getClave())){
+                    clave_modificada = false;
+                }
+                if (id_modificado){
+                    idAntiguo = m.obtenerUsuario(tablaUsuarios.getSelectedRow()).getIdUsuario();
                 }
             }
-        }
-        
-        fa.actualizarUsuario(us, existeUsuario);
-        buscaUsuario();
-        btnBorrarUsuario.setEnabled(true);
-        
+
+            fa.actualizarUsuario(us, existeUsuario, clave_modificada, idAntiguo);
+            buscaUsuario();
+            btnBorrarUsuario.setEnabled(true);
+
         }catch(Exception exc){
             this.fa.muestraExcepcion(exc.getMessage());
         }
@@ -301,10 +297,6 @@ public class VUsuario extends javax.swing.JDialog {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
-
-    private void editaIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editaIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_editaIdActionPerformed
 
     private void tablaUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaUsuariosMouseClicked
         ModeloTablaUsuarios m=(ModeloTablaUsuarios) tablaUsuarios.getModel();
@@ -322,7 +314,12 @@ public class VUsuario extends javax.swing.JDialog {
     }//GEN-LAST:event_tablaUsuariosMouseClicked
 
     private void btnNuevoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoUsuarioActionPerformed
-        
+        editaNombre.setText("");
+        editaId.setText("");
+        editaEmail.setText("");
+        editaTipo.setText("");
+        editaClave.setText("");
+        editaDireccion.setText("");
     }//GEN-LAST:event_btnNuevoUsuarioActionPerformed
 
     private void btnBorrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarUsuarioActionPerformed
@@ -349,6 +346,7 @@ public class VUsuario extends javax.swing.JDialog {
     private javax.swing.JTextField editaNombre;
     private javax.swing.JTextField editaTipo;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

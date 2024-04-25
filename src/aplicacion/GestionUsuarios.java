@@ -34,12 +34,12 @@ public class GestionUsuarios {
         return fbd.consultarUsuarios(id, nombre);
    }
   
-  public void actualizarUsuario(Usuario u, Boolean existeUsuario){
+  public void actualizarUsuario(Usuario u, Boolean existeUsuario , Boolean clave_modificada, String idAntiguo){
       
       if (existeUsuario){
-          fbd.modificarUsuario(u);
+          fbd.modificarUsuario(u, clave_modificada);
       }else{
-          fbd.insertarUsuario(u);
+          fbd.insertarUsuario(u, idAntiguo);
       }
   }
   

@@ -70,8 +70,8 @@ public class FachadaAplicacion {
         return cu.obtenerUsuarios(id, nombre);
     }
 
-    public void actualizarUsuario(Usuario u, Boolean existeUsuario){
-        cu.actualizarUsuario(u, existeUsuario);
+    public void actualizarUsuario(Usuario u, Boolean existeUsuario, Boolean clave_cambiada, String idAntiguo){
+        cu.actualizarUsuario(u, existeUsuario, clave_cambiada, idAntiguo);
     }
 
     public void borrarUsuario(Usuario usuario){

@@ -79,12 +79,12 @@ public class FachadaBaseDatos {
         return daoUsuarios.consultarUsuarios(id,nombre);
     }
     
-    public void insertarUsuario(Usuario u){
-        daoUsuarios.insertarUsuario(u);
+    public void insertarUsuario(Usuario u, String idAntiguo){
+        daoUsuarios.insertarUsuario(u, idAntiguo);
     }
     
-    public void modificarUsuario(Usuario u){
-        daoUsuarios.modificarUsuario(u);
+    public void modificarUsuario(Usuario u, Boolean clave_modificada){
+        daoUsuarios.modificarUsuario(u, clave_modificada);
     }
 
     public void borrarUsuario(Usuario usuario){
