@@ -11,8 +11,9 @@
 package gui;
 import aplicacion.*;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Random;
 
 /**
  *
@@ -281,8 +282,18 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
     }
     
     public void añadirNotificaciones(){
+        List<String> listaDeStrings = new ArrayList<>();
+        int min = 0;
+        int max = 3;
+        Random random = new Random();
+        int numeroAleatorio = random.nextInt(max - min + 1) + min;
+        listaDeStrings.add("La tarea '%s' termina pronto, ¡date prisa!");
+        listaDeStrings.add("Queda 1 día para que la tarea '%s' termine, ¡ánimo!");
+        listaDeStrings.add("¿Vas a dejar que la pereza te domine? ¡¡¡Acaba '%s'!!!");
+        listaDeStrings.add("Todo el mundo confía en ti, tu puedes acabar '%s'");
+        
         for (Tarea tarea: fa.notiTareaBasica()){
-            String m = String.format("La tarea '%s' termina pronto, ¡date prisa!", tarea.getNombre());
+            String m = String.format(listaDeStrings.get(numeroAleatorio), tarea.getNombre());
             LocalDate fechaActual = LocalDate.now();
             Notificacion n = new Notificacion(-1, m, false, fechaActual, tarea.getIdTarea(), TipoNotificacion.Basica);
             fa.insertarNotificacionBasica(n);
