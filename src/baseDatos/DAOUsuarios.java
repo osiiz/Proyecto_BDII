@@ -33,19 +33,19 @@ public class DAOUsuarios extends AbstractDAO {
         try {
             stmUsuario = con.prepareStatement("select id_usuario, contraseña, nombre, direccion, email "+
                                             "from usuario "+
-                                            "where id_usuario = ? and contraseña = ?;");
+                                            "where id_usuario = ? and contraseña = hash(?);");
             stmUsuario.setString(1, idUsuario);
             stmUsuario.setString(2, clave);
 
             stmGestor = con.prepareStatement("select id_gestor, contraseña, nombre, direccion, email "+
                                             "from usuario_gestor "+
-                                            "where id_gestor = ? and contraseña = ?;");
+                                            "where id_gestor = ? and contraseña = hash(?);");
             stmGestor.setString(1, idUsuario);
             stmGestor.setString(2, clave);
 
             stmAdmin = con.prepareStatement("select id_administrador, contraseña, nombre "+
                                             "from administrador "+
-                                            "where id_administrador = ? and contraseña = ?;");
+                                            "where id_administrador = ? and contraseña = hash(?);");
             stmAdmin.setString(1, idUsuario);
             stmAdmin.setString(2, clave);
 

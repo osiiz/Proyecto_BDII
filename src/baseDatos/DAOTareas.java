@@ -281,7 +281,8 @@ public class DAOTareas extends AbstractDAO {
             stmTarea = con.prepareStatement("select id_tarea, nombre, completada, fecha_fin "
                     + "from tarea_basica tb "
                     + "where id_usuario = ? "
-                    + "and fecha_fin - CURRENT_DATE in (0,1)");
+                    + "and fecha_fin - CURRENT_DATE in (0,1) "
+                    + "AND id_tarea NOT IN (SELECT tb2.id_tarea FROM tarea_basica tb2 JOIN notificacion_basica nb on (tb2.id_tarea = nb.id_tarea))");
             stmTarea.setString(1, idUsuario);
             rsTarea = stmTarea.executeQuery();
             while (rsTarea.next()){

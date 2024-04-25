@@ -21,6 +21,7 @@ public class VNotificaciones extends javax.swing.JDialog {
         ModeloTablaNotificaciones m;
 
         m = (ModeloTablaNotificaciones) tablaNotis.getModel();
+        
         m.setFilas(fa.obtenerNotificaciones());
         if (m.getRowCount() > 0) {
             tablaNotis.setRowSelectionInterval(0, 0);
@@ -28,6 +29,8 @@ public class VNotificaciones extends javax.swing.JDialog {
         } else {
             btnBorrar.setEnabled(false);
         }
+        
+        tablaNotis.getColumnModel().getColumn(0).setMaxWidth(110);
     }
 
     /**
@@ -64,6 +67,7 @@ public class VNotificaciones extends javax.swing.JDialog {
         });
 
         tablaNotis.setModel(new ModeloTablaNotificaciones());
+        tablaNotis.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
         tablaNotis.setColumnSelectionAllowed(true);
         tablaNotis.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaNotis);

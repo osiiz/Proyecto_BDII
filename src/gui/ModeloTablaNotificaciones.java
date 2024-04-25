@@ -75,4 +75,6 @@ public class ModeloTablaNotificaciones extends AbstractTableModel{
         return this.notis.get(i);
     }
     
+    
+    
 }
