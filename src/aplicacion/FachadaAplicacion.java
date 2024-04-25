@@ -199,4 +199,12 @@ public class FachadaAplicacion {
     public void insertarNotificacionProyecto(Notificacion n){
         cn.insertarNotificacionProyecto(n, usuario.getIdUsuario());
     }
+    
+    public void borrarNotificacionBasica(int idNotificacion){
+        cn.borrarNotificacionBasica(idNotificacion);
+    }
+    
+    public void borrarNotificacionProyecto(int idNotificacion){
+        cn.borrarNotificacionProyecto(idNotificacion);
+    }
 }

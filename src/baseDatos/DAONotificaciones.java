@@ -9,7 +9,6 @@ import java.util.List;
 import aplicacion.Notificacion;
 import aplicacion.TipoNotificacion;
 import java.sql.*;
-import java.time.LocalDate;
 
 /**
  *
@@ -126,6 +125,40 @@ public class DAONotificaciones extends AbstractDAO{
           this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         }finally{
           try {stmNoti.close();} catch (SQLException e){System.out.println("Imposible cerrar cursores");}
+        }
+    }
+    
+    public void borrarNotificacionBasica(int idNotificacion) {
+        Connection con;
+        PreparedStatement stmBorrar=null;
+
+        con=super.getConexion();
+        
+        try{
+            stmBorrar = con.prepareStatement("delete from Notificacion_basica where id_notificacion = ?");
+            stmBorrar.setInt(1, idNotificacion);
+            stmBorrar.executeUpdate();
+            stmBorrar.close();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
+        }
+    }
+    
+    public void borrarNotificacionProyecto(int idNotificacion) {
+        Connection con;
+        PreparedStatement stmBorrar=null;
+
+        con=super.getConexion();
+        
+        try{
+            stmBorrar = con.prepareStatement("delete from Notificacion_de_proyecto where id_notificacion = ?");
+            stmBorrar.setInt(1, idNotificacion);
+            stmBorrar.executeUpdate();
+            stmBorrar.close();
+        }catch (SQLException e){
+            System.out.println(e.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(e.getMessage());
         }
     }
 }

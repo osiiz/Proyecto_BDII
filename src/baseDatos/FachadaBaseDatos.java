@@ -178,4 +178,12 @@ public class FachadaBaseDatos {
     public void insertarNotificacionProyecto(Notificacion n, String idUsuario){
         daoNotis.insertarNotificacionProyecto(n, idUsuario);
     }
+    
+    public void borrarNotificacionBasica(int idNotificacion){
+        daoNotis.borrarNotificacionBasica(idNotificacion);
+    }
+    
+    public void borrarNotificacionProyecto(int idNotificacion){
+        daoNotis.borrarNotificacionProyecto(idNotificacion);
+    }
 }
