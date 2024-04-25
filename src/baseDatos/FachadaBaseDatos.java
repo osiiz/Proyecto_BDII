@@ -66,8 +66,6 @@ public class FachadaBaseDatos {
             fa.muestraExcepcion(i.getMessage());
         }
         
-        
-        
     }
     
     
@@ -172,5 +170,12 @@ public class FachadaBaseDatos {
     
     public List<Tarea> notiTareaProyecto(String idUsuario){
         return daoTareas.notiTareaProyecto(idUsuario);
+    }
+    
+    public void insertarNotificacionBasica(Notificacion n, String idUsuario){
+        daoNotis.insertarNotificacionBasica(n, idUsuario);
+    }
+    public void insertarNotificacionProyecto(Notificacion n, String idUsuario){
+        daoNotis.insertarNotificacionProyecto(n, idUsuario);
     }
 }

@@ -9,6 +9,7 @@ import java.util.List;
 import aplicacion.Notificacion;
 import aplicacion.TipoNotificacion;
 import java.sql.*;
+import java.time.LocalDate;
 
 /**
  *
@@ -51,10 +52,10 @@ public class DAONotificaciones extends AbstractDAO{
             while (rsNotis.next()){
                 if(rsNotis.getString("Tipo").equals("Basica"))
                     notiActual = new Notificacion(rsNotis.getInt("id_notificacion"), rsNotis.getString("mensaje"), rsNotis.getBoolean("leida"), 
-                        rsNotis.getString("fecha"),rsNotis.getInt("id_tarea"), TipoNotificacion.Basica);
+                        rsNotis.getDate("fecha").toLocalDate(),rsNotis.getInt("id_tarea"), TipoNotificacion.Basica);
                 else
                     notiActual = new Notificacion(rsNotis.getInt("id_notificacion"), rsNotis.getString("mensaje"), rsNotis.getBoolean("leida"), 
-                        rsNotis.getString("fecha") ,rsNotis.getInt("id_tarea"), TipoNotificacion.Proyecto);
+                        rsNotis.getDate("fecha").toLocalDate() ,rsNotis.getInt("id_tarea"), TipoNotificacion.Proyecto);
 
                 resultado.add(notiActual);
             }
@@ -81,7 +82,7 @@ public class DAONotificaciones extends AbstractDAO{
                                               "values (?,?,?,?,?)");
                     stmNoti.setString(1, n.getMensaje());
                     stmNoti.setBoolean(2, n.isLeida());
-                    stmNoti.setString(3, n.getFecha());
+                    stmNoti.setDate(3, Date.valueOf(n.getFecha()));
                     stmNoti.setInt(4, n.getIdTarea());
                     stmNoti.setString(5, idUsuario);
                     
@@ -108,7 +109,7 @@ public class DAONotificaciones extends AbstractDAO{
                                               "values (?,?,?,?)");
                     stmNoti.setString(1, n.getMensaje());
                     stmNoti.setBoolean(2, n.isLeida());
-                    stmNoti.setString(3, n.getFecha());
+                    stmNoti.setDate(3, Date.valueOf(n.getFecha()));
                     stmNoti.setInt(4, n.getIdTarea());
                     
                     stmNoti.executeUpdate();

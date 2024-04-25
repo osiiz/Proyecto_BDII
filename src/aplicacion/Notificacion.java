@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package aplicacion;
+import java.time.LocalDate;
 /**
  *
  * @author alumnogreibd
@@ -11,11 +12,11 @@ public class Notificacion {
     private int idNotificacion;
     private String mensaje;
     private boolean leida;
-    private String fecha;
+    private LocalDate fecha;
     private int idTarea;
     private TipoNotificacion tipo;
 
-    public Notificacion(int idNotificacion, String mensaje, boolean leida, String fecha, int idTarea, TipoNotificacion tipo) {
+    public Notificacion(int idNotificacion, String mensaje, boolean leida, LocalDate fecha, int idTarea, TipoNotificacion tipo) {
         this.idNotificacion = idNotificacion;
         this.mensaje = mensaje;
         this.leida = leida;
@@ -24,7 +25,7 @@ public class Notificacion {
         this.tipo = tipo;
     }
 
-    public String getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 

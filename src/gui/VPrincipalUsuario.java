@@ -284,17 +284,15 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
         for (Tarea tarea: fa.notiTareaBasica()){
             String m = String.format("La tarea '%s' termina pronto, ¡date prisa!", tarea.getNombre());
             LocalDate fechaActual = LocalDate.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("DD-MM-YYYY");
-            String fechaString = fechaActual.format(formatter);
-            Notificacion n = new Notificacion(-1, m, false, fechaString, tarea.getIdTarea(), TipoNotificacion.Basica);
+            Notificacion n = new Notificacion(-1, m, false, fechaActual, tarea.getIdTarea(), TipoNotificacion.Basica);
+            fa.insertarNotificacionBasica(n);
             
         }
         for (Tarea tarea: fa.notiTareaProyecto()){
             String m = String.format("La tarea '%s' termina pronto, ¡date prisa!", tarea.getNombre());
             LocalDate fechaActual = LocalDate.now();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("DD-MM-YYYY");
-            String fechaString = fechaActual.format(formatter);
-            Notificacion n = new Notificacion(-1, m, false, fechaString, tarea.getIdTarea(), TipoNotificacion.Proyecto);
+            Notificacion n = new Notificacion(-1, m, false, fechaActual, tarea.getIdTarea(), TipoNotificacion.Proyecto);
+            fa.insertarNotificacionProyecto(n);
             
         }
     }

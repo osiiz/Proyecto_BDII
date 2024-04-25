@@ -25,4 +25,11 @@ public class GestionNotificaciones {
         return fbd.obtenerNotificaciones(usuario);
     }
     
+    public void insertarNotificacionBasica(Notificacion n, String idUsuario){
+        fbd.insertarNotificacionBasica(n, idUsuario);
+    }
+    
+    public void insertarNotificacionProyecto(Notificacion n, String idUsuario){
+        fbd.insertarNotificacionProyecto(n, idUsuario);
+    }
 }
