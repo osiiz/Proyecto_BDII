@@ -40,11 +40,15 @@ public class VTarea extends javax.swing.JFrame {
         ModeloListaStrings mListaRC=new ModeloListaStrings();
         listaCategorias.setModel(mListaRC);
         mListaRC.setElementos(restoCategorias);
+        
+        ModeloListaStrings mLRC=new ModeloListaStrings();
+        listaCategoriasActuales.setModel(mLRC);
+        mLRC.setElementos(new ArrayList<>());
         btnAnhadirCategoria.setEnabled(false);
         
         btnQuitarCategoria.setEnabled(false);
         txtId.setEditable(false);
-        //listaCategoriasActuales.setEditable(false);
+        
     }
     
     public VTarea(FachadaAplicacion fa, List<String> restoCategorias, Tarea t, FachadaBaseDatos fbd){
@@ -78,7 +82,6 @@ public class VTarea extends javax.swing.JFrame {
         
         btnQuitarCategoria.setEnabled(true);
         txtId.setEditable(false);
-        //listaCategoriasActuales.setEditable(false);
     }
 
     /**

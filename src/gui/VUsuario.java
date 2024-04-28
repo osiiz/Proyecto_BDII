@@ -22,7 +22,8 @@ public class VUsuario extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.fa = fa;
-        jLabel6.setVisible(false);
+        labelTipo.setVisible(false);
+        labelCompleta.setVisible(false);
     }
 
     /**
@@ -57,8 +58,8 @@ public class VUsuario extends javax.swing.JDialog {
         editaNombre = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        labelTipo = new javax.swing.JLabel();
+        labelCompleta = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gestión de Usuarios");
@@ -124,11 +125,11 @@ public class VUsuario extends javax.swing.JDialog {
 
         jLabel8.setText("E-mail:");
 
-        jLabel6.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel6.setText("¡Tipo Incorrecto!");
+        labelTipo.setForeground(new java.awt.Color(255, 0, 0));
+        labelTipo.setText("¡Tipo Incorrecto!");
 
-        jLabel10.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel10.setText("¡Completa todos los campos!");
+        labelCompleta.setForeground(new java.awt.Color(255, 0, 0));
+        labelCompleta.setText("¡Completa todos los campos!");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -158,7 +159,7 @@ public class VUsuario extends javax.swing.JDialog {
                                 .addGap(18, 18, 18)
                                 .addComponent(btnGuardarUsuario)
                                 .addGap(56, 56, 56)
-                                .addComponent(jLabel10))
+                                .addComponent(labelCompleta))
                             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -186,7 +187,7 @@ public class VUsuario extends javax.swing.JDialog {
                                         .addComponent(editaDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(21, 21, 21)
-                                .addComponent(jLabel6)
+                                .addComponent(labelTipo)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                                 .addComponent(btnBorrarUsuario)
                                 .addGap(18, 18, 18)
@@ -228,8 +229,8 @@ public class VUsuario extends javax.swing.JDialog {
                     .addComponent(btnGuardarUsuario)
                     .addComponent(btnBorrarUsuario)
                     .addComponent(btnSalir)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel10))
+                    .addComponent(labelTipo)
+                    .addComponent(labelCompleta))
                 .addContainerGap())
         );
 
@@ -244,16 +245,17 @@ public class VUsuario extends javax.swing.JDialog {
 
     private void btnGuardarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarUsuarioActionPerformed
         if (!editaTipo.getText().equals("Normal") && !editaTipo.getText().equals("Gestor") && !editaTipo.getText().equals("Administrador")){
-            jLabel6.setVisible(true);
+            labelTipo.setVisible(true);
             return;
         }
         if(editaNombre.getText().equals("") || editaClave.getText().equals("") || 
            editaId.getText().equals("")){
-            jLabel6.setVisible(true);
+            labelCompleta.setVisible(true);
             return;
         }
         
-        jLabel6.setVisible(false);
+        labelTipo.setVisible(false);
+        labelCompleta.setVisible(false);
         
         Usuario us;
         try{
@@ -346,16 +348,16 @@ public class VUsuario extends javax.swing.JDialog {
     private javax.swing.JTextField editaNombre;
     private javax.swing.JTextField editaTipo;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel labelCompleta;
+    private javax.swing.JLabel labelTipo;
     private javax.swing.JTable tablaUsuarios;
     // End of variables declaration//GEN-END:variables
    

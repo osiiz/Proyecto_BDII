@@ -180,7 +180,7 @@ public class DAOUsuarios extends AbstractDAO {
                     stmUsuario.executeUpdate();
                     break;
                 case "Gestor": 
-                    stmBorrar = con.prepareStatement("delete from usuario where id_gestor = ?");
+                    stmBorrar = con.prepareStatement("delete from usuario_gestor where id_gestor = ?");
                     stmUsuario=con.prepareStatement("insert into usuario_gestor(id_gestor, nombre, email, contraseña, direccion) "+
                                               "values (?,?,?, hash(?),?)");
                     stmBorrar.setString(1, idAntiguo);
@@ -193,7 +193,7 @@ public class DAOUsuarios extends AbstractDAO {
                     stmUsuario.executeUpdate();
                     break;
                 case "Administrador": 
-                    stmBorrar = con.prepareStatement("delete from usuario where id_administrador = ?");
+                    stmBorrar = con.prepareStatement("delete from administrador where id_administrador = ?");
                     stmUsuario=con.prepareStatement("insert into administrador(id_administrador, nombre, contraseña) "+
                                               "values (?,?,hash(?))");
                     stmBorrar.setString(1, idAntiguo);
