@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package gui;
+import aplicacion.TipoNotificacion;
 
 /**
  *
@@ -111,7 +112,11 @@ public class VNotificaciones extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBorrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarActionPerformed
-        
+        ModeloTablaNotificaciones mtn = (ModeloTablaNotificaciones) tablaNotis.getModel();
+        TipoNotificacion tipo;
+        tipo = mtn.obtenerNotificacion(tablaNotis.getSelectedRow()).getTipo();
+        if(tipo.equals(TipoNotificacion.Basica)) fa.borrarNotificacionBasica(mtn.obtenerNotificacion(tablaNotis.getSelectedRow()).getIdNotificacion());
+        else fa.borrarNotificacionProyecto(mtn.obtenerNotificacion(tablaNotis.getSelectedRow()).getIdNotificacion());
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
