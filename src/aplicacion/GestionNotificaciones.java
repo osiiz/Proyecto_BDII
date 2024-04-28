@@ -32,4 +32,12 @@ public class GestionNotificaciones {
     public void insertarNotificacionProyecto(Notificacion n, String idUsuario){
         fbd.insertarNotificacionProyecto(n, idUsuario);
     }
+    
+    public void borrarNotificacionBasica(int idNotificacion){
+        fbd.borrarNotificacionBasica(idNotificacion);
+    }
+    
+    public void borrarNotificacionProyecto(int idNotificacion){
+        fbd.borrarNotificacionProyecto(idNotificacion);
+    }
 }

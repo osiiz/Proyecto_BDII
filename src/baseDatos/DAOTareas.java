@@ -314,7 +314,8 @@ public class DAOTareas extends AbstractDAO {
                     + "where s.id_proyecto = p.id_proyecto "
                     + "and tp.id_seccion = s.id_seccion "
                     + "and p.id_usuario = ? "
-                    + "and fecha_fin - CURRENT_DATE <= 1");
+                    + "and fecha_fin - CURRENT_DATE <= 1"
+                    + "AND id_tarea NOT IN (SELECT tp2.id_tarea FROM tarea_de_proyecto tp2 JOIN notificacion_de_proyecto np on (tp2.id_tarea = np.id_tarea))");
             stmTarea.setString(1, idUsuario);
             rsTarea = stmTarea.executeQuery();
             while (rsTarea.next()){
