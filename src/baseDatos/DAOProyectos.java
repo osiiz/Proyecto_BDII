@@ -29,9 +29,6 @@ public class DAOProyectos extends AbstractDAO {
         Proyecto proyectoActual;
         
         
-        //Quieres probar a ver si das a poner lo de prohibir usar los botones de entrar si no has seleccionado un elemento de la lista
-        
-        
         con=this.getConexion();
         
         String consulta = "select * from proyecto as p " +
