@@ -25,6 +25,7 @@ public class FachadaBaseDatos {
     private DAOForos daoForos;
     private DAOProyectos daoProyectos;
     private DAONotificaciones daoNotis;
+    private DAOCategorias daoCategorias;
 
 
     public FachadaBaseDatos (aplicacion.FachadaAplicacion fa){
@@ -56,6 +57,7 @@ public class FachadaBaseDatos {
             daoForos = new DAOForos(conexion, fa);
             daoProyectos = new DAOProyectos(conexion,fa);
             daoNotis = new DAONotificaciones(conexion, fa);
+            daoCategorias = new DAOCategorias(conexion, fa);
 
 
         } catch (FileNotFoundException f){
@@ -185,5 +187,21 @@ public class FachadaBaseDatos {
     
     public void borrarNotificacionProyecto(int idNotificacion){
         daoNotis.borrarNotificacionProyecto(idNotificacion);
+    }
+    
+    public List<Categoria> consultarCategorias(String nombre){
+        return daoCategorias.consultarCategorias(nombre);
+    }
+    
+    public void insertarCategoria(Categoria c){
+        daoCategorias.insertarCategoria(c);
+    }
+    
+    public void borrarCategoria(Categoria c){
+        daoCategorias.borrarCategoria(c);
+    }
+    
+    public void editarCategoria(String nombreAntiguo, String nuevoNombre){
+        daoCategorias.editarCategoria(nombreAntiguo, nuevoNombre);
     }
 }

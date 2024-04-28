@@ -21,7 +21,8 @@ public class FachadaAplicacion {
     GestionTareas ct;
     GestionNotificaciones cn;
     GestionForos cf;
-    GestionProyectos gp;
+    GestionProyectos cp;
+    GestionCategorias cc;
     Usuario usuario;
     
     
@@ -32,7 +33,8 @@ public class FachadaAplicacion {
       ct = new GestionTareas(fgui, fbd);
       cn = new GestionNotificaciones(fgui, fbd);
       cf = new GestionForos(fgui, fbd);
-      gp = new GestionProyectos(fgui,fbd);
+      cp = new GestionProyectos(fgui,fbd);
+      cc = new GestionCategorias(fgui, fbd);
       usuario = null;
     }
 
@@ -176,13 +178,12 @@ public class FachadaAplicacion {
     }
 
     public ArrayList<Proyecto> obtenerProyectos(Usuario usuario) {
-        return gp.obtenerProyectos(usuario);
+        return cp.obtenerProyectos(usuario);
     }
 
     public void nuevoVProyecto(Proyecto p) {
         fgui.nuevoVProyecto(p);
     }
-       
     
     public List<Tarea> notiTareaBasica(){
         return ct.notiTareaBasica(usuario.getIdUsuario());
@@ -206,5 +207,24 @@ public class FachadaAplicacion {
     
     public void borrarNotificacionProyecto(int idNotificacion){
         cn.borrarNotificacionProyecto(idNotificacion);
+    }
+    
+    public List<Categoria> obtenerCategorias(String nombre){
+        return cc.obtenerCategorias(nombre);
+    }
+    
+    public void insertarCategoria(Categoria c, Boolean existeCategoria){
+        cc.insertarCategoria(c, existeCategoria);
+    }
+    public void borrarCategoria(Categoria c){
+        cc.borrarCategoria(c);
+    }
+    
+    public void editarCategoria(String nombreAntiguo, String nuevoNombre){
+        cc.editarCategoria(nombreAntiguo, nuevoNombre);
+    }
+
+    public void ventanaCategorias() {
+        fgui.ventanaCategorias();
     }
 }

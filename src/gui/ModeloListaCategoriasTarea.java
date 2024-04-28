@@ -14,10 +14,10 @@ import java.util.ArrayList;
  * @author alumnogreibd
  */
 
-public class ModeloListaCategorias extends javax.swing.AbstractListModel {
+public class ModeloListaCategoriasTarea extends javax.swing.AbstractListModel {
     List<Categoria> elementos;
     
-    public ModeloListaCategorias(){
+    public ModeloListaCategoriasTarea(){
         this.elementos=new ArrayList<>();
     }
 
@@ -55,5 +55,6 @@ public class ModeloListaCategorias extends javax.swing.AbstractListModel {
         }
         return nombres;
     }
+    
     
 }

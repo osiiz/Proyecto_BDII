@@ -118,6 +118,12 @@ public class FachadaGui {
        vP.setVisible(true);
    }
 
+    public void ventanaCategorias() {
+        VCategorias vc;
+        vc = new VCategorias(vp, true, fa);
+        vc.setVisible(true);
+    }
+
     
   
 }

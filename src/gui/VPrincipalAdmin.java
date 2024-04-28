@@ -46,6 +46,11 @@ public class VPrincipalAdmin extends javax.swing.JFrame {
         });
 
         btnGestCategorias.setText("Gestión Categorías");
+        btnGestCategorias.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnGestCategoriasMouseClicked(evt);
+            }
+        });
 
         btnSalir.setText("Salir");
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -91,6 +96,10 @@ public class VPrincipalAdmin extends javax.swing.JFrame {
     private void btnGestUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestUsuariosActionPerformed
         fa.ventanaUsuario();
     }//GEN-LAST:event_btnGestUsuariosActionPerformed
+
+    private void btnGestCategoriasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestCategoriasMouseClicked
+        fa.ventanaCategorias();
+    }//GEN-LAST:event_btnGestCategoriasMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
