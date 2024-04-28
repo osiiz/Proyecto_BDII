@@ -107,8 +107,8 @@ public class FachadaGui {
     }
 
     public void nuevoVPProyecto() {
-       VPrincipalProyectos vpp;
-       vpp = new VPrincipalProyectos(fa,usuario);
+       VBuscarProyectos vpp;
+       vpp = new VBuscarProyectos(fa,usuario);
        vpp.setVisible(true);
     }
     

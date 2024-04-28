@@ -11,7 +11,7 @@ import java.util.*;
  *
  * @author alumnogreibd
  */
-public class VPrincipalProyectos extends javax.swing.JFrame {
+public class VBuscarProyectos extends javax.swing.JFrame {
     aplicacion.FachadaAplicacion fa;
     Usuario usuario;
     ArrayList<Proyecto> proyectos;
@@ -20,7 +20,7 @@ public class VPrincipalProyectos extends javax.swing.JFrame {
      * @param fa
      * @param usuario
      */
-    public VPrincipalProyectos(FachadaAplicacion fa,Usuario usuario) {
+    public VBuscarProyectos(FachadaAplicacion fa,Usuario usuario) {
         this.fa = fa;
         this.usuario = usuario;
         initComponents();
@@ -38,8 +38,8 @@ public class VPrincipalProyectos extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         lProyectos = new javax.swing.JList<>();
-        bEntrar = new javax.swing.JButton();
-        bSalir = new javax.swing.JButton();
+        btnEntrar = new javax.swing.JButton();
+        btnSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Proyectos");
@@ -49,17 +49,17 @@ public class VPrincipalProyectos extends javax.swing.JFrame {
         lProyectos.setAlignmentX(5.0F);
         jScrollPane1.setViewportView(lProyectos);
 
-        bEntrar.setText("Entrar");
-        bEntrar.addActionListener(new java.awt.event.ActionListener() {
+        btnEntrar.setText("Entrar");
+        btnEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bEntrarActionPerformed(evt);
+                btnEntrarActionPerformed(evt);
             }
         });
 
-        bSalir.setText("Salir");
-        bSalir.addActionListener(new java.awt.event.ActionListener() {
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bSalirActionPerformed(evt);
+                btnSalirActionPerformed(evt);
             }
         });
 
@@ -68,15 +68,13 @@ public class VPrincipalProyectos extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(253, Short.MAX_VALUE)
-                        .addComponent(bEntrar)
+                        .addComponent(btnEntrar)
                         .addGap(18, 18, 18)
-                        .addComponent(bSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(23, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
@@ -86,20 +84,20 @@ public class VPrincipalProyectos extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bEntrar)
-                    .addComponent(bSalir))
+                    .addComponent(btnEntrar)
+                    .addComponent(btnSalir))
                 .addGap(14, 14, 14))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSalirActionPerformed
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         // TODO add your handling code here:
         this.dispose();
-    }//GEN-LAST:event_bSalirActionPerformed
+    }//GEN-LAST:event_btnSalirActionPerformed
 
-    private void bEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEntrarActionPerformed
+    private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
         Proyecto p=null;
         ModeloListaStrings modelo;
         modelo=(ModeloListaStrings) lProyectos.getModel();
@@ -110,12 +108,12 @@ public class VPrincipalProyectos extends javax.swing.JFrame {
         for(Proyecto pr: proyectos) if((pr.getNProyecto()+" ["+pr.getIdProyecto()+"]").equals(aux)) p= pr;
         fa.nuevoVProyecto(p);
         
-    }//GEN-LAST:event_bEntrarActionPerformed
+    }//GEN-LAST:event_btnEntrarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bEntrar;
-    private javax.swing.JButton bSalir;
+    private javax.swing.JButton btnEntrar;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<String> lProyectos;
     // End of variables declaration//GEN-END:variables
