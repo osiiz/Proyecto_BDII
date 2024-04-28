@@ -251,6 +251,7 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
 
     private void btnNuevaTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevaTareaActionPerformed
         fa.nuevaTarea();
+        
     }//GEN-LAST:event_btnNuevaTareaActionPerformed
 
     private void btnBorrarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarTareaActionPerformed
@@ -265,6 +266,10 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
 
     private void btnNotificacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNotificacionActionPerformed
         fa.ventanaNotificaciones();
+        btnNotificacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/bell.png")));
+        if (!fa.obtenerNotificaciones().isEmpty()){
+            btnNotificacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/bell_act.png")));
+        }
     }//GEN-LAST:event_btnNotificacionActionPerformed
 
     private void btnProyectosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProyectosActionPerformed
