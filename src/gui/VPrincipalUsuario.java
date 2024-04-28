@@ -11,6 +11,7 @@
 package gui;
 import aplicacion.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Random;
@@ -47,6 +48,10 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
             btnNotificacion.setEnabled(false);
         }
         
+        if (!fa.obtenerNotificaciones().isEmpty()){
+            btnNotificacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/bell_act.png")));
+        }
+        
     }
 
     /**
@@ -74,8 +79,7 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
         btnNotificacion = new javax.swing.JButton();
         selecAscDesc = new javax.swing.JComboBox<>();
         btnBorrarTarea = new javax.swing.JButton();
-        jMenuBar2 = new javax.swing.JMenuBar();
-        btnProyectos = new javax.swing.JMenu();
+        btnProyectos = new javax.swing.JButton();
 
         jScrollPane2.setViewportView(jEditorPane1);
 
@@ -124,7 +128,7 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
 
         jLabel3.setText("Completada:");
 
-        btnNotificacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/bell (1).png"))); // NOI18N
+        btnNotificacion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gui/bell.png"))); // NOI18N
         btnNotificacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNotificacionActionPerformed(evt);
@@ -141,14 +145,11 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
         });
 
         btnProyectos.setText("Proyectos");
-        btnProyectos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnProyectosMouseClicked(evt);
+        btnProyectos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProyectosActionPerformed(evt);
             }
         });
-        jMenuBar2.add(btnProyectos);
-
-        setJMenuBar(jMenuBar2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -159,7 +160,7 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 599, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(btnNuevaTarea)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -167,6 +168,8 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(btnEditarTarea)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnProyectos)
+                                .addGap(75, 75, 75)
                                 .addComponent(btnSalir))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(etiquetaTitulo)
@@ -174,20 +177,20 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(buscaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 451, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(buscaNombre))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(selecAscDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(176, 176, 176)
                                 .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(buscaCompletada)
-                                .addGap(30, 30, 30)
+                                .addGap(18, 18, 18)
+                                .addComponent(selecAscDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(btnBuscar)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnNotificacion)
                         .addGap(24, 24, 24))))
         );
@@ -204,16 +207,15 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
                             .addComponent(buscaNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(selecAscDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnBuscar)
+                                .addComponent(selecAscDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(buscaCompletada)
                                 .addComponent(jLabel3))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnNotificacion))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(buscaCompletada)))
+                        .addComponent(btnNotificacion)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -221,8 +223,9 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
                     .addComponent(btnSalir)
                     .addComponent(btnNuevaTarea)
                     .addComponent(btnEditarTarea)
-                    .addComponent(btnBorrarTarea))
-                .addContainerGap(14, Short.MAX_VALUE))
+                    .addComponent(btnBorrarTarea)
+                    .addComponent(btnProyectos))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getAccessibleContext().setAccessibleName("Biblioteca Informática");
@@ -250,10 +253,6 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
         fa.nuevaTarea();
     }//GEN-LAST:event_btnNuevaTareaActionPerformed
 
-    private void btnProyectosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProyectosMouseClicked
-        fa.nuevoVPrincipalProyectos();
-    }//GEN-LAST:event_btnProyectosMouseClicked
-
     private void btnBorrarTareaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBorrarTareaActionPerformed
         ModeloTablaTareasBasicas m;
         m = (ModeloTablaTareasBasicas) tablaTareas.getModel();
@@ -268,6 +267,10 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
         fa.ventanaNotificaciones();
     }//GEN-LAST:event_btnNotificacionActionPerformed
 
+    private void btnProyectosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProyectosActionPerformed
+        fa.nuevoVPrincipalProyectos();
+    }//GEN-LAST:event_btnProyectosActionPerformed
+
     public void buscarTareas() {
         ModeloTablaTareasBasicas m;
 
@@ -281,7 +284,8 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
         }
     }
     
-    public void añadirNotificaciones(){
+
+    public final void añadirNotificaciones(){
         List<String> listaDeStrings = new ArrayList<>();
         int min = 0;
         int max = 3;
@@ -318,7 +322,7 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
     private javax.swing.JButton btnEditarTarea;
     private javax.swing.JButton btnNotificacion;
     private javax.swing.JButton btnNuevaTarea;
-    private javax.swing.JMenu btnProyectos;
+    private javax.swing.JButton btnProyectos;
     private javax.swing.JButton btnSalir;
     private javax.swing.JCheckBox buscaCompletada;
     private javax.swing.JTextField buscaNombre;
@@ -326,7 +330,6 @@ public class VPrincipalUsuario extends javax.swing.JFrame {
     private javax.swing.JEditorPane jEditorPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JComboBox<String> selecAscDesc;

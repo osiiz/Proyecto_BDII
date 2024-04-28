@@ -38,22 +38,18 @@ public class VProyecto extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        bSalir = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        mProyecto = new javax.swing.JMenu();
-        btnForos = new javax.swing.JMenuItem();
+        btnSalir = new javax.swing.JButton();
+        btnForos = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle(proyecto.getNProyecto());
+        setTitle("Proyecto");
 
-        bSalir.setText("Salir");
-        bSalir.addActionListener(new java.awt.event.ActionListener() {
+        btnSalir.setText("Salir");
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bSalirActionPerformed(evt);
+                btnSalirActionPerformed(evt);
             }
         });
-
-        mProyecto.setText("Proyecto");
 
         btnForos.setText("Foros");
         btnForos.addActionListener(new java.awt.event.ActionListener() {
@@ -61,36 +57,34 @@ public class VProyecto extends javax.swing.JFrame {
                 btnForosActionPerformed(evt);
             }
         });
-        mProyecto.add(btnForos);
-
-        jMenuBar1.add(mProyecto);
-
-        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(342, Short.MAX_VALUE)
-                .addComponent(bSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(70, 70, 70)
+                .addComponent(btnForos)
+                .addGap(18, 18, 18)
+                .addComponent(btnSalir)
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(230, 230, 230)
-                .addComponent(bSalir)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addGap(59, 59, 59)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnForos)
+                    .addComponent(btnSalir))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSalirActionPerformed
-        // TODO add your handling code here:
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         this.dispose();
-    }//GEN-LAST:event_bSalirActionPerformed
+    }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnForosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnForosActionPerformed
         fa.visualizarForos();
@@ -99,10 +93,8 @@ public class VProyecto extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bSalir;
-    private javax.swing.JMenuItem btnForos;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenu mProyecto;
+    private javax.swing.JButton btnForos;
+    private javax.swing.JButton btnSalir;
     // End of variables declaration//GEN-END:variables
 
 

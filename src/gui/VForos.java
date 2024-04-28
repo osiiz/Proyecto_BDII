@@ -152,8 +152,10 @@ public final class VForos extends javax.swing.JFrame {
         if (m.getRowCount() > 0) {
             tablaForos.setRowSelectionInterval(0, 0);
             btnBorrarForo.setEnabled(true);
+            btnEntrarForo.setEnabled(true);
         } else {
             btnBorrarForo.setEnabled(false);
+            btnEntrarForo.setEnabled(false);
         }
     }
 
