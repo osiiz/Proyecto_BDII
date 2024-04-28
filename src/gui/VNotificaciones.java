@@ -19,19 +19,7 @@ public class VNotificaciones extends javax.swing.JDialog {
         this.fa = fa;
         initComponents();
         
-        ModeloTablaNotificaciones m;
-
-        m = (ModeloTablaNotificaciones) tablaNotis.getModel();
-        
-        m.setFilas(fa.obtenerNotificaciones());
-        if (m.getRowCount() > 0) {
-            tablaNotis.setRowSelectionInterval(0, 0);
-            btnBorrar.setEnabled(true);
-        } else {
-            btnBorrar.setEnabled(false);
-        }
-        
-        tablaNotis.getColumnModel().getColumn(0).setMaxWidth(110);
+        refresh();
     }
 
     /**
@@ -117,13 +105,28 @@ public class VNotificaciones extends javax.swing.JDialog {
         tipo = mtn.obtenerNotificacion(tablaNotis.getSelectedRow()).getTipo();
         if(tipo.equals(TipoNotificacion.Basica)) fa.borrarNotificacionBasica(mtn.obtenerNotificacion(tablaNotis.getSelectedRow()).getIdNotificacion());
         else fa.borrarNotificacionProyecto(mtn.obtenerNotificacion(tablaNotis.getSelectedRow()).getIdNotificacion());
+        refresh();
     }//GEN-LAST:event_btnBorrarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         this.dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void refresh(){
+        ModeloTablaNotificaciones m;
 
+        m = (ModeloTablaNotificaciones) tablaNotis.getModel();
+        
+        m.setFilas(fa.obtenerNotificaciones());
+        if (m.getRowCount() > 0) {
+            tablaNotis.setRowSelectionInterval(0, 0);
+            btnBorrar.setEnabled(true);
+        } else {
+            btnBorrar.setEnabled(false);
+        }
+        
+        tablaNotis.getColumnModel().getColumn(0).setMaxWidth(110);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBorrar;
     private javax.swing.JButton btnSalir;

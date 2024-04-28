@@ -113,12 +113,18 @@ public class DAONotificaciones extends AbstractDAO{
                     
                     stmNoti.executeUpdate();
                     
-                    stmNoti=con.prepareStatement("insert into Tener_notificacion_de_proyecto(usuario, notificacion) "+
-                                              "values (?,?)");
-                    stmNoti.setString(1, idUsuario);
-                    stmNoti.setInt(2, n.getIdNotificacion());
-                    
-                    stmNoti.executeUpdate();
+                    Statement stmt = con.createStatement();
+    ResultSet rs = stmt.executeQuery("SELECT last_value FROM notificacion_de_proyecto_id_seq;");
+    if (rs.next()) {
+        int idNotificacion = rs.getInt(1); // Obtiene el último ID insertado
+        // Continúas con la segunda inserción
+        stmNoti=con.prepareStatement("insert into Tener_notificacion_de_proyecto(usuario, notificacion) "+
+                                      "values (?,?)");
+        stmNoti.setString(1, idUsuario);
+        stmNoti.setInt(2, idNotificacion);
+        
+        stmNoti.executeUpdate();
+    }
             
         } catch (SQLException e){
           System.out.println(e.getMessage());
@@ -152,6 +158,10 @@ public class DAONotificaciones extends AbstractDAO{
         con=super.getConexion();
         
         try{
+            stmBorrar = con.prepareStatement("delete from Tener_notificacion_de_proyecto where notificacion = ?");
+            stmBorrar.setInt(1, idNotificacion);
+            stmBorrar.executeUpdate();
+            
             stmBorrar = con.prepareStatement("delete from Notificacion_de_proyecto where id_notificacion = ?");
             stmBorrar.setInt(1, idNotificacion);
             stmBorrar.executeUpdate();
