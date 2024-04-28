@@ -17,6 +17,12 @@ import java.sql.*;
 public class DAONotificaciones extends AbstractDAO{
     
     public DAONotificaciones (Connection conexion, aplicacion.FachadaAplicacion fa){
+        try {
+            conexion.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
+        }
         super.setConexion(conexion);
         super.setFachadaAplicacion(fa);
     }
@@ -104,27 +110,29 @@ public class DAONotificaciones extends AbstractDAO{
         con=super.getConexion();
 
         try {
-                    stmNoti=con.prepareStatement("insert into Notificacion_de_proyecto(mensaje, leida, fecha, id_tarea) "+
+            con.setAutoCommit(false);
+            stmNoti=con.prepareStatement("insert into Notificacion_de_proyecto(mensaje, leida, fecha, id_tarea) "+
                                               "values (?,?,?,?)");
-                    stmNoti.setString(1, n.getMensaje());
-                    stmNoti.setBoolean(2, n.isLeida());
-                    stmNoti.setDate(3, Date.valueOf(n.getFecha()));
-                    stmNoti.setInt(4, n.getIdTarea());
+            stmNoti.setString(1, n.getMensaje());
+            stmNoti.setBoolean(2, n.isLeida());
+            stmNoti.setDate(3, Date.valueOf(n.getFecha()));
+            stmNoti.setInt(4, n.getIdTarea());
                     
-                    stmNoti.executeUpdate();
+            stmNoti.executeUpdate();
                     
-                    Statement stmt = con.createStatement();
-    ResultSet rs = stmt.executeQuery("SELECT last_value FROM notificacion_de_proyecto_id_seq;");
-    if (rs.next()) {
-        int idNotificacion = rs.getInt(1); // Obtiene el último ID insertado
-        // Continúas con la segunda inserción
-        stmNoti=con.prepareStatement("insert into Tener_notificacion_de_proyecto(usuario, notificacion) "+
-                                      "values (?,?)");
-        stmNoti.setString(1, idUsuario);
-        stmNoti.setInt(2, idNotificacion);
-        
-        stmNoti.executeUpdate();
-    }
+            Statement stmt = con.createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT last_value FROM notificacion_de_proyecto_id_seq;");
+            if (rs.next()) {
+                int idNotificacion = rs.getInt(1); // Obtiene el último ID insertado
+                // Continúas con la segunda inserción
+                stmNoti=con.prepareStatement("insert into Tener_notificacion_de_proyecto(usuario, notificacion) "+
+                                              "values (?,?)");
+                stmNoti.setString(1, idUsuario);
+                stmNoti.setInt(2, idNotificacion);
+
+                stmNoti.executeUpdate();
+            }
+            con.commit();
             
         } catch (SQLException e){
           System.out.println(e.getMessage());

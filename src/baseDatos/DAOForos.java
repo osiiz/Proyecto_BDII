@@ -20,6 +20,12 @@ import java.util.List;
 public class DAOForos extends AbstractDAO {
     
     public DAOForos (Connection conexion, aplicacion.FachadaAplicacion fa){
+        try {
+            conexion.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
+        }
         super.setConexion(conexion);
         super.setFachadaAplicacion(fa);
     }

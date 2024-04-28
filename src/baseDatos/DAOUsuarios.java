@@ -14,6 +14,12 @@ import java.sql.*;
 public class DAOUsuarios extends AbstractDAO {
 
     public DAOUsuarios (Connection conexion, aplicacion.FachadaAplicacion fa){
+        try {
+            conexion.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
+        }
         super.setConexion(conexion);
         super.setFachadaAplicacion(fa);
     }
@@ -166,7 +172,8 @@ public class DAOUsuarios extends AbstractDAO {
 
         try {
             switch (u.getTipoUsuario().toString()){
-                case "Normal": 
+                case "Normal":
+                    con.setAutoCommit(false);
                     stmBorrar = con.prepareStatement("delete from usuario where id_usuario = ?");
                     stmUsuario=con.prepareStatement("insert into usuario(id_usuario, nombre, email, contraseña, direccion) "+
                                               "values (?,?,?,hash(?),?)");
@@ -178,8 +185,10 @@ public class DAOUsuarios extends AbstractDAO {
                     stmUsuario.setString(5, u.getDireccion());
                     stmBorrar.executeUpdate();
                     stmUsuario.executeUpdate();
+                    con.commit();
                     break;
                 case "Gestor": 
+                    con.setAutoCommit(false);
                     stmBorrar = con.prepareStatement("delete from usuario_gestor where id_gestor = ?");
                     stmUsuario=con.prepareStatement("insert into usuario_gestor(id_gestor, nombre, email, contraseña, direccion) "+
                                               "values (?,?,?, hash(?),?)");
@@ -191,8 +200,10 @@ public class DAOUsuarios extends AbstractDAO {
                     stmUsuario.setString(5, u.getDireccion());
                     stmBorrar.executeUpdate();
                     stmUsuario.executeUpdate();
+                    con.commit();
                     break;
                 case "Administrador": 
+                    con.setAutoCommit(false);
                     stmBorrar = con.prepareStatement("delete from administrador where id_administrador = ?");
                     stmUsuario=con.prepareStatement("insert into administrador(id_administrador, nombre, contraseña) "+
                                               "values (?,?,hash(?))");
@@ -201,7 +212,8 @@ public class DAOUsuarios extends AbstractDAO {
                     stmUsuario.setString(2, u.getNombre());
                     stmUsuario.setString(3, u.getClave());
                     stmBorrar.executeUpdate();
-                    stmUsuario.executeUpdate(); 
+                    stmUsuario.executeUpdate();
+                    con.commit();
                     break;
             }
             

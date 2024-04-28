@@ -20,6 +20,12 @@ import java.util.ArrayList;
 public class DAOTareas extends AbstractDAO {
     
     public DAOTareas (Connection conexion, aplicacion.FachadaAplicacion fa){
+        try {
+            conexion.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
+        }
         super.setConexion(conexion);
         super.setFachadaAplicacion(fa);
     }
@@ -245,6 +251,7 @@ public class DAOTareas extends AbstractDAO {
         con=super.getConexion();
         
         try{
+            con.setAutoCommit(false);
             stmTarea = con.prepareStatement("insert into tarea_basica (id_usuario, nombre, completada, fecha_fin) "
                     + "values (?, ?, ?, ?)");
             stmTarea.setString(1, idUsuario);
@@ -253,6 +260,7 @@ public class DAOTareas extends AbstractDAO {
             stmTarea.setDate(4, Date.valueOf(t.getFechaFin()));
             stmTarea.executeUpdate();
             
+            
             stmIdTarea=con.prepareStatement("select currval('tarea_basica_id_seq') as idTarea");
             rsIdTarea=stmIdTarea.executeQuery();
             rsIdTarea.next();
@@ -260,6 +268,7 @@ public class DAOTareas extends AbstractDAO {
             
             resultado = t;
             
+            con.commit();
             rsIdTarea.close();
             
         }catch(SQLException e){

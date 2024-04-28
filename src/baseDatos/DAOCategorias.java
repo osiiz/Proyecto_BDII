@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.util.List;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,6 +19,12 @@ import java.util.ArrayList;
 public class DAOCategorias extends AbstractDAO {
 
     public DAOCategorias(Connection conexion, aplicacion.FachadaAplicacion fa) {
+        try {
+            conexion.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
+        }
         super.setConexion(conexion);
         super.setFachadaAplicacion(fa);
     }

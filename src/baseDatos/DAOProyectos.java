@@ -4,11 +4,9 @@
  */
 package baseDatos;
 
-import aplicacion.TipoUsuario;
 import aplicacion.Usuario;
 import aplicacion.*;
 import java.sql.*;
-import java.text.SimpleDateFormat;
 /**
  *
  * @author alumnogreibd
@@ -16,6 +14,12 @@ import java.text.SimpleDateFormat;
 public class DAOProyectos extends AbstractDAO {
     
     public DAOProyectos (Connection conexion, aplicacion.FachadaAplicacion fa){
+        try {
+            conexion.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            this.getFachadaAplicacion().muestraExcepcion(ex.getMessage());
+        }
         super.setConexion(conexion);
         super.setFachadaAplicacion(fa);
     }
