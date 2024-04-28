@@ -126,8 +126,8 @@ public class FachadaAplicacion {
         return ct.anhadirTarea(t, idUsuario);
     }
     
-    public void visualizarForos() {
-        fgui.ventanaForos(usuario);
+    public void visualizarForos(int idProyecto) {
+        fgui.ventanaForos(usuario, idProyecto);
     }
 
     public void nuevoForo(String text, int idProyecto) {

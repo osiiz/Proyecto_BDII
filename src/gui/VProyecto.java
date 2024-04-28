@@ -87,7 +87,7 @@ public class VProyecto extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnForosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnForosActionPerformed
-        fa.visualizarForos();
+        fa.visualizarForos(proyecto.getIdProyecto());
     }//GEN-LAST:event_btnForosActionPerformed
 
     

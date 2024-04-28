@@ -80,9 +80,9 @@ public class FachadaGui {
         vt.setVisible(true);
     }
     
-    public void ventanaForos(Usuario usuario) {
+    public void ventanaForos(Usuario usuario, int idProyecto) {
         VForos vf;
-        vf = new VForos(fa, usuario, 2);
+        vf = new VForos(fa, usuario, idProyecto);
         vf.setVisible(true);
         
     }
